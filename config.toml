@@ -1,0 +1,58 @@
+baseURL = "https://www.camlab.ca"
+languageCode = "en-us"
+title = "Campbell Lab Toronto | Machine Learning in Translational Biomedicine"
+theme = "minimal-bootstrap-hugo-theme"
+
+[taxonomies]
+  tag = "tags"
+
+[permalinks]
+  post = "/:filename/"
+
+[params]
+  description = "Some description"
+  contentBackgroundColor = "#fff"
+  contentTextColor = "#212529"
+  contentLinkColor = "rgba(0, 77, 128, 1)"
+  contentLinkHoverColor = "#rgba(0, 77, 128, 0.8)"
+  navbarBackgroundColor = "#ffffff"
+  navbarLinkColor = "rgba(0, 0, 0, 1)"
+  navbarLinkHoverColor = "rgba(0, 0, 0, 0.7)"
+  wrapperMaxWidth = "800px"
+  customDateFormat = "Jan 2, 2006"
+  customCodeStyle = true
+  customBlockquoteStyle = true
+  showPostSummary = false
+  googleAnalytics = "UA-123456789-1"
+  cookieConsent = true
+  includeBootstrapJs = false
+  faviconSafariPinnedTabColor = "#5bbad5"
+  faviconMsApplicationTileColor = "#da532c"
+  faviconThemeColor = "#ffffff"
+
+[menu]
+  [[menu.nav]]
+  name = "Home"
+  url = "/"
+  weight = 1
+  [[menu.nav]]
+  name = "Research"
+  url = "/research/"
+  weight = 2
+  [[menu.nav]]
+  name = "Software"
+  url = "/software/"
+  weight = 3
+  [[menu.nav]]
+  name = "People"
+  url = "/people/"
+  weight = 4
+  [[menu.nav]]
+  name = "Join"
+  url = "/join/"
+  weight = 5
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
