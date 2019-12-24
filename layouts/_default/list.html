@@ -1,0 +1,16 @@
+{{- define "main" -}}
+
+<!-- {{ $homepage := "Home" }} -->
+{{ with .Site.Menus.nav }}
+  {{ range first 1 . }}
+    {{ $homepage = .Name }}
+  {{ end }}
+{{ end }}
+
+<!-- {{ partial "nav.html" . }} -->
+
+<div class="container" style="margin-top:1em">
+  {{ .Content }}
+</div>
+
+{{- end -}}

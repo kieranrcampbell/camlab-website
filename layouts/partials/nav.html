@@ -1,0 +1,38 @@
+
+
+<div class="container">
+    <img src="/img/camlab-toronto.png" class="img-fluid" alt="Kieran Campbell Lab Toronto">
+
+    <nav class="custom-navbar navbar navbar-expand-sm">
+        <!-- <div  class="container"> -->
+            <ul class="navbar-nav">
+              {{ range .Site.Menus.nav }}
+              <li class="nav-item">
+              <a href="{{ .URL }}">{{ .Name }}</a>
+              </li>
+            {{ end }}
+            </ul>
+          <!-- </div> -->
+    </nav>
+ </div>
+
+<!-- <nav class="custom-navbar navbar-expand-sm">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+        <ul class="navbar-nav">
+          {{ range .Site.Menus.nav }}
+          <li class="nav-item">
+          <a href="{{ .URL }}">{{ .Name }}</a>
+          </li>
+        {{ end }}
+        </ul>
+  </div>
+</nav> -->
+
+<!-- <nav class="custom-navbar navbar-expand-lg">
+    <div class="container">
+      {{ range .Site.Menus.nav }}
+      <a href="{{ .URL }}">{{ .Name }}</a>
+      {{ end }}
+    </div>
+  </nav> -->

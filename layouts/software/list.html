@@ -1,0 +1,43 @@
+{{- define "main" -}}
+
+<!-- {{ $homepage := "Home" }} -->
+{{ with .Site.Menus.nav }}
+  {{ range first 1 . }}
+    {{ $homepage = .Name }}
+  {{ end }}
+{{ end }}
+
+<!-- {{ partial "nav.html" . }} -->
+
+
+<div class="container-fluid" style="margin-top:1em">
+  <h4>Software</h4>
+  <div class="row">
+      <!-- Ranges through content/posts/*.md -->
+      {{ range .Pages }}
+      <div class="col-xs-6 col-md-6" style="margin-bottom:1em">
+        <div class="card card-body">
+          <h5 class="card-title">{{.Title}} </h5>
+          <h6 class="card-subtitle mb-2"><em>{{.Params.journal}}</em></h6>
+          <p class="card-text">
+            {{.Params.software_summary}}
+          </p>
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                  <a href="{{.Params.software_link}}" class="btn btn-outline-primary">Software</a>
+              </div>
+              <div class="col">
+                <a href="{{.Params.paper_link}}" class="btn btn-outline-success">Paper</a>
+              </div>
+            </div>
+          </div>
+         
+        </div>
+      </div>
+      {{ end }}
+  </div>
+</div>
+
+
+{{- end -}}
