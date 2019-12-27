@@ -21,17 +21,30 @@ We are primarily interested in
         Toronto, Ontario  M5T 3L9
         </td>
         <td>
-        Kieran R Campbell <br>
+        <p>Kieran R Campbell <br>
         kierancampbell -at- lunenfeld dot ca
+        </p>
+        <p> 
+        <center>
+            <a href="https://www.twitter.com/kieranrcampbell"><i class="fa fa-twitter fa-2x"></i></a> &nbsp;&nbsp;
+            <a href="https://www.github.com/kieranrcampbell"><i class="fa fa-github fa-2x"></i></a> &nbsp;&nbsp;
+            <a href="https://www.linkedin.com/in/kieranrcampbell/"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a> &nbsp;&nbsp;
+                <a href="mailto:kierancampbell-at-lunenfelddotca"><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i></a> &nbsp;&nbsp;
+        </center>
+         </p>
         </tr>
     </tbody>
 </table>
 
-<p> 
-    <center>
-    <a href="https://www.twitter.com/kieranrcampbell"><i class="fa fa-twitter fa-2x"></i></a> &nbsp;&nbsp;
-    <a href="https://www.github.com/kieranrcampbell"><i class="fa fa-github fa-2x"></i></a> &nbsp;&nbsp;
-    <a href="https://www.linkedin.com/in/kieranrcampbell/"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a> &nbsp;&nbsp;
-        <a href="firstnamelastname@lunenfeld.ca"><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i></a> &nbsp;&nbsp;
-    </center>
-</p>
+
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-6">
+            <img src="/img/ltri.png" class="img-fluid" alt="Lunenfeld-Tanenbaum Research Institute">
+        </div>
+        <div class="col-6">
+            <img src="/img/uoftmedicine.png" class="img-fluid" alt="University of Toronto Faculty of Medicine">
+        </div>
+    </div>
+</div>
