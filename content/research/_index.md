@@ -6,7 +6,7 @@ For a full list of publications please see [Google Scholar](https://scholar.goog
 
 
 <div class="container-fluid mt-2 pb-0 card card-body border-dark">
-Current and past research:
+<h4>Current and past research:</h4>
     <p>
     <ul class="nav flex-column">
     <li class="nav-item">
@@ -36,7 +36,7 @@ Current and past research:
                     <img src="/img/research/cellassign.gif" class="img-fluid" alt="CellAssign">
                 </div>
                 <div class="col-7">
-                    <p>We created CellAssign, a novel statistical model implemented in Google's Tensorflow to assign cells to known tumour microenvironment cell types from single-cell RNA-sequencing data, across large patient cohorts while controlling for technical effects.</p>
+                    <p>We created CellAssign, a novel statistical model implemented in Google's Tensorflow to assign cells to known tumour microenvironment cell types from single-cell RNA-sequencing data, across large patient cohorts while controlling for sample and technical effects.</p>
                     <p><a href="https://www.nature.com/articles/s41592-019-0529-1" class="btn btn-outline-secondary" style="white-space: normal">Zhang et al. 2019 (Nature Methods)</a></p>
                 </div>
             </div>
@@ -104,10 +104,18 @@ Current and past research:
         <div class="card mb-1">
             <div class="card-header">Covariate Gaussian Process Latent Variable Models</div>
             <div class="card-body">
-                <p>
-                Covariate Gaussian Process Latent Variable Models (C-GPLVMs) are a novel type of probabilistic latent variable model similar to a GPLVM except the functional form of the outputs wrt the latent space is modified by an additional set of covariates.
-                </p>
-                <p><a href="http://proceedings.mlr.press/v97/martens19a/martens19a.pdf" class="btn btn-outline-secondary"  style="white-space: normal">Martens et al. (ICML)</a></p>
+                <div class="row">
+                    <div class="col-5">
+                        <img src="/img/research/cgplvm.png" class="img-fluid" alt="CloneAlign">
+                    </div>
+                    <div class="col-7">
+                        <p>
+                            Covariate Gaussian Process Latent Variable Models (C-GPLVMs) are a novel type of probabilistic latent variable model similar to a GPLVM except the functional form of the outputs wrt the latent space is modified by an additional set of covariates.
+                            </p>
+                            <p><a href="http://proceedings.mlr.press/v97/martens19a/martens19a.pdf" class="btn btn-outline-secondary"  style="white-space: normal">Martens et al. (ICML)</a>
+                        </p>
+                    </div>
+                </div>
             </div>
     </div> 
 </div>
