@@ -32,10 +32,10 @@ For a full list of publications please see [Google Scholar](https://scholar.goog
         <div class="card-header">Automated assignment of the tumour microenvironment from single-cell RNA-seq</div>
         <div class="card-body">
             <div class="row">
-                <div class="col-5">
+                <div class="col-md-5 col-sm-12">
                     <img src="/img/research/cellassign.gif" class="img-fluid" alt="CellAssign">
                 </div>
-                <div class="col-7">
+                <div class="col-md-7 col-sm-12">
                     <p>We created CellAssign, a novel statistical model implemented in Google's Tensorflow to assign cells to known tumour microenvironment cell types from single-cell RNA-sequencing data, across large patient cohorts while controlling for sample and technical effects.</p>
                     <p><a href="https://www.nature.com/articles/s41592-019-0529-1" class="btn btn-outline-secondary" style="white-space: normal">Zhang et al. 2019 (Nature Methods)</a></p>
                 </div>
@@ -46,10 +46,10 @@ For a full list of publications please see [Google Scholar](https://scholar.goog
         <div class="card-header">Statistical integration of single-cell RNA and DNA sequencing data</div>
         <div class="card-body">
             <div class="row">
-                    <div class="col-3">
+                    <div class="col-md-3 col-sm-12">
                         <img src="/img/research/clonealign.png" class="img-fluid" alt="CloneAlign">
                     </div>
-                    <div class="col-9">
+                    <div class="col-md-9 col-sm-12">
                         <p>CloneAlign assigns cells as measured with single-cell RNA-seq to mutational cancer clones defined by copy number profiles by probabilistically mapping RNA-seq to clone-specific copy number profiles using reparametrization gradient variational inference.</p>
                         <p><a href="https://www.nature.com/articles/s41592-019-0529-1" class="btn btn-outline-secondary"  style="white-space: normal">Campbell et al. 2019 (Genome Biology)</a></p>
                     </div>
@@ -60,10 +60,10 @@ For a full list of publications please see [Google Scholar](https://scholar.goog
         <div class="card-header">Pseudotime inference from single-cell RNA-seq</div>
         <div class="card-body">
             <div class="row">
-                <div class="col-5">
+                <div class="col-md-5 col-sm-12">
                     <img src="/img/research/ouija.png" class="img-fluid" alt="CloneAlign">
                 </div>
-                <div class="col-7">
+                <div class="col-md-7 col-sm-12">
                     <p>
                     We have created a number of  methods to understand single-cell trajectories from a probabilistic perspective, in particular (i) while controlling for heterogeneous genetic or phenotypic backgrounds, (ii) directly from marker genes allowing interpretable inference of pseudotimes, (iii) probabilistic inference of bifurcations.
                     </p>
@@ -105,10 +105,10 @@ For a full list of publications please see [Google Scholar](https://scholar.goog
             <div class="card-header">Covariate Gaussian Process Latent Variable Models</div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-sm-12 col-md-5">
                         <img src="/img/research/cgplvm.png" class="img-fluid" alt="CloneAlign">
                     </div>
-                    <div class="col-7">
+                    <div class="col-md-7 col-sm-12">
                         <p>
                             Covariate Gaussian Process Latent Variable Models (C-GPLVMs) are a novel type of probabilistic latent variable model similar to a GPLVM except the functional form of the outputs wrt the latent space is modified by an additional set of covariates.
                             </p>
