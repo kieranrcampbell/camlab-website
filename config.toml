@@ -1,6 +1,5 @@
 baseURL = "https://camlab.netlify.com/"
 languageCode = "en-us"
-googleAnalytics = "UA-61354538-4"
 title = "Campbell Lab Toronto | Machine Learning in Translational Biomedicine"
 theme = "minimal-bootstrap-hugo-theme"
 
@@ -24,7 +23,7 @@ theme = "minimal-bootstrap-hugo-theme"
   customCodeStyle = true
   customBlockquoteStyle = true
   showPostSummary = false
-  googleAnalytics = "UA-123456789-1"
+  googleAnalytics = "UA-61354538-4"
   cookieConsent = true
   includeBootstrapJs = false
   faviconSafariPinnedTabColor = "#5bbad5"
