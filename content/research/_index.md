@@ -6,7 +6,7 @@ For a full list of publications please see [Google Scholar](https://scholar.goog
 
 
 <div class="container-fluid mt-2 pb-0 card card-body border-dark">
-<h4>Current and past research:</h4>
+    <h4>Current and past research:</h4>
     <p>
     <ul class="nav flex-column">
     <li class="nav-item">
@@ -21,10 +21,9 @@ For a full list of publications please see [Google Scholar](https://scholar.goog
     </ul>
     </p>
 </div>
-</span>
 
 
-<div class="container-fluid mt-4" id="sc">
+<div class="container-fluid mt-4 pb-0" id="sc">
     <h5>Probabilistic modelling of single-cell genomics data</h5>
     <p>Current research interests in this area include creating statistical machine learning models and scalable inference paradigms to understand cell type composition, interactions, and signatures from single-cell and spatially-resolved 'omics data with a focus on the tumour microenvironment.</p>
     <strong>Research works:</strong>
