@@ -10,40 +10,45 @@
 
 <div class="container-fluid" style="margin-top:.5em">
   <h4>Lab Members</h4>
+  <!-- Ranges through content/posts/*.md -->
+  {{ range .Pages }}
+
   <div class="row">
-      <!-- Ranges through content/posts/*.md -->
-      {{ range .Pages }}
-      <div class="col-xs-12 col-md-12" style="margin-bottom:1em">
-        <div class="card card-body">
-          <div class="row">
-            <div class="col-3">
-                <img src="/img/people/{{.Params.image}}" class="img-fluid" alt="Kieran Campbell Lab Toronto">
+    <div class="col-xs-12 col-md-12" style="margin-bottom:1em">
+      <div class="card card-body">
+        <div class="row">
+          <div class="col-3">
+              <img src="/img/people/{{.Params.image}}" class="img-fluid" alt="{{.Title}}">
+          </div>
+          <div class="col-9">
+            <div class = "row">
+              <h5 class="card-title">{{.Title}} </h5>
             </div>
-            <div class="col-9">
-              <div class = "row">
-                <h5 class="card-title">{{.Title}} </h5>
-                <h6 class="card-subtitle mb-2">{{.Params.position}}</h6>
-                <p class="card-text">
-                  {{.Params.biography}}
-                </p>
-              </div>
-              <div class = "row-mb-6">
-                <!-- Social media badges here -->
-                  <p> 
-                    <center>
-                    <a href="https://www.twitter.com/{{.Params.twitter}}"><i class="fa fa-twitter fa-2x"></i></a> &nbsp;&nbsp;
-                    <a href="https://www.github.com/{{.Params.github}}"><i class="fa fa-github fa-2x"></i></a> &nbsp;&nbsp;
-                    <a href="https://www.linkedin.com/in/{{.Params.linkedin}}/"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a> &nbsp;&nbsp;
-                        <a href="mailto:{{.Params.email}}"><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i></a> &nbsp;&nbsp;
-                    </center>
-                  </p>
-              </div>
-             </div>
+            <div class = "row">
+              <h6 class="card-subtitle mb-2">{{.Params.position}}</h6>
             </div>
+            <div class="row">
+              <p class="card-text">
+                {{.Params.biography}}
+              </p>
+            </div>
+            <div class = "row-mb-6">
+              <!-- Social media badges here -->
+              <p> 
+                <center>
+                <a href="https://www.twitter.com/{{.Params.twitter}}"><i class="fa fa-twitter fa-2x"></i></a> &nbsp;&nbsp;
+                <a href="https://www.github.com/{{.Params.github}}"><i class="fa fa-github fa-2x"></i></a> &nbsp;&nbsp;
+                <a href="https://www.linkedin.com/in/{{.Params.linkedin}}/"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a> &nbsp;&nbsp;
+                    <a href="mailto:{{.Params.email}}"><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i></a> &nbsp;&nbsp;
+                </center>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-      {{ end }}
+    </div>
   </div>
+  {{ end }}
 </div>
 
 
