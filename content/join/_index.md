@@ -9,7 +9,11 @@ title = "Join"
 <div class="card" style="margin-top:1em">
 <div class="card-body">
  <h5 class="card-title">Summer undergraduate research positions</h5>
-    Opportunities to join the lab for undergraduates are available through the <a href="http://research.lunenfeld.ca/rtc/DEFAULT.ASP?page=Summer%20Research%20Program">LTRI Summer Research Program for Undergraduates</a>. These will give research experience in machine learning and data science applied to aspects of single-cell and spatial cancer genomics. Please read the program requirements and get in touch with any questions. The deadline is <b>February 28th, 2020</b>.
+    Opportunities to join the lab for undergraduates are available through:
+    <ol type="1"> 
+      <li>The <a href="http://research.lunenfeld.ca/rtc/DEFAULT.ASP?page=Summer%20Research%20Program">LTRI Summer Research Program for Undergraduates</a>. These will give research experience in machine learning and data science applied to aspects of single-cell and spatial cancer genomics. Please read the program requirements and get in touch with any questions. The deadline is <b>February 28th, 2020</b>.
+      </li>
+      <li>The <a href="https://www.nserc-crsng.gc.ca/students-etudiants/ug-pc/usra-brpc_eng.asp">NSERC Undergraduate Student Research Awards</a>. Please email me by <b>March 7th, 2020</b> to be considered for this. Note that this is open to undergraduate students who are Canadian citizens and permanent residents only.</li>
 </div>
 </div>
 <div class="card" style="margin-top:1em">
