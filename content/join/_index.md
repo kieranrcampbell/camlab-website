@@ -5,8 +5,8 @@ title = "Join"
 
 #### Openings
 
-
-<div class="card" style="margin-top:1em">
+<!-- Removed the summer student opportunities with display:none -->
+<div class="card" style="margin-top:1em; display:none"> 
 <div class="card-body">
  <h5 class="card-title">Summer undergraduate research positions</h5>
     Opportunities to join the lab for undergraduates are available through:
@@ -16,6 +16,8 @@ title = "Join"
       <li>The <a href="https://www.nserc-crsng.gc.ca/students-etudiants/ug-pc/usra-brpc_eng.asp">NSERC Undergraduate Student Research Awards</a>. Please email me by <b>March 7th, 2020</b> to be considered for this. Note that this is open to undergraduate students who are Canadian citizens and permanent residents only.</li>
 </div>
 </div>
+
+
 <div class="card" style="margin-top:1em">
 <div class="card-body">
  <h5 class="card-title">PhD positions</h5>

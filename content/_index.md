@@ -8,7 +8,8 @@ We are primarily interested in
 * Machine learning algorithms to help automate biological and biomedical data analysis
 * Machine learning models to uncover structure from large, heterogeneous datasets such as electronic health records (EHRs)
 
-<div class="alert alert-success" role="alert">
+<!-- Remove summer student opportunities with display:none -->
+<div class="alert alert-success" role="alert" style="display:none">
   <b>Summer research positions for undergraduates</b> along with <b>PhD positions</b> and <b>postdoctoral fellowships</b> are <a href="https://www.camlab.ca/join/">available in the lab!</a> 
 </div>
 
