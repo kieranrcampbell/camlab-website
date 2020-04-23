@@ -7,4 +7,5 @@ twitter = "kieranrcampbell"
 github = "kieranrcampbell"
 linkedin = "kieranrcampbell"
 email = "firstnamelastname@lunenfeld.ca"
+date = 2020-01-09
 +++
