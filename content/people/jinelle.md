@@ -1,6 +1,6 @@
 +++
 title = "Jinyu Hou"
-image = "jinyu_profile.png"
+image = "jinyu_profile.jpg"
 position = "Undergraduate Summer Student"
 biography = "Jinyu is currently a second year undergraduate CS student at University of Toronto. She is working in the lab during summer 2020 on python development and machine learning for spatial proteomics data."
 twitter = "aBigGoldfish"
