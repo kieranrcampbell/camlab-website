@@ -29,6 +29,19 @@ title = "Join"
     </ul>
 </div>
 </div>
+
+<div class="card" style="margin-top:1em"> 
+<div class="card-body">
+ <h5 class="card-title">BCB330 / BCB430 students</h5>
+    The lab accepts applications for BCB330/430 projects. If you are interested, please email Kieran with
+    <ol type="1"> 
+      <li>Your CV</li>
+      <li>Your research interests in bioinfomatics</li>
+      <li>The semester(s) in which you would like to join the lab</li>
+</div>
+</div>
+
+
 <div class="card" style="margin-top:1em">
 <div class="card-body">
  <h5 class="card-title">Postdoctoral fellowships</h5>
