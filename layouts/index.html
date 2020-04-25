@@ -11,6 +11,100 @@
 
 <div class="container" style="margin-top:1em">
   {{ .Content }}
+
+
+  <!-- Remove summer student opportunities with display:none -->
+  <div class="alert alert-success" role="alert" style="display:none">
+    <b>Summer research positions for undergraduates</b> along with <b>PhD positions</b> and <b>postdoctoral fellowships</b> are <a href="https://www.camlab.ca/join/">available in the lab!</a> 
+  </div>
+
+  <h4>Latest news</h4>
+
+  {{ with .Site.GetPage "section" "news" }}
+  {{ range first 2 .Pages.ByDate.Reverse }}
+  <div class="card px-0" style="margin-top:.5em; margin-bottom:.5em;">
+    <div class="card-body pb-0 px-3 pt-3">
+      <div class="row">
+      <div class="col-3"><h6 class="card-title">{{.Params.Date.Format "Jan 2, 2006"}}</h6></div>
+      <div class="col-9"><h6 class="card-title">{{.Title}}</h6></div>
+      </div>
+      {{.Content}}
+    </div>
+  </div>
+  {{ end }}
+  {{ end }}
+  <p>
+  <h6><a href="/news/">More...</a></h6>
+  </p>
+    <!-- <div class="card" style="margin-top:.5em; margin-bottom:.5em;">
+
+    <div class="card-body">
+
+    <h5 class="card-title">News</h5>
+    {{ with .Site.GetPage "section" "news" }}
+    {{ range .Pages.ByDate.Reverse }}
+      <div class = "row">
+        <div class="col-3">
+       <h6>{{.Params.Date.Format "Jan 2, 2006"}}</h6>
+       </div>
+       <div class="col-9">
+        <h6>{{.Title}}</h6>
+       </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          Test
+        </div>
+      </div>
+    {{ end }}
+
+    <a href="/news/">More...</a>
+    {{ end }}
+    </div>
+    </div> -->
+
+
+  <h4>Contact</h4>
+
+  <table class="table table-bordered">
+      <tbody>
+          <tr>
+          <td>
+          Lunenfeld-Tanenbaum Research Institute <br>
+          Mount Sinai Hospital <br>
+          Joseph and Wolf Lebovic Health Complex <br>
+          L5-230 — 60 Murray St. <br>
+          Toronto, Ontario  M5T 3L9
+          </td>
+          <td>
+          <p>Kieran R Campbell <br>
+          kierancampbell -at- lunenfeld dot ca
+          </p>
+          <p> 
+          <center>
+              <a href="https://www.twitter.com/kieranrcampbell"><i class="fa fa-twitter fa-2x"></i></a> &nbsp;&nbsp;
+              <a href="https://www.github.com/kieranrcampbell"><i class="fa fa-github fa-2x"></i></a> &nbsp;&nbsp;
+              <a href="https://www.linkedin.com/in/kieranrcampbell/"><i class="fa fa-linkedin fa-2x" aria-hidden="true"></i></a> &nbsp;&nbsp;
+                  <a href="mailto:kierancampbell-at-lunenfelddotca"><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i></a> &nbsp;&nbsp;
+          </center>
+          </p>
+          </tr>
+      </tbody>
+  </table>
+
+
+
+  <div class="container-fluid mt-4">
+      <div class="row">
+          <div class="col-6">
+              <img src="/img/ltri.png" class="img-fluid" alt="Lunenfeld-Tanenbaum Research Institute">
+          </div>
+          <div class="col-6">
+              <img src="/img/uoftmedicine.png" class="img-fluid" alt="University of Toronto Faculty of Medicine">
+          </div>
+      </div>
+  </div>
+
 </div>
 
 
