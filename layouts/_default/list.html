@@ -1,5 +1,14 @@
 {{- define "main" -}}
 
+<!-- <style>
+  body {
+    font-family: Helvetica, Open Sans, Segoe UI, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+</style> -->
+
 <!-- {{ $homepage := "Home" }} -->
 {{ with .Site.Menus.nav }}
   {{ range first 1 . }}

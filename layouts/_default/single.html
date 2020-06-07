@@ -1,11 +1,15 @@
 <!-- {{- define "main" -}}
 
+  
+
 {{ $homepage := "Home" }}
 {{ with .Site.Menus.nav }}
   {{ range first 1 . }}
     {{ $homepage = .Name }}
   {{ end }}
 {{ end }} -->
+
+
 
 {{ partial "nav.html" . }}
 

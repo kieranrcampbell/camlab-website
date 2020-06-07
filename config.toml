@@ -41,17 +41,21 @@ pluralizelisttitles = false
   url = "/research/"
   weight = 2
   [[menu.nav]]
+  name = "Publications"
+  url = "/publications/"
+  weight = 3
+  [[menu.nav]]
   name = "Software"
   url = "/software/"
-  weight = 3
+  weight = 4
   [[menu.nav]]
   name = "People"
   url = "/people/"
-  weight = 4
+  weight = 5
   [[menu.nav]]
   name = "Join"
   url = "/join/"
-  weight = 5
+  weight = 6
 
 [markup]
   [markup.goldmark]

@@ -2,9 +2,6 @@
 title = "Research"
 +++
 
-For a full list of publications please see [Google Scholar](https://scholar.google.co.uk/citations?user=C-M77l8AAAAJ&hl=en). 
-
-
 <div class="container-fluid mt-2 pb-0 card card-body border-dark">
     <h4>Current and past research:</h4>
     <p>
