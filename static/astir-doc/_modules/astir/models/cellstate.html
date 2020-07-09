@@ -1,0 +1,603 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>astir.models.cellstate &mdash; astir  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> astir
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../development.html">Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../astir.html">astir package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../astir.data.html">astir.data package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../astir.models.html">astir.models package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">astir</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>astir.models.cellstate</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for astir.models.cellstate</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Cell State Model</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">from</span> <span class="nn">.abstract</span> <span class="kn">import</span> <span class="n">AstirModel</span>
+<span class="kn">from</span> <span class="nn">astir.data</span> <span class="kn">import</span> <span class="n">SCDataset</span>
+<span class="kn">from</span> <span class="nn">.cellstate_recognet</span> <span class="kn">import</span> <span class="n">StateRecognitionNet</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">trange</span>
+<span class="kn">from</span> <span class="nn">torch.autograd</span> <span class="kn">import</span> <span class="n">Variable</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">DataLoader</span>
+
+
+<div class="viewcode-block" id="CellStateModel"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellStateModel">[docs]</a><span class="k">class</span> <span class="nc">CellStateModel</span><span class="p">(</span><span class="n">AstirModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class to perform statistical inference to on the activation</span>
+<span class="sd">        of states (pathways) across cells</span>
+
+<span class="sd">    :param df_gex: the input gene expression dataframe</span>
+<span class="sd">    :param marker_dict: the gene marker dictionary</span>
+<span class="sd">    :param random_seed: seed number to reproduce results, defaults to 1234</span>
+<span class="sd">    :param dtype: torch datatype to use in the model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dset</span><span class="p">:</span> <span class="n">SCDataset</span><span class="p">,</span>
+        <span class="n">const</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">dropout_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">batch_norm</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">dset</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
+
+        <span class="c1"># Setting random seeds</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">random_seed</span> <span class="o">=</span> <span class="n">random_seed</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_seed</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed_all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_seed</span><span class="p">)</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_seed</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">random_seed</span><span class="p">)</span>
+
+        <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">benchmark</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">deterministic</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span> <span class="o">=</span> <span class="n">dset</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_losses</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_param_init</span><span class="p">(</span><span class="n">const</span><span class="p">,</span> <span class="n">dropout_rate</span><span class="p">,</span> <span class="n">batch_norm</span><span class="p">)</span>
+
+        <span class="c1"># Convergence flag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_converged</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_param_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">const</span><span class="p">,</span> <span class="n">dropout_rate</span><span class="p">,</span> <span class="n">batch_norm</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Initializes sets of parameters</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="p">)</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_n_classes</span><span class="p">()</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_n_features</span><span class="p">()</span>
+
+        <span class="n">initializations</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;log_sigma&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_sigma</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
+            <span class="s2">&quot;mu&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_mu</span><span class="p">(),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)),</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Include beta or not</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">initializations</span><span class="p">[</span><span class="s2">&quot;log_w&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">sample</span><span class="p">((</span><span class="n">C</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_n_features</span><span class="p">())))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_variables</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">n</span><span class="p">:</span> <span class="n">i</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="ow">in</span> <span class="n">initializations</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;rho&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_marker_mat</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_recog</span> <span class="o">=</span> <span class="n">StateRecognitionNet</span><span class="p">(</span>
+            <span class="n">C</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">const</span><span class="o">=</span><span class="n">const</span><span class="p">,</span> <span class="n">dropout_rate</span><span class="o">=</span><span class="n">dropout_rate</span><span class="p">,</span> <span class="n">batch_norm</span><span class="o">=</span><span class="n">batch_norm</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_loss_fn</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">mu_z</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="n">std_z</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="n">z_sample</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+        <span class="n">y_in</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Returns the calculated loss</span>
+
+<span class="sd">        :param mu_z: the predicted mean of z</span>
+<span class="sd">        :param std_z: the predicted standard deviation of z</span>
+<span class="sd">        :param z_sample: the sampled z values</span>
+<span class="sd">        :param y_in: the input data</span>
+
+<span class="sd">        :return: the loss</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">y_in</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># log posterior q(z) approx p(z|y)</span>
+        <span class="n">q_z_dist</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu_z</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">std_z</span><span class="p">))</span>
+        <span class="n">log_q_z</span> <span class="o">=</span> <span class="n">q_z_dist</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">z_sample</span><span class="p">)</span>
+
+        <span class="c1"># log likelihood p(y|z)</span>
+        <span class="n">rho_w</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;rho&quot;</span><span class="p">],</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="s2">&quot;log_w&quot;</span><span class="p">]))</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">z_sample</span><span class="p">,</span> <span class="n">rho_w</span><span class="p">)</span>
+        <span class="n">std</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="s2">&quot;log_sigma&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">p_y_given_z_dist</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">std</span><span class="p">)</span>
+        <span class="n">log_p_y_given_z</span> <span class="o">=</span> <span class="n">p_y_given_z_dist</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">y_in</span><span class="p">)</span>
+
+        <span class="c1"># log prior p(z)</span>
+        <span class="n">p_z_dist</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">log_p_z</span> <span class="o">=</span> <span class="n">p_z_dist</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">z_sample</span><span class="p">)</span>
+
+        <span class="n">loss</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">S</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">log_q_z</span><span class="p">)</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">log_p_y_given_z</span><span class="p">)</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">log_p_z</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">loss</span>
+
+    <span class="k">def</span> <span class="nf">_forward</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">Y</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot; One forward pass</span>
+
+<span class="sd">        :param Y: dataset to do forward pass on</span>
+
+<span class="sd">        :return: mu_z, std_z, z_sample</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mu_z</span><span class="p">,</span> <span class="n">std_z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recog</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+
+        <span class="n">std</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">std_z</span><span class="p">)</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">std</span><span class="p">)</span>
+        <span class="n">z_sample</span> <span class="o">=</span> <span class="n">eps</span> <span class="o">*</span> <span class="n">std</span> <span class="o">+</span> <span class="n">mu_z</span>
+
+        <span class="k">return</span> <span class="n">mu_z</span><span class="p">,</span> <span class="n">std_z</span><span class="p">,</span> <span class="n">z_sample</span>
+
+    <span class="c1"># @profile</span>
+<div class="viewcode-block" id="CellStateModel.fit"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellStateModel.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">max_epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">learning_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span>
+        <span class="n">delta_loss</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">delta_loss_batch</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot; Runs train loops until the convergence reaches delta_loss for\</span>
+<span class="sd">            delta_loss_batch sizes or for max_epochs number of times</span>
+
+<span class="sd">        :param max_epochs: number of train loop iterations, defaults to 50</span>
+<span class="sd">        :param learning_rate: the learning rate, defaults to 0.01</span>
+<span class="sd">        :param batch_size: the batch size, defaults to 128</span>
+<span class="sd">        :param delta_loss: stops iteration once the loss rate reaches\</span>
+<span class="sd">            delta_loss, defaults to 0.001</span>
+<span class="sd">        :param delta_loss_batch: the batch size to consider delta loss,\</span>
+<span class="sd">            defaults to 10</span>
+<span class="sd">        :param msg: iterator bar message, defaults to empty string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Returns early if the model has already converged</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_converged</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">losses</span>
+
+        <span class="k">if</span> <span class="n">delta_loss_batch</span> <span class="o">&gt;=</span> <span class="n">max_epochs</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Delta loss batch size is greater than the number of epochs&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Create an optimizer if there is no optimizer</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">opt_params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_recog</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">opt_params</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_losses</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">delta_loss_batch</span><span class="p">:</span>
+            <span class="n">prev_mean</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_losses</span><span class="p">[</span><span class="o">-</span><span class="n">delta_loss_batch</span><span class="p">:])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prev_mean</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="n">delta_cond_met</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">iterator</span> <span class="o">=</span> <span class="n">trange</span><span class="p">(</span>
+            <span class="n">max_epochs</span><span class="p">,</span>
+            <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;training restart&quot;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;epochs&quot;</span><span class="p">,</span>
+            <span class="n">bar_format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{l_bar}{bar}</span><span class="s2">| </span><span class="si">{n_fmt}</span><span class="s2">/</span><span class="si">{total_fmt}</span><span class="s2"> [</span><span class="si">{rate_fmt}{postfix}</span><span class="s2">]&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">train_iterator</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="p">))</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+        <span class="c1"># for ep in range(max_epochs):</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">y_in</span><span class="p">,</span> <span class="n">x_in</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">train_iterator</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+                <span class="n">mu_z</span><span class="p">,</span> <span class="n">std_z</span><span class="p">,</span> <span class="n">z_samples</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward</span><span class="p">(</span><span class="n">x_in</span><span class="p">)</span>
+
+                <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loss_fn</span><span class="p">(</span><span class="n">mu_z</span><span class="p">,</span> <span class="n">std_z</span><span class="p">,</span> <span class="n">z_samples</span><span class="p">,</span> <span class="n">x_in</span><span class="p">)</span>
+
+                <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+            <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+
+            <span class="n">start_index</span> <span class="o">=</span> <span class="n">ep</span> <span class="o">-</span> <span class="n">delta_loss_batch</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="n">end_index</span> <span class="o">=</span> <span class="n">start_index</span> <span class="o">+</span> <span class="n">delta_loss_batch</span>
+            <span class="k">if</span> <span class="n">start_index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">curr_mean</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">losses</span><span class="p">[</span><span class="n">start_index</span><span class="p">:</span><span class="n">end_index</span><span class="p">])</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span>
+                    <span class="n">losses</span><span class="p">[</span><span class="n">start_index</span><span class="p">:</span><span class="n">end_index</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_losses</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="n">start_index</span><span class="p">:</span>
+                <span class="n">last_ten_losses</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span>
+                    <span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_losses</span><span class="p">[</span><span class="n">start_index</span><span class="p">:],</span>
+                        <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">losses</span><span class="p">[:</span><span class="n">end_index</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">curr_mean</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">last_ten_losses</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">curr_mean</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="k">if</span> <span class="n">prev_mean</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">curr_delta_loss</span> <span class="o">=</span> <span class="p">(</span><span class="n">prev_mean</span> <span class="o">-</span> <span class="n">curr_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">prev_mean</span>
+                <span class="n">delta_cond_met</span> <span class="o">=</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">curr_delta_loss</span> <span class="o">&lt;</span> <span class="n">delta_loss</span>
+            <span class="c1"># iterator.set_postfix_str(&quot;current loss: &quot; + str(round(losses[ep], 1)))</span>
+            <span class="k">yield</span> <span class="nb">round</span><span class="p">(</span><span class="n">losses</span><span class="p">[</span><span class="n">ep</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="n">prev_mean</span> <span class="o">=</span> <span class="n">curr_mean</span>
+            <span class="k">if</span> <span class="n">delta_cond_met</span><span class="p">:</span>
+                <span class="n">losses</span> <span class="o">=</span> <span class="n">losses</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="n">ep</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_is_converged</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="c1"># iterator.close()</span>
+                <span class="k">break</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_losses</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_losses</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_losses</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_losses</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">losses</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">))</span>
+            <span class="p">)</span></div>
+
+        <span class="c1"># return losses</span>
+
+<div class="viewcode-block" id="CellStateModel.get_recognet"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellStateModel.get_recognet">[docs]</a>    <span class="k">def</span> <span class="nf">get_recognet</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateRecognitionNet</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Getter for the recognition net</span>
+
+<span class="sd">        :return: the trained recognition net</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recog</span></div>
+
+<div class="viewcode-block" id="CellStateModel.get_final_mu_z"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellStateModel.get_final_mu_z">[docs]</a>    <span class="k">def</span> <span class="nf">get_final_mu_z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_dset</span><span class="p">:</span> <span class="n">SCDataset</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Returns the mean of the predicted z values for each core</span>
+
+<span class="sd">        :param new_dset: returns the predicted z values of this dataset on</span>
+<span class="sd">            the existing model. If None, it predicts using the existing dataset</span>
+
+<span class="sd">        :return: the mean of the predicted z values for each core</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">new_dset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">x_in</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="p">[:]</span>  <span class="c1"># should be the scaled one</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">x_in</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">new_dset</span><span class="p">[:]</span>
+        <span class="n">final_mu_z</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward</span><span class="p">(</span><span class="n">x_in</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">final_mu_z</span></div>
+
+<div class="viewcode-block" id="CellStateModel.get_correlations"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellStateModel.get_correlations">[docs]</a>    <span class="k">def</span> <span class="nf">get_correlations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+        <span class="n">state_assignment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_final_mu_z</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">y_in</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_exprs</span><span class="p">()</span>
+
+        <span class="n">feature_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_features</span><span class="p">()</span>
+        <span class="n">state_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_classes</span><span class="p">()</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_n_features</span><span class="p">()</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_n_classes</span><span class="p">()</span>
+        <span class="n">corr_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">C</span><span class="p">,</span> <span class="n">G</span><span class="p">))</span>
+        <span class="c1"># Make a matrix of correlations between all states and proteins</span>
+        <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">state_names</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">feature_names</span><span class="p">):</span>
+                <span class="n">states</span> <span class="o">=</span> <span class="n">state_assignment</span><span class="p">[:,</span> <span class="n">c</span><span class="p">]</span>
+                <span class="n">protein</span> <span class="o">=</span> <span class="n">y_in</span><span class="p">[:,</span> <span class="n">g</span><span class="p">]</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span>
+                <span class="n">corr_mat</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">protein</span><span class="p">,</span> <span class="n">states</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">corr_mat</span></div>
+
+<div class="viewcode-block" id="CellStateModel.diagnostics"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellStateModel.diagnostics">[docs]</a>    <span class="k">def</span> <span class="nf">diagnostics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Run diagnostics on cell state assignments</span>
+
+<span class="sd">        :return: diagnostics</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">feature_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_features</span><span class="p">()</span>
+        <span class="n">state_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_classes</span><span class="p">()</span>
+
+        <span class="n">corr_mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_correlations</span><span class="p">()</span>
+
+        <span class="c1"># Correlation values of all marker proteins</span>
+        <span class="n">marker_mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_marker_mat</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">marker_corr</span> <span class="o">=</span> <span class="n">marker_mat</span> <span class="o">*</span> <span class="n">corr_mat</span>
+        <span class="n">marker_corr</span><span class="p">[</span><span class="n">marker_mat</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+        <span class="c1"># Smallest correlation values for each pathway</span>
+        <span class="n">min_marker_corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">marker_corr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">min_marker_proteins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">take</span><span class="p">(</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">marker_corr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># Correlation values of all non marker proteins</span>
+        <span class="n">non_marker_mat</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_marker_mat</span><span class="p">()</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="n">non_marker_corr</span> <span class="o">=</span> <span class="n">non_marker_mat</span> <span class="o">*</span> <span class="n">corr_mat</span>
+        <span class="n">non_marker_corr</span><span class="p">[</span><span class="n">non_marker_mat</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+        <span class="c1"># Any correlation values where non marker proteins is greater than</span>
+        <span class="c1"># the smallest correlation values of marker proteins</span>
+        <span class="n">bad_corr_marker</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">non_marker_corr</span> <span class="o">&gt;</span> <span class="n">min_marker_corr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+        <span class="c1"># Problem summary</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">bad_corr_marker</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;pathway&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;protein A&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;correlation of protein A&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;protein B&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;correlation of protein B&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;note&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="n">problems</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+            <span class="n">state_index</span> <span class="o">=</span> <span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">protein_index</span> <span class="o">=</span> <span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">state_names</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">marker_protein</span> <span class="o">=</span> <span class="n">min_marker_proteins</span><span class="p">[</span><span class="n">state_index</span><span class="p">]</span>
+            <span class="n">non_marker_protein</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">[</span><span class="n">protein_index</span><span class="p">]</span>
+            <span class="n">problem</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;pathway&quot;</span><span class="p">:</span> <span class="n">state</span><span class="p">,</span>
+                <span class="s2">&quot;marker_protein&quot;</span><span class="p">:</span> <span class="n">marker_protein</span><span class="p">,</span>
+                <span class="s2">&quot;corr_of_marker_protein&quot;</span><span class="p">:</span> <span class="n">min_marker_corr</span><span class="p">[</span><span class="n">state_index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s2">&quot;non_marker_protein&quot;</span><span class="p">:</span> <span class="n">non_marker_protein</span><span class="p">,</span>
+                <span class="s2">&quot;corr_of_non_marker_protein&quot;</span><span class="p">:</span> <span class="n">non_marker_corr</span><span class="p">[</span>
+                    <span class="n">state_index</span><span class="p">,</span> <span class="n">protein_index</span>
+                <span class="p">],</span>
+                <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> is marker for </span><span class="si">{}</span><span class="s2"> but </span><span class="si">{}</span><span class="s2"> isn&#39;t&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">marker_protein</span><span class="p">,</span> <span class="n">state</span><span class="p">,</span> <span class="n">non_marker_protein</span>
+                <span class="p">),</span>
+            <span class="p">}</span>
+            <span class="n">problems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">problem</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">problems</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">df_issues</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">problems</span><span class="p">)</span>
+            <span class="n">df_issues</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">col_names</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df_issues</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df_issues</span></div>
+
+<div class="viewcode-block" id="CellStateModel.get_losses"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellStateModel.get_losses">[docs]</a>    <span class="k">def</span> <span class="nf">get_losses</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Getter for losses</span>
+
+<span class="sd">        :return: a torch tensor of losses for each training iteration the</span>
+<span class="sd">            model runs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_losses</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;The state model has not been trained yet&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_losses</span></div>
+
+<div class="viewcode-block" id="CellStateModel.get_scdataset"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellStateModel.get_scdataset">[docs]</a>    <span class="k">def</span> <span class="nf">get_scdataset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SCDataset</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Returns the input dataset</span>
+
+<span class="sd">        :return: self._dset</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span></div>
+
+<div class="viewcode-block" id="CellStateModel.is_converged"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellStateModel.is_converged">[docs]</a>    <span class="k">def</span> <span class="nf">is_converged</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Returns True if the model converged</span>
+
+<span class="sd">        :return: self._is_converged</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_converged</span></div>
+
+<div class="viewcode-block" id="CellStateModel.get_data"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellStateModel.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot; Returns data parameter</span>
+
+<span class="sd">        :return: self._data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span></div>
+
+<div class="viewcode-block" id="CellStateModel.get_variables"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellStateModel.get_variables">[docs]</a>    <span class="k">def</span> <span class="nf">get_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot; Returns all variables</span>
+
+<span class="sd">        :return: self._variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_variables</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">NotClassifiableError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Raised when the input data is not classifiable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jinyu Hou, Sunyun Lee, Michael Geuenich, Kieran Campbell
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

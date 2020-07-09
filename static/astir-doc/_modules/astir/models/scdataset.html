@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>astir.models.scdataset &mdash; astir  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> astir
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../development.html">Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../astir.html">astir package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../astir.data.html">astir.data package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../astir.models.html">astir.models package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">astir</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>astir.models.scdataset</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for astir.models.scdataset</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">DataLoader</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+
+<div class="viewcode-block" id="SCDataset"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset">[docs]</a><span class="k">class</span> <span class="nc">SCDataset</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Container for single-cell proteomic data in the form of </span>
+<span class="sd">    a pytorch dataset</span>
+
+<span class="sd">    :param expr_input: Input expression data. See details TODO</span>
+<span class="sd">    :param marker_dict: Marker dictionary containing cell type and </span>
+<span class="sd">        information. See details :TODO:</span>
+<span class="sd">    :param design: A design matrix</span>
+<span class="sd">    :param include_other_column: Should an additional &#39;other&#39; column be included?</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">expr_input</span><span class="p">,</span>
+        <span class="n">marker_dict</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
+        <span class="n">design</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
+        <span class="n">include_other_column</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span> <span class="o">=</span> <span class="n">dtype</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_marker_dict</span> <span class="o">=</span> <span class="n">marker_dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_m_features</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">l</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">marker_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">s</span><span class="p">]))</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_classes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">marker_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+        <span class="c1">## sanitize features</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_classes</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NotClassifiableError</span><span class="p">(</span>
+                <span class="s2">&quot;Classification failed. There &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;should be at least two cell classes to classify the data into.&quot;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_marker_mat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construct_marker_mat</span><span class="p">(</span>
+            <span class="n">include_other_column</span><span class="o">=</span><span class="n">include_other_column</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr_input</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_exprs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_df_input</span><span class="p">(</span><span class="n">expr_input</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_expr_features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">expr_input</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cell_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">expr_input</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr_input</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_expr_features</span> <span class="o">=</span> <span class="n">expr_input</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cell_names</span> <span class="o">=</span> <span class="n">expr_input</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_exprs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_np_input</span><span class="p">(</span><span class="n">expr_input</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_design</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fix_design</span><span class="p">(</span><span class="n">design</span><span class="p">)</span>
+        <span class="c1">## sanitize df</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exprs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NotClassifiableError</span><span class="p">(</span>
+                <span class="s2">&quot;Classification failed. There &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;should be at least one row of data to be classified.&quot;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_exprs_mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exprs</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_exprs_std</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exprs</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_process_df_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df_input</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Processes input as pd.DataFrame and convert it into torch.Tensor</span>
+
+<span class="sd">        :param df_input: the input</span>
+<span class="sd">        :type df_input: pd.DataFrame</span>
+<span class="sd">        :raises NotClassifiableError: raised when there is no overlap between the </span>
+<span class="sd">            data and the marker</span>
+<span class="sd">        :return: the processed input as a torch.Tensor</span>
+<span class="sd">        :rtype: torch.Tensor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">Y_np</span> <span class="o">=</span> <span class="n">df_input</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_m_features</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">NotClassifiableError</span><span class="p">(</span>
+                <span class="s2">&quot;Classification failed. There&#39;s no &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;overlap between marked features and expression features for &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;the classification of cell type/state.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">Y_np</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_process_np_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">np_input</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Process the input as Tuple[np.array, np.array, np.array] and convert it </span>
+<span class="sd">            to torch.Tensor.</span>
+<span class="sd">        :param np_input: input as a tuple. np_input[0] is the input data. np.input[1]</span>
+<span class="sd">            is the </span>
+<span class="sd">        :type np_input: Tuple[np.array, np.array, np.array]</span>
+<span class="sd">        :raises NotClassifiableError: raised when there is no overlap between marked</span>
+<span class="sd">            features and expression feature.</span>
+<span class="sd">        :return: the processed input as a torch.Tensor</span>
+<span class="sd">        :rtype: torch.Tensor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_expr_features</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_m_features</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expr_features</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NotClassifiableError</span><span class="p">(</span>
+                <span class="s2">&quot;Classification failed. There&#39;s no &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;overlap between marked features and expression features for &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;the classification of cell type/state.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_m_features</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Classified features are less than marked features.&quot;</span><span class="p">)</span>
+        <span class="n">Y_np</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">np_input</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="n">cell</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ind</span><span class="p">]</span>
+            <span class="n">Y_np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">temp</span><span class="p">))</span>
+        <span class="n">Y_np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">Y_np</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">Y_np</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_construct_marker_mat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_other_column</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Construct a marker matrix.</span>
+<span class="sd">        :param include_other_column: indicates whether or not include other columns.</span>
+<span class="sd">        :type include_other_column: bool</span>
+<span class="sd">        :return: A marker matrix. The rows are features and the coloumns are </span>
+<span class="sd">            the corresponding classes (type/state).</span>
+<span class="sd">        :rtype: torch.Tensor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_n_features</span><span class="p">()</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_n_classes</span><span class="p">()</span>
+
+        <span class="n">marker_mat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">C</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">include_other_column</span> <span class="k">else</span> <span class="n">C</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_m_features</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">cell_class</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_classes</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">feature</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_marker_dict</span><span class="p">[</span><span class="n">cell_class</span><span class="p">]:</span>
+                    <span class="n">marker_mat</span><span class="p">[</span><span class="n">g</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="k">return</span> <span class="n">marker_mat</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="c1"># N</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exprs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exprs</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exprs_mean</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exprs_std</span>
+        <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_design</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="k">def</span> <span class="nf">_fix_design</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">design</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">design</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_exprs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_device</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">design</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exprs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">NotClassifiableError</span><span class="p">(</span>
+                <span class="s2">&quot;Number of rows of design matrix &quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;must equal number of rows of expression data&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">d</span>
+
+<div class="viewcode-block" id="SCDataset.rescale"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.rescale">[docs]</a>    <span class="k">def</span> <span class="nf">rescale</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_exprs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exprs</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_sigma</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="SCDataset.get_exprs"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.get_exprs">[docs]</a>    <span class="k">def</span> <span class="nf">get_exprs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the expression data as a :class:`torch.Tensor`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exprs</span></div>
+
+<div class="viewcode-block" id="SCDataset.get_exprs_df"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.get_exprs_df">[docs]</a>    <span class="k">def</span> <span class="nf">get_exprs_df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the expression data as a :class:`pandas.DataFrame`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_exprs</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_cell_names</span><span class="p">()</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_features</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">df</span></div>
+
+<div class="viewcode-block" id="SCDataset.get_marker_mat"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.get_marker_mat">[docs]</a>    <span class="k">def</span> <span class="nf">get_marker_mat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the marker matrix as a :class:`torch.Tensor`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_marker_mat</span></div>
+
+<div class="viewcode-block" id="SCDataset.get_mu"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.get_mu">[docs]</a>    <span class="k">def</span> <span class="nf">get_mu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the mean expression of each protein as a :class:`torch.Tensor`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exprs_mean</span></div>
+
+<div class="viewcode-block" id="SCDataset.get_sigma"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.get_sigma">[docs]</a>    <span class="k">def</span> <span class="nf">get_sigma</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exprs_std</span></div>
+
+<div class="viewcode-block" id="SCDataset.get_n_classes"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.get_n_classes">[docs]</a>    <span class="k">def</span> <span class="nf">get_n_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the number of &#39;classes&#39;: either the number of cell types or cell states </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_classes</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SCDataset.get_n_cells"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.get_n_cells">[docs]</a>    <span class="k">def</span> <span class="nf">get_n_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the number of cells: either the number of cell types or cell states </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_cell_names</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="SCDataset.get_n_features"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.get_n_features">[docs]</a>    <span class="k">def</span> <span class="nf">get_n_features</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the number of features (proteins)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_m_features</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SCDataset.get_features"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.get_features">[docs]</a>    <span class="k">def</span> <span class="nf">get_features</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_m_features</span></div>
+
+<div class="viewcode-block" id="SCDataset.get_cell_names"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.get_cell_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_cell_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cell_names</span></div>
+
+<div class="viewcode-block" id="SCDataset.get_classes"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.get_classes">[docs]</a>    <span class="k">def</span> <span class="nf">get_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_classes</span></div>
+
+<div class="viewcode-block" id="SCDataset.get_design"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.get_design">[docs]</a>    <span class="k">def</span> <span class="nf">get_design</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_design</span></div>
+
+<div class="viewcode-block" id="SCDataset.normalize"><a class="viewcode-back" href="../../../astir.models.html#astir.models.SCDataset.normalize">[docs]</a>    <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">percentile_lower</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">percentile_upper</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">99.9</span><span class="p">,</span>
+     <span class="n">cofactor</span><span class="o">=</span><span class="mf">5.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Normalize the expression data</span>
+
+<span class="sd">        This performs a two-step normalization:</span>
+<span class="sd">        1. A `log(1+x)` transformation to the data</span>
+<span class="sd">        2. Winsorizes to (:param:`percentile_lower`, :param:`percentile_upper`)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="n">exprs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_exprs</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+            <span class="n">exprs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsinh</span><span class="p">(</span><span class="n">exprs</span> <span class="o">/</span> <span class="n">cofactor</span><span class="p">)</span>
+            <span class="n">q_low</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="p">(</span><span class="n">percentile_lower</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">q_high</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="p">(</span><span class="n">percentile_upper</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">exprs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="n">exprs</span><span class="p">[:,</span> <span class="n">g</span><span class="p">][</span><span class="n">exprs</span><span class="p">[:,</span> <span class="n">g</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">q_low</span><span class="p">[</span><span class="n">g</span><span class="p">]]</span> <span class="o">=</span> <span class="n">q_low</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+                <span class="n">exprs</span><span class="p">[:,</span> <span class="n">g</span><span class="p">][</span><span class="n">exprs</span><span class="p">[:,</span> <span class="n">g</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">q_high</span><span class="p">[</span><span class="n">g</span><span class="p">]]</span> <span class="o">=</span> <span class="n">q_high</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_exprs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">exprs</span><span class="p">)</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">NotClassifiableError</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jinyu Hou, Sunyun Lee, Michael Geuenich, Kieran Campbell
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

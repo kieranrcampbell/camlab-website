@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Development &mdash; astir  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="astir package" href="astir.html" />
+    <link rel="prev" title="Diagnosing and troubleshooting astir" href="tutorials/notebooks/diagnosing_troubleshooting.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> astir
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Development</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-render-the-docs">How to render the docs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-run-nosetests-and-add-a-test">How to run nosetests and add a test</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#running-nosetests">Running nosetests</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#method-1">Method 1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#method-2">Method 2</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#adding-a-unittest">Adding a unittest</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#best-git-practices">Best git practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#git-clone-and-start-a-new-branch">Git clone and start a new branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-your-copy-in-the-repo-git-add-commit-push">Update your copy in the repo (git add, commit, push)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#update-origin-master-git-merge-pull">Update origin/master (git merge, pull)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="astir.html">astir package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="astir.data.html">astir.data package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="astir.models.html">astir.models package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">astir</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Development</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/development.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="development">
+<h1>Development<a class="headerlink" href="#development" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="how-to-render-the-docs">
+<h2>How to render the docs<a class="headerlink" href="#how-to-render-the-docs" title="Permalink to this headline">¶</a></h2>
+<p>Install Sphinx</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install sphinx
+</pre></div>
+</div>
+<p>From the main project directory <cite>cd</cite> into docs directory</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd docs
+</pre></div>
+</div>
+<p>Build the existing reStructuredText files</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make html
+</pre></div>
+</div>
+<p>If the above command causes “Could not import extension &lt;extension-name&gt;”
+pip install them until the build succeeds.</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">astir/docs/html/index.html</span></code> in your favourite browser either by copying
+the absolute path in your browser URL bar.
+If you are using <cite>PyCharm</cite> editor, you can</p>
+<p>right click on <code class="docutils literal notranslate"><span class="pre">index.html</span></code>  in the file browser -&gt; <cite>Open in Browser</cite> -&gt;
+select your favourite browser</p>
+</div>
+<div class="section" id="how-to-run-nosetests-and-add-a-test">
+<h2>How to run nosetests and add a test<a class="headerlink" href="#how-to-run-nosetests-and-add-a-test" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="running-nosetests">
+<h3>Running nosetests<a class="headerlink" href="#running-nosetests" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="method-1">
+<h4>Method 1<a class="headerlink" href="#method-1" title="Permalink to this headline">¶</a></h4>
+<p>Run one test module at a time</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nosetests astir/tests/test_astir.py
+$ nosetests astir/tests/models/test_cellstate.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="method-2">
+<h4>Method 2<a class="headerlink" href="#method-2" title="Permalink to this headline">¶</a></h4>
+<p>Run all test modules at once</p>
+<p>..code:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ nosetests
+</pre></div>
+</div>
+<p>in any project module directory. You might need install the nose package.</p>
+</div>
+</div>
+<div class="section" id="adding-a-unittest">
+<h3>Adding a unittest<a class="headerlink" href="#adding-a-unittest" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="best-git-practices">
+<h2>Best git practices<a class="headerlink" href="#best-git-practices" title="Permalink to this headline">¶</a></h2>
+<p>The best git practice is to start your own local branch, and commit to your local branch’s
+remote branch once in awhile. Once your branch is ready to merge into the
+origin master repo, you want to git merge, pull, and push.</p>
+<div class="section" id="git-clone-and-start-a-new-branch">
+<h3>Git clone and start a new branch<a class="headerlink" href="#git-clone-and-start-a-new-branch" title="Permalink to this headline">¶</a></h3>
+<p>This is the first step you want to take and won’t have to repeat unless you want
+to clone on another machine or create a new branch.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/camlab-bioml/astir.git
+$ git checkout -b &lt;new-branch-name&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="update-your-copy-in-the-repo-git-add-commit-push">
+<h3>Update your copy in the repo (git add, commit, push)<a class="headerlink" href="#update-your-copy-in-the-repo-git-add-commit-push" title="Permalink to this headline">¶</a></h3>
+<p>You might want to do git commits once in awhile to save your work or create new checkpoint.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git add &lt;filename1&gt; &lt;filename2&gt; ... &lt;filename n&gt;
+$ git commit -m &quot;&lt;your-commmit-message&gt;&quot;
+</pre></div>
+</div>
+<p>Additionally push your work in local branch to its remote branch</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git push origin &lt;my-working-branch-name&gt;
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git push
+</pre></div>
+</div>
+<p>If you are using the second command make sure that your local branch, called <cite>branch-name</cite>,
+is pushing to its remote branch, called <cite>origin/branch-name</cite></p>
+</div>
+<div class="section" id="update-origin-master-git-merge-pull">
+<h3>Update origin/master (git merge, pull)<a class="headerlink" href="#update-origin-master-git-merge-pull" title="Permalink to this headline">¶</a></h3>
+<p>To update Master remote branch</p>
+<p>First, commit and push all your current work to your remote branch</p>
+<p>Second, checkout master</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git checkout master
+</pre></div>
+</div>
+<p>This changes your working branch to <cite>local master</cite>.</p>
+<p>You can view your current working branch with the following command</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git branch
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git merge &lt;branch-to-merge-current-with&gt;
+</pre></div>
+</div>
+<p>Resolve any merge conflicts you get. Once the merge is complete and
+all conflicts are resolved</p>
+<p>Update the local master branch by</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git pull origin master
+</pre></div>
+</div>
+<p>or depending on your setup you may even be able to run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git pull
+</pre></div>
+</div>
+<p>To merge a branch into the current one
+Again resolve any conflicts</p>
+<p>Update remote master by following the steps outlined in
+<cite>Update your copy in the repo</cite></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="astir.html" class="btn btn-neutral float-right" title="astir package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tutorials/notebooks/diagnosing_troubleshooting.html" class="btn btn-neutral float-left" title="Diagnosing and troubleshooting astir" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jinyu Hou, Sunyun Lee, Michael Geuenich, Kieran Campbell
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

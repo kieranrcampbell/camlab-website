@@ -1,0 +1,1844 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Loading data into astir &mdash; astir  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Diagnosing and troubleshooting astir" href="diagnosing_troubleshooting.html" />
+    <link rel="prev" title="Getting started with astir" href="getting_started.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> astir
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started with astir</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Loading data into astir</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Table-of-Contents:">Table of Contents:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#0.-Loading-necessary-libraries-and-define-paths">0. Loading necessary libraries and define paths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.-Starting-Astir-within-python">1. Starting Astir within python</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#1.0-Loading-marker-dictionary-and-design-matrix">1.0 Loading marker dictionary and design matrix</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#1.1-Loading-data-as-pd.DataFrame">1.1 Loading data as <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#1.2-Loading-data-as-np.array-or-torch.tensor">1.2 Loading data as <code class="docutils literal notranslate"><span class="pre">np.array</span></code> or <code class="docutils literal notranslate"><span class="pre">torch.tensor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#1.3-Loading-data-as-SCDataset">1.3 Loading data as <code class="docutils literal notranslate"><span class="pre">SCDataset</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2.-Loading-from-csv-and-yaml-files">2. Loading from csv and yaml files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#3.-Loading-from-a-directory-of-csvs-and-yaml">3. Loading from a directory of csvs and yaml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#4.-Loading-from-loom">4. Loading from loom</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#5.-Loading-from-anndata">5. Loading from anndata</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="diagnosing_troubleshooting.html">Diagnosing and troubleshooting astir</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../astir.html">astir package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../astir.data.html">astir.data package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../astir.models.html">astir.models package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">astir</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Tutorials</a> &raquo;</li>
+        
+      <li>Loading data into astir</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/tutorials/notebooks/data_loading.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Loading-data-into-astir">
+<h1>Loading data into astir<a class="headerlink" href="#Loading-data-into-astir" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Table-of-Contents:">
+<h2>Table of Contents:<a class="headerlink" href="#Table-of-Contents:" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="#zero">0 Loading necessary libraries</a></p></li>
+<li><p><a class="reference external" href="#one">1 Starting Astir within python</a></p>
+<ul>
+<li><p><a class="reference external" href="#one0">1.0 Loading marker dictionary and design matrix</a></p></li>
+<li><p><a class="reference external" href="#one1">1.1 Loading data as pd.DataFrame</a></p></li>
+<li><p><a class="reference external" href="#one2">1.2 Loading data as np.array</a></p></li>
+<li><p><a class="reference external" href="#one3">1.3 Loading data as SCDataset</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#two">2 Loading from csv and yaml files</a></p></li>
+<li><p><a class="reference external" href="#three">3 Loading from a directory of csvs and yaml</a></p></li>
+<li><p><a class="reference external" href="#four">4 Loading from loom</a></p></li>
+<li><p><a class="reference external" href="#five">5 Loading from anndata</a></p></li>
+</ul>
+</div>
+<div class="section" id="0.-Loading-necessary-libraries-and-define-paths">
+<h2>0. Loading necessary libraries and define paths<a class="headerlink" href="#0.-Loading-necessary-libraries-and-define-paths" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># !pip install -e ../../..</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">module_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;../../..&#39;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">module_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">module_path</span><span class="p">)</span>
+<span class="n">module_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;../../../astir&#39;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">module_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">module_path</span><span class="p">)</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">astir</span> <span class="k">as</span> <span class="nn">ast</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">yaml_marker_path</span> <span class="o">=</span> <span class="s2">&quot;../../../astir/tests/test-data/jackson-2020-markers.yml&quot;</span>
+<span class="n">design_mat_path</span> <span class="o">=</span> <span class="s2">&quot;../../../astir/tests/test-data/design.csv&quot;</span>
+<span class="n">expression_mat_path</span> <span class="o">=</span> <span class="s2">&quot;../../../astir/tests/test-data/test_data.csv&quot;</span>
+<span class="n">expression_dir_path</span> <span class="o">=</span> <span class="s2">&quot;../../../astir/tests/test-data/test-dir-read&quot;</span>
+<span class="n">expression_loom_path</span> <span class="o">=</span> <span class="s2">&quot;../../../astir/tests/test-data/basel_100.loom&quot;</span>
+<span class="n">expression_anndata_path</span><span class="o">=</span><span class="s2">&quot;../../../astir/tests/test-data/adata_small.h5ad&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="1.-Starting-Astir-within-python">
+<h2>1. Starting Astir within python<a class="headerlink" href="#1.-Starting-Astir-within-python" title="Permalink to this headline">¶</a></h2>
+<p>The input dataset should represent protein expression in single cells. The rows should represent each cell (one row per cell) and the columns should represent each protein (one column per protein). A marker which maps the features (proteins) to cell type/state may is required. A design matrix is optional. If provided, it should be either <code class="docutils literal notranslate"><span class="pre">np.array</span></code> or <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>.</p>
+<p>The initialization of <code class="docutils literal notranslate"><span class="pre">Astir</span></code> requires input dataset <code class="docutils literal notranslate"><span class="pre">input_expr</span></code> as one of <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>, <code class="docutils literal notranslate"><span class="pre">Tuple[np.array,</span> <span class="pre">List[str],</span> <span class="pre">List[str]]</span></code> and <code class="docutils literal notranslate"><span class="pre">Tuple[SCDataset,</span> <span class="pre">SCDataset]</span></code>.</p>
+<p>Note: <code class="docutils literal notranslate"><span class="pre">dtype</span></code> and <code class="docutils literal notranslate"><span class="pre">random_seed</span></code> are always customizable. <code class="docutils literal notranslate"><span class="pre">dtype</span></code> is default to <code class="docutils literal notranslate"><span class="pre">torch.float64</span></code> and <code class="docutils literal notranslate"><span class="pre">random_seed</span></code> is default to <code class="docutils literal notranslate"><span class="pre">1234</span></code>.</p>
+<div class="section" id="1.0-Loading-marker-dictionary-and-design-matrix">
+<h3>1.0 Loading marker dictionary and design matrix<a class="headerlink" href="#1.0-Loading-marker-dictionary-and-design-matrix" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="Marker-Dictionary">
+<h4>Marker Dictionary<a class="headerlink" href="#Marker-Dictionary" title="Permalink to this headline">¶</a></h4>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">yaml_marker_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+    <span class="n">marker_dict</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">marker_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;cell_states&#39;: {&#39;RTK_signalling&#39;: [&#39;Her2&#39;, &#39;EGFR&#39;], &#39;proliferation&#39;: [&#39;Ki-67&#39;, &#39;phospho Histone&#39;], &#39;mTOR_signalling&#39;: [&#39;phospho mTOR&#39;, &#39;phospho S6&#39;], &#39;apoptosis&#39;: [&#39;cleaved PARP&#39;, &#39;Cleaved Caspase3&#39;]}, &#39;cell_types&#39;: {&#39;stromal&#39;: [&#39;Vimentin&#39;, &#39;Fibronectin&#39;], &#39;B cells&#39;: [&#39;CD45&#39;, &#39;CD20&#39;], &#39;T cells&#39;: [&#39;CD45&#39;, &#39;CD3&#39;], &#39;macrophage&#39;: [&#39;CD45&#39;, &#39;CD68&#39;], &#39;epithelial(basal)&#39;: [&#39;E-Cadherin&#39;, &#39;pan Cytokeratin&#39;, &#39;Cytokeratin 5&#39;, &#39;Cytokeratin 14&#39;, &#39;Her2&#39;], &#39;epithelial(luminal)&#39;: [&#39;E-Cadherin&#39;, &#39;pan Cytokeratin&#39;, &#39;Cytokeratin 7&#39;, &#39;Cytokeratin 8/18&#39;, &#39;Cytokeratin 19&#39;, &#39;Cytokeratin 5&#39;, &#39;Her2&#39;]}, &#39;hierarchy&#39;: {&#39;immune&#39;: [&#39;B cells&#39;, &#39;T cells&#39;, &#39;macrophage&#39;], &#39;epithelial&#39;: [&#39;epithelial(basal)&#39;, &#39;epithelial(luminal)&#39;]}}
+</pre></div></div>
+</div>
+<p>Some notes:</p>
+<ol class="arabic simple">
+<li><p>The marker <code class="docutils literal notranslate"><span class="pre">marker_dict</span></code> is not required when <code class="docutils literal notranslate"><span class="pre">input_expr</span></code> is <code class="docutils literal notranslate"><span class="pre">Tuple[SCDataset,</span> <span class="pre">SCDataset]</span></code>. Otherwise, it is required to be <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Dict[str,</span> <span class="pre">str]]</span></code>.</p></li>
+<li><p>The outer dictionary may have at most three keys: <code class="docutils literal notranslate"><span class="pre">cell_type</span></code>, <code class="docutils literal notranslate"><span class="pre">cell_state</span></code> and <code class="docutils literal notranslate"><span class="pre">hierarchy</span></code>. <code class="docutils literal notranslate"><span class="pre">cell_type</span></code> and <code class="docutils literal notranslate"><span class="pre">cell_state</span></code> maps to the corresponding dictionary which maps the name of cell type/state to protein features. <code class="docutils literal notranslate"><span class="pre">hierarchy</span></code> maps to the dictionary which indicates the cell type hierarchy.</p></li>
+<li><p>If the user is only intended to classify one of cell type and cell state, only the intended marker dictionary should be provided. So that marker_dict is one of <code class="docutils literal notranslate"><span class="pre">{&quot;cell_state&quot;:</span> <span class="pre">{...}}</span></code>, <code class="docutils literal notranslate"><span class="pre">{&quot;cell_type&quot;:</span> <span class="pre">{...}}</span></code> and <code class="docutils literal notranslate"><span class="pre">{&quot;cell_type&quot;:</span> <span class="pre">{...},</span> <span class="pre">&quot;cell_state&quot;:</span> <span class="pre">{...}}</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">hierarchy</span></code> dictionary should be included when the client tends to call <code class="docutils literal notranslate"><span class="pre">Astir.assign_celltype_hierarchy()</span></code></p></li>
+</ol>
+</div>
+<div class="section" id="Design-matrix:">
+<h4>Design matrix:<a class="headerlink" href="#Design-matrix:" title="Permalink to this headline">¶</a></h4>
+<p>Note that the design matrix must have the same number of rows as there are number of cells.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">design_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">design_mat_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">design_df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(49, 40)
+</pre></div></div>
+</div>
+<p>Note: <code class="docutils literal notranslate"><span class="pre">design</span></code> is not necessary when <code class="docutils literal notranslate"><span class="pre">input_expr</span></code> is <code class="docutils literal notranslate"><span class="pre">Tuple[SCDataset,</span> <span class="pre">SCDataset]</span></code>. Otherwise it is optional.</p>
+</div>
+</div>
+<div class="section" id="1.1-Loading-data-as-pd.DataFrame">
+<h3>1.1 Loading data as <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code><a class="headerlink" href="#1.1-Loading-data-as-pd.DataFrame" title="Permalink to this headline">¶</a></h3>
+<p>When the input is <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>, its row and column should respectively represent the cells and the features (proteins).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">df_expr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">expression_mat_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">df_expr</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>EGFR</th>
+      <th>Ruthenium_1</th>
+      <th>Ruthenium_2</th>
+      <th>Ruthenium_3</th>
+      <th>Ruthenium_4</th>
+      <th>Ruthenium_5</th>
+      <th>Ruthenium_6</th>
+      <th>Ruthenium_7</th>
+      <th>E-Cadherin</th>
+      <th>DNA1</th>
+      <th>...</th>
+      <th>CD45</th>
+      <th>CD68</th>
+      <th>CD3</th>
+      <th>Carbonic Anhydrase IX</th>
+      <th>Cytokeratin 8/18</th>
+      <th>Cytokeratin 7</th>
+      <th>Twist</th>
+      <th>phospho Histone</th>
+      <th>phospho mTOR</th>
+      <th>phospho S6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_1</th>
+      <td>0.281753</td>
+      <td>1.319588</td>
+      <td>0.597380</td>
+      <td>1.782863</td>
+      <td>1.757824</td>
+      <td>1.991857</td>
+      <td>2.580564</td>
+      <td>2.287167</td>
+      <td>1.814309</td>
+      <td>2.261638</td>
+      <td>...</td>
+      <td>0.044733</td>
+      <td>0.184805</td>
+      <td>0.000000</td>
+      <td>0.928929</td>
+      <td>0.025526</td>
+      <td>0.043423</td>
+      <td>0.209742</td>
+      <td>0.137454</td>
+      <td>0.572811</td>
+      <td>0.215508</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_2</th>
+      <td>0.303016</td>
+      <td>1.319588</td>
+      <td>0.597380</td>
+      <td>1.782863</td>
+      <td>1.757824</td>
+      <td>1.991857</td>
+      <td>2.580564</td>
+      <td>2.287167</td>
+      <td>1.517685</td>
+      <td>1.613060</td>
+      <td>...</td>
+      <td>0.046802</td>
+      <td>0.080406</td>
+      <td>0.110806</td>
+      <td>0.752101</td>
+      <td>0.000000</td>
+      <td>0.032056</td>
+      <td>0.108013</td>
+      <td>0.048428</td>
+      <td>0.539647</td>
+      <td>0.655731</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_3</th>
+      <td>0.252374</td>
+      <td>1.319588</td>
+      <td>0.597380</td>
+      <td>1.782863</td>
+      <td>1.757824</td>
+      <td>1.991857</td>
+      <td>2.580564</td>
+      <td>2.287167</td>
+      <td>1.246433</td>
+      <td>2.138744</td>
+      <td>...</td>
+      <td>0.028499</td>
+      <td>0.203248</td>
+      <td>0.020617</td>
+      <td>0.740759</td>
+      <td>0.083311</td>
+      <td>0.081503</td>
+      <td>0.119058</td>
+      <td>0.063097</td>
+      <td>0.409735</td>
+      <td>0.437845</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_4</th>
+      <td>0.397732</td>
+      <td>1.306852</td>
+      <td>0.534496</td>
+      <td>1.678217</td>
+      <td>1.757824</td>
+      <td>1.961430</td>
+      <td>2.528551</td>
+      <td>2.183814</td>
+      <td>1.839785</td>
+      <td>1.816015</td>
+      <td>...</td>
+      <td>0.069053</td>
+      <td>0.305200</td>
+      <td>0.060264</td>
+      <td>1.095968</td>
+      <td>0.184603</td>
+      <td>0.131531</td>
+      <td>0.160778</td>
+      <td>0.090666</td>
+      <td>0.305718</td>
+      <td>0.132236</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_5</th>
+      <td>0.426352</td>
+      <td>1.173439</td>
+      <td>0.597380</td>
+      <td>1.589303</td>
+      <td>1.389839</td>
+      <td>1.789887</td>
+      <td>2.343743</td>
+      <td>2.123334</td>
+      <td>1.618347</td>
+      <td>1.355214</td>
+      <td>...</td>
+      <td>0.233777</td>
+      <td>0.135084</td>
+      <td>0.057195</td>
+      <td>1.427983</td>
+      <td>0.035371</td>
+      <td>0.038448</td>
+      <td>0.014434</td>
+      <td>0.127032</td>
+      <td>0.261205</td>
+      <td>0.157786</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 45 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">a_df</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">Astir</span><span class="p">(</span><span class="n">input_expr</span><span class="o">=</span><span class="n">df_expr</span><span class="p">,</span> <span class="n">marker_dict</span><span class="o">=</span><span class="n">marker_dict</span><span class="p">,</span> <span class="n">design</span><span class="o">=</span><span class="n">design_df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Astir object with 6 cell types, 4 cell states, and 49 cells.
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="1.2-Loading-data-as-np.array-or-torch.tensor">
+<h3>1.2 Loading data as <code class="docutils literal notranslate"><span class="pre">np.array</span></code> or <code class="docutils literal notranslate"><span class="pre">torch.tensor</span></code><a class="headerlink" href="#1.2-Loading-data-as-np.array-or-torch.tensor" title="Permalink to this headline">¶</a></h3>
+<p>When the input is <code class="docutils literal notranslate"><span class="pre">Tuple[Union[np.array,</span> <span class="pre">torch.tensor]],</span> <span class="pre">List[str],</span> <span class="pre">List[str]]</span></code>, the first element <code class="docutils literal notranslate"><span class="pre">np.array</span></code> or <code class="docutils literal notranslate"><span class="pre">torch.tensor</span></code> is the input dataset, the second element <code class="docutils literal notranslate"><span class="pre">List[str]</span></code> is the title of the columns (the names of proteins) and the third element <code class="docutils literal notranslate"><span class="pre">List[str]</span></code> is the title of the rows (the name　of the cells). The length of the second and third list should be equal to the number of columns and rows of the first array.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Load as np.array</span>
+<span class="n">np_expr</span> <span class="o">=</span> <span class="n">df_expr</span><span class="o">.</span><span class="n">values</span>
+<span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_expr</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">cores</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_expr</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">a_np</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">Astir</span><span class="p">(</span><span class="n">input_expr</span><span class="o">=</span><span class="p">(</span><span class="n">np_expr</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">cores</span><span class="p">),</span> <span class="n">marker_dict</span><span class="o">=</span><span class="n">marker_dict</span><span class="p">,</span> <span class="n">design</span><span class="o">=</span><span class="n">design_df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_np</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Astir object with 6 cell types, 4 cell states, and 49 cells.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Load as torch.tensor</span>
+<span class="n">t_expr</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np_expr</span><span class="p">)</span>
+<span class="n">a_t</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">Astir</span><span class="p">(</span><span class="n">input_expr</span><span class="o">=</span><span class="p">(</span><span class="n">t_expr</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="n">cores</span><span class="p">),</span> <span class="n">marker_dict</span><span class="o">=</span><span class="n">marker_dict</span><span class="p">,</span> <span class="n">design</span><span class="o">=</span><span class="n">design_df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Astir object with 6 cell types, 4 cell states, and 49 cells.
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="1.3-Loading-data-as-SCDataset">
+<h3>1.3 Loading data as <code class="docutils literal notranslate"><span class="pre">SCDataset</span></code><a class="headerlink" href="#1.3-Loading-data-as-SCDataset" title="Permalink to this headline">¶</a></h3>
+<p>When the input is <code class="docutils literal notranslate"><span class="pre">Tuple[SCDataset,</span> <span class="pre">SCDataset]</span></code>, the first <code class="docutils literal notranslate"><span class="pre">SCDataset</span></code> should be the cell type dataset and the second <code class="docutils literal notranslate"><span class="pre">SCDataset</span></code> should be the cell state dataset.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">type_scd</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">SCDataset</span><span class="p">(</span><span class="n">expr_input</span><span class="o">=</span><span class="n">df_expr</span><span class="p">,</span> <span class="n">marker_dict</span><span class="o">=</span><span class="n">marker_dict</span><span class="p">[</span><span class="s2">&quot;cell_types&quot;</span><span class="p">],</span>
+                         <span class="n">include_other_column</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">design</span><span class="o">=</span><span class="n">design_df</span><span class="p">)</span>
+<span class="n">state_scd</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">SCDataset</span><span class="p">(</span><span class="n">expr_input</span><span class="o">=</span><span class="n">df_expr</span><span class="p">,</span> <span class="n">marker_dict</span><span class="o">=</span><span class="n">marker_dict</span><span class="p">[</span><span class="s2">&quot;cell_states&quot;</span><span class="p">],</span>
+                          <span class="n">include_other_column</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">design</span><span class="o">=</span><span class="n">design_df</span><span class="p">)</span>
+<span class="n">a_scd</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">Astir</span><span class="p">(</span><span class="n">input_expr</span><span class="o">=</span><span class="p">(</span><span class="n">type_scd</span><span class="p">,</span> <span class="n">state_scd</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_scd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Astir object with 6 cell types, 4 cell states, and 49 cells.
+</pre></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="2.-Loading-from-csv-and-yaml-files">
+<h2>2. Loading from csv and yaml files<a class="headerlink" href="#2.-Loading-from-csv-and-yaml-files" title="Permalink to this headline">¶</a></h2>
+<p>A data reader <code class="docutils literal notranslate"><span class="pre">from_csv_yaml</span></code> for loading <code class="docutils literal notranslate"><span class="pre">csv</span></code> and <code class="docutils literal notranslate"><span class="pre">yaml</span></code> file is provided.</p>
+<p>The row of the <code class="docutils literal notranslate"><span class="pre">csv</span></code> file should represent the information of each single cells and the column of the <code class="docutils literal notranslate"><span class="pre">csv</span></code> file should represent the expression of each protein in different cells.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">a_csv</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">from_csv_yaml</span><span class="p">(</span><span class="n">csv_input</span><span class="o">=</span><span class="n">expression_mat_path</span><span class="p">,</span> <span class="n">marker_yaml</span><span class="o">=</span><span class="n">yaml_marker_path</span><span class="p">,</span> <span class="n">design_csv</span><span class="o">=</span><span class="n">design_mat_path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_csv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Astir object with 6 cell types, 4 cell states, and 49 cells.
+</pre></div></div>
+</div>
+<p>Some notes:</p>
+<ol class="arabic simple">
+<li><p>The yaml file at <code class="docutils literal notranslate"><span class="pre">yaml_marker_path</span></code> contains the marker which maps protein features to cell type/state classes. The format should match the description of *<a class="reference external" href="#mk">marker dictionary</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_csv_yaml</span></code> returns an <code class="docutils literal notranslate"><span class="pre">Astir</span></code> object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dtype</span></code> and <code class="docutils literal notranslate"><span class="pre">random_seed</span></code> are also customizable. <code class="docutils literal notranslate"><span class="pre">dtype</span></code> is default to <code class="docutils literal notranslate"><span class="pre">torch.float64</span></code> and <code class="docutils literal notranslate"><span class="pre">random_seed</span></code> is default to <code class="docutils literal notranslate"><span class="pre">1234</span></code>.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">type</span><span class="p">(</span><span class="n">a_csv</span><span class="o">.</span><span class="n">get_type_dataset</span><span class="p">()</span><span class="o">.</span><span class="n">get_exprs</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+torch.Tensor
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">a_csv</span><span class="o">.</span><span class="n">get_type_dataset</span><span class="p">()</span><span class="o">.</span><span class="n">get_exprs_df</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CD20</th>
+      <th>CD3</th>
+      <th>CD45</th>
+      <th>CD68</th>
+      <th>Cytokeratin 14</th>
+      <th>Cytokeratin 19</th>
+      <th>Cytokeratin 5</th>
+      <th>Cytokeratin 7</th>
+      <th>Cytokeratin 8/18</th>
+      <th>E-Cadherin</th>
+      <th>Fibronectin</th>
+      <th>Her2</th>
+      <th>Vimentin</th>
+      <th>pan Cytokeratin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_1</th>
+      <td>0.207884</td>
+      <td>0.000000</td>
+      <td>0.044733</td>
+      <td>0.184805</td>
+      <td>0.134128</td>
+      <td>0.079956</td>
+      <td>0.178350</td>
+      <td>0.043423</td>
+      <td>0.025526</td>
+      <td>1.814309</td>
+      <td>1.039734</td>
+      <td>0.483007</td>
+      <td>0.444140</td>
+      <td>1.187512</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_2</th>
+      <td>0.021506</td>
+      <td>0.110806</td>
+      <td>0.046802</td>
+      <td>0.080406</td>
+      <td>0.026951</td>
+      <td>0.066922</td>
+      <td>0.081147</td>
+      <td>0.032056</td>
+      <td>0.000000</td>
+      <td>1.517685</td>
+      <td>1.147644</td>
+      <td>0.513386</td>
+      <td>0.270070</td>
+      <td>0.749379</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_3</th>
+      <td>0.008878</td>
+      <td>0.020617</td>
+      <td>0.028499</td>
+      <td>0.203248</td>
+      <td>0.023515</td>
+      <td>0.186294</td>
+      <td>0.076112</td>
+      <td>0.081503</td>
+      <td>0.083311</td>
+      <td>1.246433</td>
+      <td>0.988906</td>
+      <td>0.633226</td>
+      <td>0.233909</td>
+      <td>1.216521</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_4</th>
+      <td>0.053027</td>
+      <td>0.060264</td>
+      <td>0.069053</td>
+      <td>0.305200</td>
+      <td>0.114420</td>
+      <td>0.346273</td>
+      <td>0.164059</td>
+      <td>0.131531</td>
+      <td>0.184603</td>
+      <td>1.839785</td>
+      <td>0.842710</td>
+      <td>0.709272</td>
+      <td>0.542362</td>
+      <td>1.354303</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_5</th>
+      <td>0.019127</td>
+      <td>0.057195</td>
+      <td>0.233777</td>
+      <td>0.135084</td>
+      <td>0.055368</td>
+      <td>0.124407</td>
+      <td>0.095323</td>
+      <td>0.038448</td>
+      <td>0.035371</td>
+      <td>1.618347</td>
+      <td>1.073357</td>
+      <td>0.482230</td>
+      <td>0.759944</td>
+      <td>0.629398</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="3.-Loading-from-a-directory-of-csvs-and-yaml">
+<h2>3. Loading from a directory of csvs and yaml<a class="headerlink" href="#3.-Loading-from-a-directory-of-csvs-and-yaml" title="Permalink to this headline">¶</a></h2>
+<p>The user can also load the data from a directory of <code class="docutils literal notranslate"><span class="pre">csv</span></code> files with <code class="docutils literal notranslate"><span class="pre">from_csv_dir_yaml</span></code>.</p>
+<p>In this case, every <code class="docutils literal notranslate"><span class="pre">csv</span></code> file should represent the expression data from different samples. A design matrix will be generated automatically.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">a_dir</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">from_csv_dir_yaml</span><span class="p">(</span><span class="n">input_dir</span><span class="o">=</span><span class="n">expression_dir_path</span><span class="p">,</span> <span class="n">marker_yaml</span><span class="o">=</span><span class="n">yaml_marker_path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_dir</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Astir object with 6 cell types, 4 cell states, and 40 cells.
+</pre></div></div>
+</div>
+<p>Some notes:</p>
+<ol class="arabic simple">
+<li><p>The yaml file at <code class="docutils literal notranslate"><span class="pre">yaml_marker_path</span></code> contains the marker which maps protein features to cell type/state classes. The format should match the description of *<a class="reference external" href="#mk">marker dictionary</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_csv_dir_yaml</span></code> returns an Astir object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dtype</span></code> and <code class="docutils literal notranslate"><span class="pre">random_seed</span></code> are also customizable. <code class="docutils literal notranslate"><span class="pre">dtype</span></code> is default to <code class="docutils literal notranslate"><span class="pre">torch.float64</span></code> and <code class="docutils literal notranslate"><span class="pre">random_seed</span></code> is default to <code class="docutils literal notranslate"><span class="pre">1234</span></code>.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">type</span><span class="p">(</span><span class="n">a_dir</span><span class="o">.</span><span class="n">get_type_dataset</span><span class="p">()</span><span class="o">.</span><span class="n">get_exprs</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+torch.Tensor
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">a_dir</span><span class="o">.</span><span class="n">get_type_dataset</span><span class="p">()</span><span class="o">.</span><span class="n">get_exprs_df</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CD20</th>
+      <th>CD3</th>
+      <th>CD45</th>
+      <th>CD68</th>
+      <th>Cytokeratin 14</th>
+      <th>Cytokeratin 19</th>
+      <th>Cytokeratin 5</th>
+      <th>Cytokeratin 7</th>
+      <th>Cytokeratin 8/18</th>
+      <th>E-Cadherin</th>
+      <th>Fibronectin</th>
+      <th>Her2</th>
+      <th>Vimentin</th>
+      <th>pan Cytokeratin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_1</th>
+      <td>0.207884</td>
+      <td>0.000000</td>
+      <td>0.044733</td>
+      <td>0.184805</td>
+      <td>0.134128</td>
+      <td>0.079956</td>
+      <td>0.178350</td>
+      <td>0.043423</td>
+      <td>0.025526</td>
+      <td>1.814309</td>
+      <td>1.039734</td>
+      <td>0.483007</td>
+      <td>0.444140</td>
+      <td>1.187512</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_2</th>
+      <td>0.021506</td>
+      <td>0.110806</td>
+      <td>0.046802</td>
+      <td>0.080406</td>
+      <td>0.026951</td>
+      <td>0.066922</td>
+      <td>0.081147</td>
+      <td>0.032056</td>
+      <td>0.000000</td>
+      <td>1.517685</td>
+      <td>1.147644</td>
+      <td>0.513386</td>
+      <td>0.270070</td>
+      <td>0.749379</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_3</th>
+      <td>0.008878</td>
+      <td>0.020617</td>
+      <td>0.028499</td>
+      <td>0.203248</td>
+      <td>0.023515</td>
+      <td>0.186294</td>
+      <td>0.076112</td>
+      <td>0.081503</td>
+      <td>0.083311</td>
+      <td>1.246433</td>
+      <td>0.988906</td>
+      <td>0.633226</td>
+      <td>0.233909</td>
+      <td>1.216521</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_4</th>
+      <td>0.053027</td>
+      <td>0.060264</td>
+      <td>0.069053</td>
+      <td>0.305200</td>
+      <td>0.114420</td>
+      <td>0.346273</td>
+      <td>0.164059</td>
+      <td>0.131531</td>
+      <td>0.184603</td>
+      <td>1.839785</td>
+      <td>0.842710</td>
+      <td>0.709272</td>
+      <td>0.542362</td>
+      <td>1.354303</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_126_X14Y7_5</th>
+      <td>0.019127</td>
+      <td>0.057195</td>
+      <td>0.233777</td>
+      <td>0.135084</td>
+      <td>0.055368</td>
+      <td>0.124407</td>
+      <td>0.095323</td>
+      <td>0.038448</td>
+      <td>0.035371</td>
+      <td>1.618347</td>
+      <td>1.073357</td>
+      <td>0.482230</td>
+      <td>0.759944</td>
+      <td>0.629398</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</div>
+<div class="section" id="4.-Loading-from-loom">
+<h2>4. Loading from loom<a class="headerlink" href="#4.-Loading-from-loom" title="Permalink to this headline">¶</a></h2>
+<p>It is also possible to load the data from a <code class="docutils literal notranslate"><span class="pre">loom</span></code> file with <code class="docutils literal notranslate"><span class="pre">from_loompy_yaml</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">a_loom</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">from_loompy_yaml</span><span class="p">(</span><span class="n">loom_file</span><span class="o">=</span><span class="n">expression_loom_path</span><span class="p">,</span> <span class="n">marker_yaml</span><span class="o">=</span><span class="n">yaml_marker_path</span><span class="p">,</span>
+                         <span class="n">protein_name_attr</span><span class="o">=</span><span class="s2">&quot;protein&quot;</span><span class="p">,</span> <span class="n">cell_name_attr</span><span class="o">=</span><span class="s2">&quot;cell_name&quot;</span><span class="p">,</span> <span class="n">batch_name_attr</span><span class="o">=</span><span class="s2">&quot;batch&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_loom</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Astir object with 6 cell types, 4 cell states, and 100 cells.
+</pre></div></div>
+</div>
+<p>Some notes:</p>
+<ol class="arabic simple">
+<li><p>The protein and cell names are taken from <code class="docutils literal notranslate"><span class="pre">ds.ra[protein_name_attr]</span></code> and <code class="docutils literal notranslate"><span class="pre">ds.ca[cell_name_attr]</span></code> respectively if specified, and <code class="docutils literal notranslate"><span class="pre">ds.ra[&quot;protein&quot;]</span></code> and <code class="docutils literal notranslate"><span class="pre">ds.cs[&quot;cell_name&quot;]</span></code> otherwise.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">batch_name</span></code> is sepecified, the corresponding column of <code class="docutils literal notranslate"><span class="pre">ds.ca[batch_name_attr]</span></code> will be assumed as the batch variable and turned into a design matrix. Otherwise it is taken as <code class="docutils literal notranslate"><span class="pre">ds.ca[&quot;batch&quot;]</span></code></p></li>
+<li><p>The yaml file at <code class="docutils literal notranslate"><span class="pre">yaml_marker_path</span></code> contains the marker which maps protein features to cell type/state classes. The format should match the description of *<a class="reference external" href="#mk">marker dictionary</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_loom_yaml</span></code> returns an Astir object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dtype</span></code> and <code class="docutils literal notranslate"><span class="pre">random_seed</span></code> are also customizable. <code class="docutils literal notranslate"><span class="pre">dtype</span></code> is default to <code class="docutils literal notranslate"><span class="pre">torch.float64</span></code> and <code class="docutils literal notranslate"><span class="pre">random_seed</span></code> is default to <code class="docutils literal notranslate"><span class="pre">1234</span></code>.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">type</span><span class="p">(</span><span class="n">a_loom</span><span class="o">.</span><span class="n">get_type_dataset</span><span class="p">()</span><span class="o">.</span><span class="n">get_exprs</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+torch.Tensor
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">a_loom</span><span class="o">.</span><span class="n">get_type_dataset</span><span class="p">()</span><span class="o">.</span><span class="n">get_exprs_df</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CD20</th>
+      <th>CD3</th>
+      <th>CD45</th>
+      <th>CD68</th>
+      <th>Cytokeratin 14</th>
+      <th>Cytokeratin 19</th>
+      <th>Cytokeratin 5</th>
+      <th>Cytokeratin 7</th>
+      <th>Cytokeratin 8/18</th>
+      <th>E-Cadherin</th>
+      <th>Fibronectin</th>
+      <th>Her2</th>
+      <th>Vimentin</th>
+      <th>pan Cytokeratin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>BaselTMA_SP41_44_X2Y7_726</th>
+      <td>0.080173</td>
+      <td>0.010469</td>
+      <td>0.013425</td>
+      <td>0.149373</td>
+      <td>0.128329</td>
+      <td>1.577395</td>
+      <td>0.210581</td>
+      <td>0.661001</td>
+      <td>1.777394</td>
+      <td>2.028177</td>
+      <td>1.606446</td>
+      <td>0.803987</td>
+      <td>0.279106</td>
+      <td>4.026491</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_Liver_X2Y1_1909</th>
+      <td>0.051691</td>
+      <td>0.139216</td>
+      <td>0.061985</td>
+      <td>0.140193</td>
+      <td>0.208142</td>
+      <td>0.129807</td>
+      <td>0.117969</td>
+      <td>0.000000</td>
+      <td>1.211757</td>
+      <td>0.642365</td>
+      <td>0.943650</td>
+      <td>1.488154</td>
+      <td>0.000000</td>
+      <td>0.743843</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_231_X6Y6_10_798</th>
+      <td>0.000000</td>
+      <td>0.078386</td>
+      <td>0.144959</td>
+      <td>0.570016</td>
+      <td>0.158847</td>
+      <td>0.325296</td>
+      <td>0.129998</td>
+      <td>0.000000</td>
+      <td>0.166604</td>
+      <td>0.699211</td>
+      <td>2.967311</td>
+      <td>0.891388</td>
+      <td>1.845164</td>
+      <td>0.137033</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_141_X11Y2_4968</th>
+      <td>0.039043</td>
+      <td>0.028426</td>
+      <td>0.089894</td>
+      <td>0.089386</td>
+      <td>0.075023</td>
+      <td>0.294802</td>
+      <td>0.130921</td>
+      <td>0.105543</td>
+      <td>0.721960</td>
+      <td>1.462543</td>
+      <td>0.607401</td>
+      <td>0.847732</td>
+      <td>0.032395</td>
+      <td>2.527473</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_141_X11Y2_746</th>
+      <td>0.079079</td>
+      <td>0.184354</td>
+      <td>1.174959</td>
+      <td>0.297893</td>
+      <td>0.039844</td>
+      <td>0.177649</td>
+      <td>0.129131</td>
+      <td>0.056974</td>
+      <td>0.017406</td>
+      <td>0.391993</td>
+      <td>1.529043</td>
+      <td>1.196052</td>
+      <td>0.816324</td>
+      <td>0.145410</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP42_25_X3Y2_1178</th>
+      <td>0.110930</td>
+      <td>0.022230</td>
+      <td>0.031842</td>
+      <td>0.076643</td>
+      <td>0.128341</td>
+      <td>0.845475</td>
+      <td>0.036395</td>
+      <td>0.143434</td>
+      <td>1.005111</td>
+      <td>1.917632</td>
+      <td>0.455979</td>
+      <td>0.994131</td>
+      <td>0.314468</td>
+      <td>2.820787</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_272_X11Y3_460</th>
+      <td>0.057730</td>
+      <td>0.124963</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.137121</td>
+      <td>0.201029</td>
+      <td>0.000000</td>
+      <td>0.075655</td>
+      <td>0.804087</td>
+      <td>2.755348</td>
+      <td>0.286016</td>
+      <td>1.194052</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP42_192_X8Y5_2214</th>
+      <td>0.053447</td>
+      <td>0.080335</td>
+      <td>0.031003</td>
+      <td>0.050570</td>
+      <td>0.095160</td>
+      <td>0.605501</td>
+      <td>0.156250</td>
+      <td>0.896955</td>
+      <td>1.221076</td>
+      <td>1.452352</td>
+      <td>0.302654</td>
+      <td>2.217377</td>
+      <td>0.687913</td>
+      <td>2.132569</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_203_X8Y8_2433</th>
+      <td>0.028729</td>
+      <td>0.030617</td>
+      <td>0.322813</td>
+      <td>1.180702</td>
+      <td>0.081800</td>
+      <td>0.182332</td>
+      <td>0.083335</td>
+      <td>0.037738</td>
+      <td>0.212589</td>
+      <td>1.547722</td>
+      <td>2.593907</td>
+      <td>0.265961</td>
+      <td>0.074016</td>
+      <td>1.381932</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_249_X3Y9_996</th>
+      <td>0.228180</td>
+      <td>0.117249</td>
+      <td>0.509954</td>
+      <td>1.180713</td>
+      <td>0.167626</td>
+      <td>0.107251</td>
+      <td>0.116069</td>
+      <td>0.026734</td>
+      <td>0.265320</td>
+      <td>0.502906</td>
+      <td>1.608899</td>
+      <td>0.579117</td>
+      <td>1.673233</td>
+      <td>1.438507</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 14 columns</p>
+</div></div>
+</div>
+</div>
+<div class="section" id="5.-Loading-from-anndata">
+<h2>5. Loading from anndata<a class="headerlink" href="#5.-Loading-from-anndata" title="Permalink to this headline">¶</a></h2>
+<p>We can read in data from the <a class="reference external" href="https://anndata.readthedocs.io/en/stable/anndata.AnnData.html">AnnData</a> format, along with a <code class="docutils literal notranslate"><span class="pre">yaml</span></code> file containing marker information using the <code class="docutils literal notranslate"><span class="pre">from_anndata_yaml</span></code> function:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">a_ann</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">from_anndata_yaml</span><span class="p">(</span><span class="n">anndata_file</span><span class="o">=</span><span class="n">expression_anndata_path</span><span class="p">,</span> <span class="n">marker_yaml</span><span class="o">=</span><span class="n">yaml_marker_path</span><span class="p">,</span>
+                        <span class="n">protein_name</span><span class="o">=</span><span class="s2">&quot;protein&quot;</span><span class="p">,</span><span class="n">cell_name</span><span class="o">=</span><span class="s2">&quot;cell_name&quot;</span><span class="p">,</span> <span class="n">batch_name</span><span class="o">=</span><span class="s2">&quot;batch&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a_ann</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Astir object with 6 cell types, 4 cell states, and 10 cells.
+</pre></div></div>
+</div>
+<p>Some notes:</p>
+<ol class="arabic simple">
+<li><p>The protein and cell names are taken from <code class="docutils literal notranslate"><span class="pre">adata.var[protein_name]</span></code> and <code class="docutils literal notranslate"><span class="pre">adata.obs[cell_name]</span></code> respectively if specified, and <code class="docutils literal notranslate"><span class="pre">adata.var_names</span></code> and <code class="docutils literal notranslate"><span class="pre">adata.obs_names</span></code> otherwise.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">batch_name</span></code> is sepecified, the corresponding column of <code class="docutils literal notranslate"><span class="pre">adata.var</span></code> will be assumed as the batch variable and turned into a design matrix.</p></li>
+<li><p>The yaml file at <code class="docutils literal notranslate"><span class="pre">yaml_marker_path</span></code> contains the marker which maps protein features to cell type/state classes. The format should match the description of *<a class="reference external" href="#mk">marker dictionary</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from_anndata_yaml</span></code> returns an Astir object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dtype</span></code> and <code class="docutils literal notranslate"><span class="pre">random_seed</span></code> are also customizable. <code class="docutils literal notranslate"><span class="pre">dtype</span></code> is default to <code class="docutils literal notranslate"><span class="pre">torch.float64</span></code> and <code class="docutils literal notranslate"><span class="pre">random_seed</span></code> is default to <code class="docutils literal notranslate"><span class="pre">1234</span></code>.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">type</span><span class="p">(</span><span class="n">a_ann</span><span class="o">.</span><span class="n">get_type_dataset</span><span class="p">()</span><span class="o">.</span><span class="n">get_exprs</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+torch.Tensor
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">a_ann</span><span class="o">.</span><span class="n">get_type_dataset</span><span class="p">()</span><span class="o">.</span><span class="n">get_exprs_df</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CD20</th>
+      <th>CD3</th>
+      <th>CD45</th>
+      <th>CD68</th>
+      <th>Cytokeratin 14</th>
+      <th>Cytokeratin 19</th>
+      <th>Cytokeratin 5</th>
+      <th>Cytokeratin 7</th>
+      <th>Cytokeratin 8/18</th>
+      <th>E-Cadherin</th>
+      <th>Fibronectin</th>
+      <th>Her2</th>
+      <th>Vimentin</th>
+      <th>pan Cytokeratin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>ZTMA208_slide_11_By5x8_1</th>
+      <td>0.168521</td>
+      <td>0.090277</td>
+      <td>0.271871</td>
+      <td>0.412439</td>
+      <td>0.087354</td>
+      <td>0.155710</td>
+      <td>0.100308</td>
+      <td>0.000000</td>
+      <td>0.096674</td>
+      <td>0.974271</td>
+      <td>2.867470</td>
+      <td>0.552905</td>
+      <td>2.335253</td>
+      <td>1.361075</td>
+    </tr>
+    <tr>
+      <th>ZTMA208_slide_11_By5x8_2</th>
+      <td>0.366301</td>
+      <td>0.352614</td>
+      <td>0.284034</td>
+      <td>0.312862</td>
+      <td>0.152354</td>
+      <td>0.508728</td>
+      <td>0.028651</td>
+      <td>0.029904</td>
+      <td>0.749755</td>
+      <td>2.787740</td>
+      <td>2.174494</td>
+      <td>1.046198</td>
+      <td>0.285699</td>
+      <td>2.454543</td>
+    </tr>
+    <tr>
+      <th>ZTMA208_slide_11_By5x8_3</th>
+      <td>0.177006</td>
+      <td>0.103808</td>
+      <td>0.150791</td>
+      <td>0.122472</td>
+      <td>0.292241</td>
+      <td>0.634366</td>
+      <td>0.090457</td>
+      <td>0.056627</td>
+      <td>0.446911</td>
+      <td>1.927940</td>
+      <td>2.997043</td>
+      <td>1.020517</td>
+      <td>2.887193</td>
+      <td>2.590460</td>
+    </tr>
+    <tr>
+      <th>ZTMA208_slide_11_By5x8_4</th>
+      <td>0.304068</td>
+      <td>0.222802</td>
+      <td>0.219736</td>
+      <td>0.277622</td>
+      <td>0.373870</td>
+      <td>2.212514</td>
+      <td>0.304824</td>
+      <td>0.000000</td>
+      <td>1.904837</td>
+      <td>3.175959</td>
+      <td>1.598163</td>
+      <td>2.269974</td>
+      <td>0.877098</td>
+      <td>4.250308</td>
+    </tr>
+    <tr>
+      <th>ZTMA208_slide_11_By5x8_5</th>
+      <td>0.137789</td>
+      <td>0.130010</td>
+      <td>0.105604</td>
+      <td>1.035280</td>
+      <td>0.212105</td>
+      <td>0.144144</td>
+      <td>0.074692</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.900182</td>
+      <td>2.326346</td>
+      <td>0.610897</td>
+      <td>2.882146</td>
+      <td>0.275225</td>
+    </tr>
+    <tr>
+      <th>ZTMA208_slide_11_By5x8_6</th>
+      <td>0.182926</td>
+      <td>0.169596</td>
+      <td>0.270698</td>
+      <td>0.257178</td>
+      <td>0.224863</td>
+      <td>1.143546</td>
+      <td>0.189600</td>
+      <td>0.001542</td>
+      <td>0.650384</td>
+      <td>2.580153</td>
+      <td>1.891692</td>
+      <td>1.724237</td>
+      <td>1.931947</td>
+      <td>2.994441</td>
+    </tr>
+    <tr>
+      <th>ZTMA208_slide_11_By5x8_7</th>
+      <td>0.239257</td>
+      <td>0.149007</td>
+      <td>0.351788</td>
+      <td>0.138080</td>
+      <td>0.142505</td>
+      <td>1.415104</td>
+      <td>0.124484</td>
+      <td>0.001245</td>
+      <td>1.091975</td>
+      <td>2.696699</td>
+      <td>1.994174</td>
+      <td>1.796137</td>
+      <td>0.127125</td>
+      <td>3.523499</td>
+    </tr>
+    <tr>
+      <th>ZTMA208_slide_11_By5x8_8</th>
+      <td>0.175299</td>
+      <td>0.153332</td>
+      <td>0.215698</td>
+      <td>0.104709</td>
+      <td>0.237387</td>
+      <td>2.190369</td>
+      <td>0.264600</td>
+      <td>0.000000</td>
+      <td>1.457901</td>
+      <td>2.788996</td>
+      <td>1.859896</td>
+      <td>1.726696</td>
+      <td>0.106661</td>
+      <td>4.245234</td>
+    </tr>
+    <tr>
+      <th>ZTMA208_slide_11_By5x8_9</th>
+      <td>0.210541</td>
+      <td>0.118273</td>
+      <td>0.146135</td>
+      <td>0.148164</td>
+      <td>0.362226</td>
+      <td>1.267224</td>
+      <td>0.173477</td>
+      <td>0.000000</td>
+      <td>0.842407</td>
+      <td>2.950440</td>
+      <td>1.852758</td>
+      <td>2.183716</td>
+      <td>0.957369</td>
+      <td>3.098247</td>
+    </tr>
+    <tr>
+      <th>ZTMA208_slide_11_By5x8_10</th>
+      <td>0.308899</td>
+      <td>0.326121</td>
+      <td>0.224866</td>
+      <td>0.276182</td>
+      <td>0.140240</td>
+      <td>2.032473</td>
+      <td>0.334358</td>
+      <td>0.000000</td>
+      <td>1.503531</td>
+      <td>2.938590</td>
+      <td>2.192502</td>
+      <td>2.312838</td>
+      <td>1.337983</td>
+      <td>4.199266</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="diagnosing_troubleshooting.html" class="btn btn-neutral float-right" title="Diagnosing and troubleshooting astir" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting started with astir" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jinyu Hou, Sunyun Lee, Michael Geuenich, Kieran Campbell
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,662 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>astir.models.celltype &mdash; astir  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> astir
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../development.html">Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../astir.html">astir package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../astir.data.html">astir.data package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../astir.models.html">astir.models package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">astir</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>astir.models.celltype</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for astir.models.celltype</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">Cell Type Model</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.abstract</span> <span class="kn">import</span> <span class="n">AstirModel</span>
+<span class="kn">from</span> <span class="nn">astir.data</span> <span class="kn">import</span> <span class="n">SCDataset</span>
+<span class="kn">from</span> <span class="nn">.celltype_recognet</span> <span class="kn">import</span> <span class="n">TypeRecognitionNet</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">trange</span>
+<span class="kn">from</span> <span class="nn">torch.autograd</span> <span class="kn">import</span> <span class="n">Variable</span>
+<span class="kn">from</span> <span class="nn">torch.distributions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Normal</span><span class="p">,</span>
+    <span class="n">StudentT</span><span class="p">,</span>
+    <span class="n">MultivariateNormal</span><span class="p">,</span>
+    <span class="n">LowRankMultivariateNormal</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">torch.utils.data</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">DataLoader</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+
+
+<div class="viewcode-block" id="CellTypeModel"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellTypeModel">[docs]</a><span class="k">class</span> <span class="nc">CellTypeModel</span><span class="p">(</span><span class="n">AstirModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Class to perform statistical inference to assign cells to cell types.</span>
+
+<span class="sd">    :param dset: the input gene expression dataframe</span>
+<span class="sd">    :type dset: SCDataset</span>
+<span class="sd">    :param random_seed: the random seed for parameter initialization, defaults to 1234</span>
+<span class="sd">    :type random_seed: int, optional</span>
+<span class="sd">    :param dtype: the data type of parameters, should be the same as `dset`, defaults to </span>
+<span class="sd">        torch.float64</span>
+<span class="sd">    :type dtype: torch.dtype, optional</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">dset</span><span class="p">:</span> <span class="n">SCDataset</span><span class="p">,</span>
+        <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">,</span>
+        <span class="n">dtype</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">dset</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">losses</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># losses after optimization</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cov_mat</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># temporary -- remove</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_assignment</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_recog</span> <span class="o">=</span> <span class="n">TypeRecognitionNet</span><span class="p">(</span>
+            <span class="n">dset</span><span class="o">.</span><span class="n">get_n_classes</span><span class="p">(),</span> <span class="n">dset</span><span class="o">.</span><span class="n">get_n_features</span><span class="p">()</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_param_init</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_param_init</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Initializes parameters and design matrices.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_n_features</span><span class="p">()</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_n_classes</span><span class="p">()</span>
+
+        <span class="c1"># Establish data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;log_alpha&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">C</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">C</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_device</span>
+            <span class="p">),</span>
+            <span class="s2">&quot;rho&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_marker_mat</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="c1"># Initialize mu, log_delta</span>
+        <span class="n">delta_init_mean</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">))</span>
+        <span class="p">)</span>  <span class="c1"># the log of the log of this is the multiplier</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span>
+            <span class="n">delta_init_mean</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">log_delta_init</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">sample</span><span class="p">((</span><span class="n">G</span><span class="p">,</span> <span class="n">C</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">mu_init</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_mu</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">)</span>
+        <span class="n">mu_init</span> <span class="o">=</span> <span class="n">mu_init</span> <span class="o">-</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;rho&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_delta_init</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">mu_init</span> <span class="o">=</span> <span class="n">mu_init</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Create initialization dictionary</span>
+        <span class="n">initializations</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;mu&quot;</span><span class="p">:</span> <span class="n">mu_init</span><span class="p">,</span>
+            <span class="s2">&quot;log_sigma&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_sigma</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">),</span>
+            <span class="s2">&quot;log_delta&quot;</span><span class="p">:</span> <span class="n">log_delta_init</span><span class="p">,</span>
+            <span class="s2">&quot;p&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">G</span><span class="p">,</span> <span class="n">C</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">),</span>
+        <span class="p">}</span>
+        <span class="n">P</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_design</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="c1"># Add additional columns of mu for anything in the design matrix</span>
+        <span class="n">initializations</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">initializations</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">],</span>
+                <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">G</span><span class="p">,</span> <span class="n">P</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">),</span>
+            <span class="p">],</span>
+            <span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># Create trainable variables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_variables</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">initializations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">clone</span><span class="p">())</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_device</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># @profile</span>
+    <span class="c1">## Declare pytorch forward fn</span>
+    <span class="k">def</span> <span class="nf">_forward</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">Y</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">design</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;One forward pass.</span>
+
+<span class="sd">        :param Y: a sample from the dataset</span>
+<span class="sd">        :type Y: torch.Tensor</span>
+<span class="sd">        :param X: normalized sample data</span>
+<span class="sd">        :type X: torch.Tensor</span>
+<span class="sd">        :param design: the corresponding row of design matrix</span>
+<span class="sd">        :type design: torch.Tensor</span>
+<span class="sd">        :return: the cost (elbo) of the current pass</span>
+<span class="sd">        :rtype: torch.Tensor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_n_features</span><span class="p">()</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_n_classes</span><span class="p">()</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">Y_spread</span> <span class="o">=</span> <span class="n">Y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">C</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">delta_tilde</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="s2">&quot;log_delta&quot;</span><span class="p">])</span>  <span class="c1"># + np.log(0.5)</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">delta_tilde</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;rho&quot;</span><span class="p">]</span>
+        <span class="n">mean2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">mm</span><span class="p">(</span><span class="n">design</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>  <span class="c1">## N x P * P x G</span>
+        <span class="n">mean2</span> <span class="o">=</span> <span class="n">mean2</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">C</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">mean</span> <span class="o">+</span> <span class="n">mean2</span>
+
+        <span class="c1"># now do the variance modelling</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">])</span>
+
+        <span class="n">sigma</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="s2">&quot;log_sigma&quot;</span><span class="p">])</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;rho&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">p</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">sigma</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;rho&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">v1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># extra 1 is the &quot;rank&quot;</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="n">v2</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">G</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-6</span>
+
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">LowRankMultivariateNormal</span><span class="p">(</span>
+            <span class="n">loc</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">cov_factor</span><span class="o">=</span><span class="n">v1</span><span class="p">,</span> <span class="n">cov_diag</span><span class="o">=</span><span class="n">v2</span>
+        <span class="p">)</span>
+
+        <span class="n">log_p_y_on_c</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">Y_spread</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recog</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">elbo</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">gamma</span> <span class="o">*</span> <span class="p">(</span><span class="n">log_p_y_on_c</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;log_alpha&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">gamma</span><span class="p">))</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="o">-</span><span class="n">elbo</span>
+
+    <span class="c1"># @profile</span>
+<div class="viewcode-block" id="CellTypeModel.fit"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellTypeModel.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">max_epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">learning_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span>
+        <span class="n">delta_loss</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_yield_loss</span><span class="p">(</span><span class="n">max_epochs</span><span class="p">,</span>
+            <span class="n">learning_rate</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="p">,</span>
+            <span class="n">delta_loss</span><span class="p">,</span>
+            <span class="n">msg</span><span class="p">):</span>
+            <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="CellTypeModel.fit_yield_loss"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellTypeModel.fit_yield_loss">[docs]</a>    <span class="k">def</span> <span class="nf">fit_yield_loss</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">max_epochs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">learning_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span>
+        <span class="n">delta_loss</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span>
+        <span class="n">msg</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Runs train loops until the convergence reaches delta_loss for\ </span>
+<span class="sd">            delta_loss_batch sizes or for max_epochs number of times</span>
+
+<span class="sd">        :param max_epochs: number of train loop iterations, defaults to 50</span>
+<span class="sd">        :param learning_rate: the learning rate, defaults to 0.01</span>
+<span class="sd">        :param batch_size: the batch size, defaults to 128</span>
+<span class="sd">        :param delta_loss: stops iteration once the loss rate reaches\ </span>
+<span class="sd">            delta_loss, defaults to 0.001</span>
+<span class="sd">        :param msg: iterator bar message, defaults to empty string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Make dataloader</span>
+        <span class="n">dataloader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="p">)),</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Run training loop</span>
+        <span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">per</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="c1"># Construct optimizer</span>
+        <span class="n">opt_params</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_recog</span><span class="o">.</span><span class="n">parameters</span><span class="p">())</span>
+
+        <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">opt_params</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+
+        <span class="n">_</span><span class="p">,</span> <span class="n">exprs_X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="p">[:]</span>  <span class="c1"># calls dset.get_item</span>
+
+        <span class="n">iterator</span> <span class="o">=</span> <span class="n">trange</span><span class="p">(</span>
+            <span class="n">max_epochs</span><span class="p">,</span>
+            <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;training restart&quot;</span> <span class="o">+</span> <span class="n">msg</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;epochs&quot;</span><span class="p">,</span>
+            <span class="n">bar_format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">{l_bar}{bar}</span><span class="s2">| </span><span class="si">{n_fmt}</span><span class="s2">/</span><span class="si">{total_fmt}</span><span class="s2"> [</span><span class="si">{rate_fmt}{postfix}</span><span class="s2">]&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+        <span class="c1"># for ep in range(max_epochs):</span>
+            <span class="n">L</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dtype</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">dataloader</span><span class="p">:</span>
+                <span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">design</span> <span class="o">=</span> <span class="n">batch</span>
+                <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+                <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">design</span><span class="p">)</span>
+                <span class="n">L</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+                <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+                <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss</span> <span class="o">+</span> <span class="n">L</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">per</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">((</span><span class="n">loss</span> <span class="o">-</span> <span class="n">losses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">losses</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
+            <span class="c1"># iterator.set_postfix_str(&quot;current loss: &quot; + str(round(float(loss), 1)))</span>
+
+            <span class="k">yield</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">loss</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">per</span> <span class="o">&lt;=</span> <span class="n">delta_loss</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_is_converged</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="c1"># iterator.close()</span>
+                <span class="k">break</span>
+
+        <span class="c1"># Save output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_assignment</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_recog</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">exprs_X</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_assignment</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_classes</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;Other&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_assignment</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_cell_names</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_losses</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_losses</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_losses</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_losses</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_losses</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">losses</span><span class="p">)),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="CellTypeModel.predict"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellTypeModel.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_dset</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Feed `new_dset` to the recognition net to get a prediction.</span>
+
+<span class="sd">        :param new_dset: the dataset to be predicted</span>
+<span class="sd">        :type new_dset: pd.DataFrame</span>
+<span class="sd">        :return: the resulting cell type assignment</span>
+<span class="sd">        :rtype: np.array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">exprs_X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">new_dset</span><span class="p">[:]</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_recog</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">exprs_X</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">g</span></div>
+
+<div class="viewcode-block" id="CellTypeModel.get_assignment"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellTypeModel.get_assignment">[docs]</a>    <span class="k">def</span> <span class="nf">get_assignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the final assignment of the dataset.</span>
+
+<span class="sd">        :return: the final assignment of the dataset</span>
+<span class="sd">        :rtype: np.array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_assignment</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;The type model has not been trained yet&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_assignment</span></div>
+
+<div class="viewcode-block" id="CellTypeModel.get_recognet"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellTypeModel.get_recognet">[docs]</a>    <span class="k">def</span> <span class="nf">get_recognet</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeRecognitionNet</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Getter for the recognition net.</span>
+
+<span class="sd">        :return: the trained recognition net</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recog</span></div>
+
+    <span class="k">def</span> <span class="nf">_most_likely_celltype</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">cell_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Given a row of the assignment matrix, return the most likely cell type</span>
+
+<span class="sd">        :param row: the row of cell assignment matrix to be evaluated</span>
+<span class="sd">        :type row: pd.DataFrame</span>
+<span class="sd">        :param threshold: the higher bound of the maximun probability to classify a cell as `Unknown`</span>
+<span class="sd">        :type threshold: float</span>
+<span class="sd">        :param cell_types: the names of cell types, in the same order as the features of the row</span>
+<span class="sd">        :type cell_types: List[str]</span>
+<span class="sd">        :return: the most likely cell type of this cell</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">max_prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">max_prob</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;Unknown&quot;</span>
+
+        <span class="k">return</span> <span class="n">cell_types</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">row</span><span class="p">)]</span>
+
+<div class="viewcode-block" id="CellTypeModel.get_celltypes"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellTypeModel.get_celltypes">[docs]</a>    <span class="k">def</span> <span class="nf">get_celltypes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the most likely cell types</span>
+
+<span class="sd">        A cell is assigned to a cell type if the probability is greater than threshold.</span>
+<span class="sd">        If no cell types have a probability higher than threshold, then &quot;Unknown&quot; is returned</span>
+
+<span class="sd">        :param threshold: the probability threshold above which a cell is assigned to a cell type</span>
+<span class="sd">        :return: a data frame with most likely cell types for each </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">type_probability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_assignment</span><span class="p">()</span>
+        <span class="n">cell_types</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">type_probability</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+        <span class="n">cell_type_assignments</span> <span class="o">=</span> <span class="n">type_probability</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_most_likely_celltype</span><span class="p">,</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+            <span class="n">cell_types</span><span class="o">=</span><span class="n">cell_types</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">cell_type_assignments</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cell_type_assignments</span><span class="p">)</span>
+        <span class="n">cell_type_assignments</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cell_type&quot;</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">cell_type_assignments</span></div>
+
+    <span class="k">def</span> <span class="nf">_compare_marker_between_types</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">curr_type</span><span class="p">,</span> <span class="n">celltype_to_compare</span><span class="p">,</span> <span class="n">marker</span><span class="p">,</span> <span class="n">cell_types</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;For a given cell type and two proteins, ensure marker</span>
+<span class="sd">        is expressed at higher level using t-test</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">current_marker_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_features</span><span class="p">())</span> <span class="o">==</span> <span class="n">marker</span>
+
+        <span class="n">cells_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cell_types</span><span class="p">)</span> <span class="o">==</span> <span class="n">curr_type</span>
+        <span class="n">cells_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cell_types</span><span class="p">)</span> <span class="o">==</span> <span class="n">celltype_to_compare</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_exprs</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="n">cells_x</span><span class="p">,</span> <span class="n">current_marker_ind</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_exprs</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()[</span><span class="n">cells_y</span><span class="p">,</span> <span class="n">current_marker_ind</span><span class="p">]</span>
+
+        <span class="n">stat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">NaN</span>
+        <span class="n">pval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">Inf</span>
+        <span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;Only 1 cell in a type: comparison not possible&quot;</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">tt</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">stat</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">statistic</span>
+            <span class="n">pval</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">pvalue</span>
+            <span class="n">note</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">stat</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">pval</span> <span class="o">&lt;</span> <span class="n">alpha</span><span class="p">):</span>
+            <span class="n">rdict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;current_marker&quot;</span><span class="p">:</span> <span class="n">marker</span><span class="p">,</span>
+                <span class="s2">&quot;curr_type&quot;</span><span class="p">:</span> <span class="n">curr_type</span><span class="p">,</span>
+                <span class="s2">&quot;celltype_to_compare&quot;</span><span class="p">:</span> <span class="n">celltype_to_compare</span><span class="p">,</span>
+                <span class="s2">&quot;mean_A&quot;</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                <span class="s2">&quot;mean_Y&quot;</span><span class="p">:</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                <span class="s2">&quot;p-val&quot;</span><span class="p">:</span> <span class="n">pval</span><span class="p">,</span>
+                <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="n">note</span><span class="p">,</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="n">rdict</span>
+
+        <span class="k">return</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="CellTypeModel.plot_clustermap"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellTypeModel.plot_clustermap">[docs]</a>    <span class="k">def</span> <span class="nf">plot_clustermap</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">plot_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;celltype_protein_cluster.png&quot;</span><span class="p">,</span>
+        <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span>
+        <span class="n">figsize</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Save the heatmap of protein content in cells with cell types labeled.</span>
+
+<span class="sd">        :param plot_name: name of the plot, extension(e.g. .png or .jpg) is needed, defaults to &quot;celltype_protein_cluster.png&quot;</span>
+<span class="sd">        :type plot_name: str, optional</span>
+<span class="sd">        :param threshold: the probability threshold above which a cell is assigned to a cell type, defaults to 0.7</span>
+<span class="sd">        :type threshold: float, optional</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">expr_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_exprs_df</span><span class="p">()</span>
+        <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">expr_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">expr_df</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span>
+                <span class="n">expr_df</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">expr_df</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="p">)</span>
+
+        <span class="n">expr_df</span><span class="p">[</span><span class="s2">&quot;cell_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_celltypes</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span>
+        <span class="n">expr_df</span> <span class="o">=</span> <span class="n">expr_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;cell_type&quot;</span><span class="p">])</span>
+        <span class="n">types</span> <span class="o">=</span> <span class="n">expr_df</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;cell_type&quot;</span><span class="p">)</span>
+        <span class="n">types_uni</span> <span class="o">=</span> <span class="n">types</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+
+        <span class="n">lut</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">types_uni</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;BrBG&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">types_uni</span><span class="p">))))</span>
+        <span class="n">col_colors</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">types</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">lut</span><span class="p">))</span>
+        <span class="n">cm</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span>
+            <span class="n">expr_df</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+            <span class="n">xticklabels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;vlag&quot;</span><span class="p">,</span>
+            <span class="n">col_cluster</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">col_colors</span><span class="o">=</span><span class="n">col_colors</span><span class="p">,</span>
+            <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">types_uni</span><span class="p">:</span>
+            <span class="n">cm</span><span class="o">.</span><span class="n">ax_col_dendrogram</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">lut</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">cm</span><span class="o">.</span><span class="n">ax_col_dendrogram</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Cell Types&quot;</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">cm</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">plot_name</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CellTypeModel.diagnostics"><a class="viewcode-back" href="../../../astir.models.html#astir.models.CellTypeModel.diagnostics">[docs]</a>    <span class="k">def</span> <span class="nf">diagnostics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cell_type_assignments</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Run diagnostics on cell type assignments</span>
+
+<span class="sd">        See :meth:`astir.Astir.diagnostics_celltype` for full documentation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">problems</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Want to construct a data frame that models rho with</span>
+        <span class="c1"># cell type names on the columns and feature names on the rows</span>
+        <span class="n">g_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="s2">&quot;rho&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+        <span class="n">g_df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_classes</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;Other&quot;</span><span class="p">]</span>
+        <span class="n">g_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_features</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">curr_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dset</span><span class="o">.</span><span class="n">get_classes</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">curr_type</span> <span class="ow">in</span> <span class="n">cell_type_assignments</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">current_markers</span> <span class="o">=</span> <span class="n">g_df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">g_df</span><span class="p">[</span><span class="n">curr_type</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">current_marker</span> <span class="ow">in</span> <span class="n">current_markers</span><span class="p">:</span>
+                <span class="c1"># find all the cell types that shouldn&#39;t highly express this marker</span>
+                <span class="n">celltypes_to_compare</span> <span class="o">=</span> <span class="n">g_df</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">g_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">current_marker</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+                <span class="k">for</span> <span class="n">celltype_to_compare</span> <span class="ow">in</span> <span class="n">celltypes_to_compare</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">celltype_to_compare</span> <span class="ow">in</span> <span class="n">cell_type_assignments</span><span class="p">:</span>
+                        <span class="k">continue</span>
+
+                    <span class="n">is_problem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compare_marker_between_types</span><span class="p">(</span>
+                        <span class="n">curr_type</span><span class="p">,</span>
+                        <span class="n">celltype_to_compare</span><span class="p">,</span>
+                        <span class="n">current_marker</span><span class="p">,</span>
+                        <span class="n">cell_type_assignments</span><span class="p">,</span>
+                        <span class="n">alpha</span><span class="p">,</span>
+                    <span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">is_problem</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">problems</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">is_problem</span><span class="p">)</span>
+
+        <span class="n">col_names</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;feature&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;should be expressed higher in&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;than&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mean cell type 1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;mean cell type 2&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;p-value&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;note&quot;</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="n">df_issues</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">problems</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">df_issues</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">problems</span><span class="p">)</span>
+            <span class="n">df_issues</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">col_names</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df_issues</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">col_names</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">df_issues</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jinyu Hou, Sunyun Lee, Michael Geuenich, Kieran Campbell
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

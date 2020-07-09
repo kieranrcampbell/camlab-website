@@ -1,0 +1,855 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>astir.models package &mdash; astir  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="astir.data package" href="astir.data.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> astir
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="astir.html">astir package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="astir.data.html">astir.data package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">astir.models package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-astir.models">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">astir</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>astir.models package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/astir.models.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="astir-models-package">
+<h1>astir.models package<a class="headerlink" href="#astir-models-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-astir.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-astir.models" title="Permalink to this headline">¶</a></h2>
+<p><strong>Classes</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.CellTypeModel" title="astir.models.CellTypeModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CellTypeModel</span></code></a>(dset[, random_seed, dtype])</p></td>
+<td><p>Class to perform statistical inference to assign cells to cell types.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.CellStateModel" title="astir.models.CellStateModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CellStateModel</span></code></a>(dset[, const, dropout_rate, …])</p></td>
+<td><p>Class to perform statistical inference to on the activation</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.AstirModel" title="astir.models.AstirModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AstirModel</span></code></a>(dset, random_seed, dtype)</p></td>
+<td><p>Abstract class to perform statistical inference to assign.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.TypeRecognitionNet" title="astir.models.TypeRecognitionNet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TypeRecognitionNet</span></code></a>(C, G[, hidden_size])</p></td>
+<td><p>Type Recognition Neural Network.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.StateRecognitionNet" title="astir.models.StateRecognitionNet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StateRecognitionNet</span></code></a>(C, G[, const, …])</p></td>
+<td><p>State Recognition Neural Network to get mean of z and standard deviation of z.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt id="astir.models.CellTypeModel">
+<em class="property">class </em><code class="sig-prename descclassname">astir.models.</code><code class="sig-name descname">CellTypeModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dset</span></em>, <em class="sig-param"><span class="n">random_seed</span><span class="o">=</span><span class="default_value">1234</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">torch.float64</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/celltype.html#CellTypeModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellTypeModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">astir.models.abstract.AstirModel</span></code></p>
+<p>Class to perform statistical inference to assign cells to cell types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dset</strong> (<a class="reference internal" href="astir.data.html#astir.data.SCDataset" title="astir.data.SCDataset"><em>SCDataset</em></a>) – the input gene expression dataframe</p></li>
+<li><p><strong>random_seed</strong> (<em>int</em><em>, </em><em>optional</em>) – the random seed for parameter initialization, defaults to 1234</p></li>
+<li><p><strong>dtype</strong> (<em>torch.dtype</em><em>, </em><em>optional</em>) – the data type of parameters, should be the same as <cite>dset</cite>, defaults to 
+torch.float64</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Methods</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.CellTypeModel.diagnostics" title="astir.models.CellTypeModel.diagnostics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagnostics</span></code></a>(cell_type_assignments, alpha)</p></td>
+<td><p>Run diagnostics on cell type assignments</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.CellTypeModel.fit" title="astir.models.CellTypeModel.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>([max_epochs, learning_rate, batch_size, …])</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">rtype</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.CellTypeModel.fit_yield_loss" title="astir.models.CellTypeModel.fit_yield_loss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit_yield_loss</span></code></a>([max_epochs, learning_rate, …])</p></td>
+<td><p>Runs train loops until the convergence reaches delta_loss for</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.CellTypeModel.get_assignment" title="astir.models.CellTypeModel.get_assignment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_assignment</span></code></a>()</p></td>
+<td><p>Get the final assignment of the dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.CellTypeModel.get_celltypes" title="astir.models.CellTypeModel.get_celltypes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_celltypes</span></code></a>([threshold])</p></td>
+<td><p>Get the most likely cell types</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.CellTypeModel.get_recognet" title="astir.models.CellTypeModel.get_recognet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_recognet</span></code></a>()</p></td>
+<td><p>Getter for the recognition net.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.CellTypeModel.plot_clustermap" title="astir.models.CellTypeModel.plot_clustermap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_clustermap</span></code></a>([plot_name, threshold, figsize])</p></td>
+<td><p>Save the heatmap of protein content in cells with cell types labeled.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.CellTypeModel.predict" title="astir.models.CellTypeModel.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code></a>(new_dset)</p></td>
+<td><p>Feed <cite>new_dset</cite> to the recognition net to get a prediction.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="astir.models.CellTypeModel.diagnostics">
+<code class="sig-name descname">diagnostics</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cell_type_assignments</span></em>, <em class="sig-param"><span class="n">alpha</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/celltype.html#CellTypeModel.diagnostics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellTypeModel.diagnostics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run diagnostics on cell type assignments</p>
+<p>See <a class="reference internal" href="astir.html#astir.Astir.diagnostics_celltype" title="astir.Astir.diagnostics_celltype"><code class="xref py py-meth docutils literal notranslate"><span class="pre">astir.Astir.diagnostics_celltype()</span></code></a> for full documentation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellTypeModel.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">max_epochs</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">learning_rate</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">128</span></em>, <em class="sig-param"><span class="n">delta_loss</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">msg</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/celltype.html#CellTypeModel.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellTypeModel.fit" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellTypeModel.fit_yield_loss">
+<code class="sig-name descname">fit_yield_loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">max_epochs</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">learning_rate</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">128</span></em>, <em class="sig-param"><span class="n">delta_loss</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">msg</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/celltype.html#CellTypeModel.fit_yield_loss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellTypeModel.fit_yield_loss" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Runs train loops until the convergence reaches delta_loss for</dt><dd><p>delta_loss_batch sizes or for max_epochs number of times</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_epochs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of train loop iterations, defaults to 50</p></li>
+<li><p><strong>learning_rate</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – the learning rate, defaults to 0.01</p></li>
+<li><p><strong>batch_size</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the batch size, defaults to 128</p></li>
+<li><p><strong>delta_loss</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – stops iteration once the loss rate reaches
+delta_loss, defaults to 0.001</p></li>
+<li><p><strong>msg</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – iterator bar message, defaults to empty string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellTypeModel.get_assignment">
+<code class="sig-name descname">get_assignment</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/celltype.html#CellTypeModel.get_assignment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellTypeModel.get_assignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the final assignment of the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the final assignment of the dataset</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellTypeModel.get_celltypes">
+<code class="sig-name descname">get_celltypes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">threshold</span><span class="o">=</span><span class="default_value">0.7</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/celltype.html#CellTypeModel.get_celltypes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellTypeModel.get_celltypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the most likely cell types</p>
+<p>A cell is assigned to a cell type if the probability is greater than threshold.
+If no cell types have a probability higher than threshold, then “Unknown” is returned</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>threshold</strong> – the probability threshold above which a cell is assigned to a cell type</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a data frame with most likely cell types for each</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellTypeModel.get_recognet">
+<code class="sig-name descname">get_recognet</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/celltype.html#CellTypeModel.get_recognet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellTypeModel.get_recognet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for the recognition net.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeRecognitionNet</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the trained recognition net</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellTypeModel.plot_clustermap">
+<code class="sig-name descname">plot_clustermap</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plot_name</span><span class="o">=</span><span class="default_value">'celltype_protein_cluster.png'</span></em>, <em class="sig-param"><span class="n">threshold</span><span class="o">=</span><span class="default_value">0.7</span></em>, <em class="sig-param"><span class="n">figsize</span><span class="o">=</span><span class="default_value">7, 5</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/celltype.html#CellTypeModel.plot_clustermap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellTypeModel.plot_clustermap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the heatmap of protein content in cells with cell types labeled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plot_name</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the plot, extension(e.g. .png or .jpg) is needed, defaults to “celltype_protein_cluster.png”</p></li>
+<li><p><strong>threshold</strong> (<em>float</em><em>, </em><em>optional</em>) – the probability threshold above which a cell is assigned to a cell type, defaults to 0.7</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellTypeModel.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_dset</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/celltype.html#CellTypeModel.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellTypeModel.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Feed <cite>new_dset</cite> to the recognition net to get a prediction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>new_dset</strong> (<em>pd.DataFrame</em>) – the dataset to be predicted</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the resulting cell type assignment</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="astir.models.CellStateModel">
+<em class="property">class </em><code class="sig-prename descclassname">astir.models.</code><code class="sig-name descname">CellStateModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dset</span></em>, <em class="sig-param"><span class="n">const</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">dropout_rate</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">random_seed</span><span class="o">=</span><span class="default_value">42</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">torch.float64</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/cellstate.html#CellStateModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellStateModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">astir.models.abstract.AstirModel</span></code></p>
+<dl class="simple">
+<dt>Class to perform statistical inference to on the activation</dt><dd><p>of states (pathways) across cells</p>
+</dd>
+</dl>
+<p><strong>Methods</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.CellStateModel.diagnostics" title="astir.models.CellStateModel.diagnostics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagnostics</span></code></a>()</p></td>
+<td><p>Run diagnostics on cell state assignments</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.CellStateModel.fit" title="astir.models.CellStateModel.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>([max_epochs, learning_rate, batch_size, …])</p></td>
+<td><p>Runs train loops until the convergence reaches delta_loss for            delta_loss_batch sizes or for max_epochs number of times</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.CellStateModel.get_correlations" title="astir.models.CellStateModel.get_correlations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_correlations</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">rtype</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.CellStateModel.get_data" title="astir.models.CellStateModel.get_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_data</span></code></a>()</p></td>
+<td><p>Returns data parameter</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.CellStateModel.get_final_mu_z" title="astir.models.CellStateModel.get_final_mu_z"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_final_mu_z</span></code></a>([new_dset])</p></td>
+<td><p>Returns the mean of the predicted z values for each core</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.CellStateModel.get_losses" title="astir.models.CellStateModel.get_losses"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_losses</span></code></a>()</p></td>
+<td><p>Getter for losses</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.CellStateModel.get_recognet" title="astir.models.CellStateModel.get_recognet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_recognet</span></code></a>()</p></td>
+<td><p>Getter for the recognition net</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.CellStateModel.get_scdataset" title="astir.models.CellStateModel.get_scdataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_scdataset</span></code></a>()</p></td>
+<td><p>Returns the input dataset</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.CellStateModel.get_variables" title="astir.models.CellStateModel.get_variables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_variables</span></code></a>()</p></td>
+<td><p>Returns all variables</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.CellStateModel.is_converged" title="astir.models.CellStateModel.is_converged"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_converged</span></code></a>()</p></td>
+<td><p>Returns True if the model converged</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df_gex</strong> – the input gene expression dataframe</p></li>
+<li><p><strong>marker_dict</strong> – the gene marker dictionary</p></li>
+<li><p><strong>random_seed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – seed number to reproduce results, defaults to 1234</p></li>
+<li><p><strong>dtype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code>) – torch datatype to use in the model</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="astir.models.CellStateModel.diagnostics">
+<code class="sig-name descname">diagnostics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/cellstate.html#CellStateModel.diagnostics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellStateModel.diagnostics" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run diagnostics on cell state assignments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>diagnostics</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellStateModel.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">max_epochs</span><span class="o">=</span><span class="default_value">50</span></em>, <em class="sig-param"><span class="n">learning_rate</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">batch_size</span><span class="o">=</span><span class="default_value">128</span></em>, <em class="sig-param"><span class="n">delta_loss</span><span class="o">=</span><span class="default_value">0.001</span></em>, <em class="sig-param"><span class="n">delta_loss_batch</span><span class="o">=</span><span class="default_value">10</span></em>, <em class="sig-param"><span class="n">msg</span><span class="o">=</span><span class="default_value">''</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/cellstate.html#CellStateModel.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellStateModel.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs train loops until the convergence reaches delta_loss for            delta_loss_batch sizes or for max_epochs number of times</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_epochs</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of train loop iterations, defaults to 50</p></li>
+<li><p><strong>learning_rate</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – the learning rate, defaults to 0.01</p></li>
+<li><p><strong>batch_size</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the batch size, defaults to 128</p></li>
+<li><p><strong>delta_loss</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – stops iteration once the loss rate reaches            delta_loss, defaults to 0.001</p></li>
+<li><p><strong>delta_loss_batch</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the batch size to consider delta loss,            defaults to 10</p></li>
+<li><p><strong>msg</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – iterator bar message, defaults to empty string</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellStateModel.get_correlations">
+<code class="sig-name descname">get_correlations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/cellstate.html#CellStateModel.get_correlations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellStateModel.get_correlations" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellStateModel.get_data">
+<code class="sig-name descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/cellstate.html#CellStateModel.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellStateModel.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns data parameter</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self._data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellStateModel.get_final_mu_z">
+<code class="sig-name descname">get_final_mu_z</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">new_dset</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/cellstate.html#CellStateModel.get_final_mu_z"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellStateModel.get_final_mu_z" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mean of the predicted z values for each core</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>new_dset</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">SCDataset</span></code>]) – returns the predicted z values of this dataset on
+the existing model. If None, it predicts using the existing dataset</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the mean of the predicted z values for each core</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellStateModel.get_losses">
+<code class="sig-name descname">get_losses</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/cellstate.html#CellStateModel.get_losses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellStateModel.get_losses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for losses</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>a torch tensor of losses for each training iteration the
+model runs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellStateModel.get_recognet">
+<code class="sig-name descname">get_recognet</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/cellstate.html#CellStateModel.get_recognet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellStateModel.get_recognet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for the recognition net</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">StateRecognitionNet</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the trained recognition net</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellStateModel.get_scdataset">
+<code class="sig-name descname">get_scdataset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/cellstate.html#CellStateModel.get_scdataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellStateModel.get_scdataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the input dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SCDataset</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self._dset</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellStateModel.get_variables">
+<code class="sig-name descname">get_variables</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/cellstate.html#CellStateModel.get_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellStateModel.get_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>]</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self._variables</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.CellStateModel.is_converged">
+<code class="sig-name descname">is_converged</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/cellstate.html#CellStateModel.is_converged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.CellStateModel.is_converged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the model converged</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self._is_converged</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="astir.models.AstirModel">
+<em class="property">class </em><code class="sig-prename descclassname">astir.models.</code><code class="sig-name descname">AstirModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dset</span></em>, <em class="sig-param"><span class="n">random_seed</span></em>, <em class="sig-param"><span class="n">dtype</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/abstract.html#AstirModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.AstirModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstract class to perform statistical inference to assign. This module is the super class of 
+<cite>CellTypeModel</cite> and <cite>CellStateModel</cite> and is not supposed to be instantiated.</p>
+<p><strong>Methods</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.AstirModel.fit" title="astir.models.AstirModel.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(max_epochs, learning_rate, batch_size, …)</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">rtype</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.AstirModel.get_data" title="astir.models.AstirModel.get_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_data</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.AstirModel.get_losses" title="astir.models.AstirModel.get_losses"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_losses</span></code></a>()</p></td>
+<td><p>Getter for losses.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.AstirModel.get_scdataset" title="astir.models.AstirModel.get_scdataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_scdataset</span></code></a>()</p></td>
+<td><p>Getter for the <cite>SCDataset</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.AstirModel.get_variables" title="astir.models.AstirModel.get_variables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_variables</span></code></a>()</p></td>
+<td><p>Returns all variables</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.models.AstirModel.is_converged" title="astir.models.AstirModel.is_converged"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_converged</span></code></a>()</p></td>
+<td><p>Returns True if the model converged</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="astir.models.AstirModel.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">max_epochs</span></em>, <em class="sig-param"><span class="n">learning_rate</span></em>, <em class="sig-param"><span class="n">batch_size</span></em>, <em class="sig-param"><span class="n">delta_loss</span></em>, <em class="sig-param"><span class="n">msg</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/abstract.html#AstirModel.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.AstirModel.fit" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.AstirModel.get_data">
+<code class="sig-name descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/abstract.html#AstirModel.get_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.AstirModel.get_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.AstirModel.get_losses">
+<code class="sig-name descname">get_losses</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/abstract.html#AstirModel.get_losses"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.AstirModel.get_losses" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for losses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>self.losses</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.AstirModel.get_scdataset">
+<code class="sig-name descname">get_scdataset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/abstract.html#AstirModel.get_scdataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.AstirModel.get_scdataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Getter for the <cite>SCDataset</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><cite>self._dset</cite></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="astir.data.html#astir.data.SCDataset" title="astir.data.SCDataset">SCDataset</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.AstirModel.get_variables">
+<code class="sig-name descname">get_variables</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/abstract.html#AstirModel.get_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.AstirModel.get_variables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>self._variables</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.models.AstirModel.is_converged">
+<code class="sig-name descname">is_converged</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/abstract.html#AstirModel.is_converged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.AstirModel.is_converged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the model converged</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>self._is_converged</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="astir.models.TypeRecognitionNet">
+<em class="property">class </em><code class="sig-prename descclassname">astir.models.</code><code class="sig-name descname">TypeRecognitionNet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">C</span></em>, <em class="sig-param"><span class="n">G</span></em>, <em class="sig-param"><span class="n">hidden_size</span><span class="o">=</span><span class="default_value">10</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/celltype_recognet.html#TypeRecognitionNet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.TypeRecognitionNet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<p>Type Recognition Neural Network.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>C</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of classes</p></li>
+<li><p><strong>G</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of features</p></li>
+<li><p><strong>hidden_size</strong> – size of hidden layers</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Methods</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.TypeRecognitionNet.forward" title="astir.models.TypeRecognitionNet.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code></a>(x)</p></td>
+<td><p>One forward pass.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="astir.models.TypeRecognitionNet.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/celltype_recognet.html#TypeRecognitionNet.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.TypeRecognitionNet.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>One forward pass.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>torch.Tensor</em>) – the input vector</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the calculated cost value</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="astir.models.StateRecognitionNet">
+<em class="property">class </em><code class="sig-prename descclassname">astir.models.</code><code class="sig-name descname">StateRecognitionNet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">C</span></em>, <em class="sig-param"><span class="n">G</span></em>, <em class="sig-param"><span class="n">const</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">dropout_rate</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">batch_norm</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/cellstate_recognet.html#StateRecognitionNet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.StateRecognitionNet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.modules.module.Module</span></code></p>
+<p>State Recognition Neural Network to get mean of z and standard
+deviation of z. The neural network architecture looks like this: G -&gt;
+const * C -&gt; const * C -&gt; G (for mu) or -&gt; G (for std). With batch
+normal layers after each activation output layers and dropout
+activation units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>C</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of classes</p></li>
+<li><p><strong>G</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – number of proteins</p></li>
+<li><p><strong>const</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – the size of the hidden layers are const times proportional
+to C</p></li>
+<li><p><strong>dropout_rate</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – the dropout rate</p></li>
+<li><p><strong>batch_norm</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – apply batch normal layers if True</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Methods</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.models.StateRecognitionNet.forward" title="astir.models.StateRecognitionNet.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code></a>(x)</p></td>
+<td><p>One forward pass of the StateRecognitionNet</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="astir.models.StateRecognitionNet.forward">
+<code class="sig-name descname">forward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/models/cellstate_recognet.html#StateRecognitionNet.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.models.StateRecognitionNet.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>One forward pass of the StateRecognitionNet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="astir.data.html" class="btn btn-neutral float-left" title="astir.data package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jinyu Hou, Sunyun Lee, Michael Geuenich, Kieran Campbell
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

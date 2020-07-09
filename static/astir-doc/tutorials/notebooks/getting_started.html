@@ -1,0 +1,2357 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting started with astir &mdash; astir  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Loading data into astir" href="data_loading.html" />
+    <link rel="prev" title="Tutorials" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> astir
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Getting started with astir</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Table-of-Contents:">Table of Contents:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#0.-Load-necessary-libraries">0. Load necessary libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.-Load-data">1. Load data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#2.-Fitting-cell-types">2. Fitting cell types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Cell-type-diagnostics">Cell type diagnostics</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3.-Fitting-cell-state">3. Fitting cell state</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Cell-state-diagnostics">Cell state diagnostics</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4.-Saving-results">4. Saving results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#5.-Accessing-internal-functions-and-data">5. Accessing internal functions and data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#6.-Saving-models">6. Saving models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#7.-Plot-clustermap-of-expression-data">7. Plot clustermap of expression data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#8.-Hierarchical-model-specification">8. Hierarchical model specification</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="data_loading.html">Loading data into astir</a></li>
+<li class="toctree-l2"><a class="reference internal" href="diagnosing_troubleshooting.html">Diagnosing and troubleshooting astir</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../development.html">Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../astir.html">astir package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../astir.data.html">astir.data package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../astir.models.html">astir.models package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">astir</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Tutorials</a> &raquo;</li>
+        
+      <li>Getting started with astir</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/tutorials/notebooks/getting_started.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container,
+div.nbinput.container div.prompt,
+div.nbinput.container div.input_area,
+div.nbinput.container div[class*=highlight],
+div.nbinput.container div[class*=highlight] pre,
+div.nboutput.container,
+div.nboutput.container div.prompt,
+div.nboutput.container div.output_area,
+div.nboutput.container div[class*=highlight],
+div.nboutput.container div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Getting-started-with-astir">
+<h1>Getting started with astir<a class="headerlink" href="#Getting-started-with-astir" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Table-of-Contents:">
+<h2>Table of Contents:<a class="headerlink" href="#Table-of-Contents:" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="#zero">0 Loading necessary libraries</a></p></li>
+<li><p><a class="reference external" href="#one">1 Load data</a></p></li>
+<li><p><a class="reference external" href="#two">2 Fitting cell type</a></p></li>
+<li><p><a class="reference external" href="#three">3 Fitting cell state</a></p></li>
+<li><p><a class="reference external" href="#four">4 Saving results</a></p></li>
+<li><p><a class="reference external" href="#five">5 Accessing internal functions and data</a></p></li>
+<li><p><a class="reference external" href="#six">6 Saving models</a></p></li>
+<li><p><a class="reference external" href="#seven">7 Plot clustermap of expression data</a></p></li>
+<li><p><a class="reference external" href="#eight">8 Hierarchical model specification</a></p></li>
+</ul>
+</div>
+<div class="section" id="0.-Load-necessary-libraries">
+<h2>0. Load necessary libraries<a class="headerlink" href="#0.-Load-necessary-libraries" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># !pip install -e ../../..</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">module_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;../../..&#39;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">module_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">module_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">astir.data</span> <span class="kn">import</span> <span class="n">from_csv_yaml</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="1.-Load-data">
+<h2>1. Load data<a class="headerlink" href="#1.-Load-data" title="Permalink to this headline">¶</a></h2>
+<p>We start by reading expression data in the form of a csv file and marker gene information in the form of a yaml file:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">expression_mat_path</span> <span class="o">=</span> <span class="s2">&quot;../../../astir/tests/test-data/sce.csv&quot;</span>
+<span class="c1"># expression_mat_path = &quot;data/sample_data.csv&quot;</span>
+<span class="n">yaml_marker_path</span> <span class="o">=</span> <span class="s2">&quot;../../../astir/tests/test-data/jackson-2020-markers.yml&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Expression data should already be cleaned and normalized. In our workflow, we perform this by a log-transformation of the data with a pseudocount of 1 (i.e. <code class="docutils literal notranslate"><span class="pre">log(x+1)</span></code>), followed by winsorization at the (1%,99%) percentiles.</p>
+</div>
+<p>We can view both the expression data and marker data:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span>head -n <span class="m">20</span> ../../../astir/tests/test-data/jackson-2020-markers.yml
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+cell_states:
+  RTK_signalling:
+    - Her2
+    - EGFR
+  cell_growth:
+    - Ki-67
+    - phospho mTOR
+  mTOR_signalling:
+    - phospho mTOR
+    - phospho S6
+  apoptosis:
+    - cleaved PARP
+    - Cleaved Caspase3
+
+cell_types:
+  stromal:
+    - Vimentin
+    - Fibronectin
+  B cells:
+    - CD45
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">expression_mat_path</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)[[</span><span class="s1">&#39;EGFR&#39;</span><span class="p">,</span><span class="s1">&#39;E-Cadherin&#39;</span><span class="p">,</span> <span class="s1">&#39;CD45&#39;</span><span class="p">,</span> <span class="s1">&#39;Cytokeratin 5&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>EGFR</th>
+      <th>E-Cadherin</th>
+      <th>CD45</th>
+      <th>Cytokeratin 5</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>BaselTMA_SP41_186_X5Y4_3679</th>
+      <td>0.346787</td>
+      <td>0.938354</td>
+      <td>0.227730</td>
+      <td>0.095283</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_153_X7Y5_246</th>
+      <td>0.833752</td>
+      <td>1.364884</td>
+      <td>0.068526</td>
+      <td>0.124031</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_20_X12Y5_197</th>
+      <td>0.110006</td>
+      <td>0.177361</td>
+      <td>0.301222</td>
+      <td>0.052750</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_14_X1Y8_84</th>
+      <td>0.282666</td>
+      <td>1.122174</td>
+      <td>0.606941</td>
+      <td>0.093352</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP41_166_X15Y4_266</th>
+      <td>0.209066</td>
+      <td>0.402554</td>
+      <td>0.588273</td>
+      <td>0.064545</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Then we can create an astir object using the <code class="docutils literal notranslate"><span class="pre">from_csv_yaml</span></code> function. For more data loading options, see the data loading tutorial.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ast</span> <span class="o">=</span> <span class="n">from_csv_yaml</span><span class="p">(</span><span class="n">expression_mat_path</span><span class="p">,</span> <span class="n">marker_yaml</span><span class="o">=</span><span class="n">yaml_marker_path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ast</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Astir object with 6 cell types, 4 cell states, and 4931 cells.
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="2.-Fitting-cell-types">
+<h2>2. Fitting cell types<a class="headerlink" href="#2.-Fitting-cell-types" title="Permalink to this headline">¶</a></h2>
+<p>To fit cell types, simply call</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ast</span><span class="o">.</span><span class="n">fit_type</span><span class="p">(</span><span class="n">max_epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_init_epochs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+training restart 1/5: 100%|██████████| 5/5 [ 3.76s/epochs, current loss: -1693.0]
+training restart 2/5: 100%|██████████| 5/5 [ 4.03s/epochs, current loss: 1273.4]
+training restart 3/5: 100%|██████████| 5/5 [ 3.54s/epochs, current loss: -640.5]
+training restart 4/5: 100%|██████████| 5/5 [ 3.41s/epochs, current loss: 198.5]
+training restart 5/5: 100%|██████████| 5/5 [ 3.44s/epochs, current loss: -415.8]
+training restart (final):  94%|█████████▍| 47/50 [ 3.51s/epochs, current loss: -17252.6]
+</pre></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Controlling inference</strong> There are many different options for controlling inference in the <code class="docutils literal notranslate"><span class="pre">fit_type</span></code> function, including <code class="docutils literal notranslate"><span class="pre">max_epochs</span></code> (maximum number of epochs to train), <code class="docutils literal notranslate"><span class="pre">learning_rate</span></code> (ADAM optimizer learning rate), <code class="docutils literal notranslate"><span class="pre">batch_size</span></code> (minibatch size), <code class="docutils literal notranslate"><span class="pre">delta_loss</span></code> (stops iteration once the change in loss falls below this value), <code class="docutils literal notranslate"><span class="pre">n_inits</span></code> (number of restarts using random initializations). For full details, see the function documentation.</p>
+</div>
+<p>We should always plot the losses to assess convergence:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">get_type_losses</span><span class="p">())),</span> <span class="n">ast</span><span class="o">.</span><span class="n">get_type_losses</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epoch&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0, &#39;Epoch&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_notebooks_getting_started_19_1.png" src="../../_images/tutorials_notebooks_getting_started_19_1.png" />
+</div>
+</div>
+<p>We can then get cell type assignment probabilities by calling</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">assignments</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">get_celltype_probabilities</span><span class="p">()</span>
+<span class="n">assignments</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stromal</th>
+      <th>B cells</th>
+      <th>T cells</th>
+      <th>macrophage</th>
+      <th>epithelial(basal)</th>
+      <th>epithelial(luminal)</th>
+      <th>Other</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_1</th>
+      <td>5.981264e-05</td>
+      <td>4.351427e-01</td>
+      <td>4.413378e-06</td>
+      <td>4.778704e-05</td>
+      <td>0.005910</td>
+      <td>0.000002</td>
+      <td>5.588340e-01</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_2</th>
+      <td>7.080264e-05</td>
+      <td>3.849646e-01</td>
+      <td>5.889273e-06</td>
+      <td>4.314298e-05</td>
+      <td>0.044710</td>
+      <td>0.000007</td>
+      <td>5.701980e-01</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_3</th>
+      <td>2.086748e-04</td>
+      <td>1.871444e-01</td>
+      <td>9.592506e-04</td>
+      <td>4.061270e-04</td>
+      <td>0.290781</td>
+      <td>0.039960</td>
+      <td>4.805403e-01</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4</th>
+      <td>2.980559e-04</td>
+      <td>4.438626e-01</td>
+      <td>6.048962e-06</td>
+      <td>1.707915e-04</td>
+      <td>0.011950</td>
+      <td>0.000006</td>
+      <td>5.437063e-01</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_5</th>
+      <td>1.121071e-04</td>
+      <td>4.681895e-01</td>
+      <td>2.136392e-05</td>
+      <td>3.064268e-05</td>
+      <td>0.017083</td>
+      <td>0.000002</td>
+      <td>5.145617e-01</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4927</th>
+      <td>4.338320e-07</td>
+      <td>1.912927e-03</td>
+      <td>2.400906e-07</td>
+      <td>1.376804e-06</td>
+      <td>0.993716</td>
+      <td>0.000003</td>
+      <td>4.365914e-03</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4928</th>
+      <td>2.193680e-04</td>
+      <td>3.908094e-01</td>
+      <td>3.504072e-04</td>
+      <td>2.164537e-04</td>
+      <td>0.009062</td>
+      <td>0.000018</td>
+      <td>5.993251e-01</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4929</th>
+      <td>1.189970e-08</td>
+      <td>7.369497e-07</td>
+      <td>5.310283e-09</td>
+      <td>8.920690e-09</td>
+      <td>0.999534</td>
+      <td>0.000464</td>
+      <td>8.322494e-07</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4930</th>
+      <td>5.812946e-08</td>
+      <td>6.018526e-09</td>
+      <td>2.364501e-08</td>
+      <td>5.991192e-09</td>
+      <td>0.000590</td>
+      <td>0.999410</td>
+      <td>6.340690e-08</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4931</th>
+      <td>1.341373e-05</td>
+      <td>1.754594e-06</td>
+      <td>2.443332e-06</td>
+      <td>8.300306e-07</td>
+      <td>0.060859</td>
+      <td>0.939114</td>
+      <td>8.438225e-06</td>
+    </tr>
+  </tbody>
+</table>
+<p>4931 rows × 7 columns</p>
+</div></div>
+</div>
+<p>We can also visualize the assignment probabilities using a heatmap:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">assignments</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f8d611c72d0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_notebooks_getting_started_23_1.png" src="../../_images/tutorials_notebooks_getting_started_23_1.png" />
+</div>
+</div>
+<p>where each row corresponds to a cell, and each column to a cell type, with the entry being the probability of that cell belonging to a particular cell type.</p>
+<p>To fetch an array corresponding to the most likely cell type assignments, call</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ast</span><span class="o">.</span><span class="n">get_celltypes</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>cell_type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_1</th>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_2</th>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_3</th>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4</th>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_5</th>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4927</th>
+      <td>epithelial(basal)</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4928</th>
+      <td>Unknown</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4929</th>
+      <td>epithelial(basal)</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4930</th>
+      <td>epithelial(luminal)</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4931</th>
+      <td>epithelial(luminal)</td>
+    </tr>
+  </tbody>
+</table>
+<p>4931 rows × 1 columns</p>
+</div></div>
+</div>
+<div class="section" id="Cell-type-diagnostics">
+<h3>Cell type diagnostics<a class="headerlink" href="#Cell-type-diagnostics" title="Permalink to this headline">¶</a></h3>
+<p>It is important to run diagnostics to ensure that cell types express their markers at higher levels than other cell types. To do this, run the <code class="docutils literal notranslate"><span class="pre">diagnostics_celltype()</span></code> function, which will alert to any issues if a cell type doesn’t express its marker signficantly higher than an alternative cell type (for which that protein isn’t a marker):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ast</span><span class="o">.</span><span class="n">diagnostics_celltype</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>feature</th>
+      <th>should be expressed higher in</th>
+      <th>than</th>
+      <th>mean cell type 1</th>
+      <th>mean cell type 2</th>
+      <th>p-value</th>
+      <th>note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Fibronectin</td>
+      <td>stromal</td>
+      <td>B cells</td>
+      <td>2.045195</td>
+      <td>1.565420</td>
+      <td>inf</td>
+      <td>Only 1 cell in a type: comparison not possible</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Vimentin</td>
+      <td>stromal</td>
+      <td>B cells</td>
+      <td>2.994335</td>
+      <td>1.095477</td>
+      <td>inf</td>
+      <td>Only 1 cell in a type: comparison not possible</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CD20</td>
+      <td>B cells</td>
+      <td>stromal</td>
+      <td>0.403677</td>
+      <td>0.081944</td>
+      <td>inf</td>
+      <td>Only 1 cell in a type: comparison not possible</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>CD20</td>
+      <td>B cells</td>
+      <td>T cells</td>
+      <td>0.403677</td>
+      <td>0.123195</td>
+      <td>inf</td>
+      <td>Only 1 cell in a type: comparison not possible</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CD20</td>
+      <td>B cells</td>
+      <td>macrophage</td>
+      <td>0.403677</td>
+      <td>0.212008</td>
+      <td>inf</td>
+      <td>Only 1 cell in a type: comparison not possible</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CD20</td>
+      <td>B cells</td>
+      <td>epithelial(basal)</td>
+      <td>0.403677</td>
+      <td>0.118228</td>
+      <td>inf</td>
+      <td>Only 1 cell in a type: comparison not possible</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CD20</td>
+      <td>B cells</td>
+      <td>epithelial(luminal)</td>
+      <td>0.403677</td>
+      <td>0.131991</td>
+      <td>inf</td>
+      <td>Only 1 cell in a type: comparison not possible</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>CD20</td>
+      <td>B cells</td>
+      <td>Other</td>
+      <td>0.403677</td>
+      <td>0.017356</td>
+      <td>inf</td>
+      <td>Only 1 cell in a type: comparison not possible</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CD45</td>
+      <td>B cells</td>
+      <td>stromal</td>
+      <td>0.077596</td>
+      <td>0.227257</td>
+      <td>inf</td>
+      <td>Only 1 cell in a type: comparison not possible</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>CD45</td>
+      <td>B cells</td>
+      <td>epithelial(basal)</td>
+      <td>0.077596</td>
+      <td>0.182078</td>
+      <td>inf</td>
+      <td>Only 1 cell in a type: comparison not possible</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this tutorial, we end up with many “Only 1 cell in a type: comparison not possible” notes - this is simply because the small dataset size results in only a single cell assigned to many types, making statistical testing infeasible.</p>
+</div>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">ast.diagnostics_celltype()</span></code> returns a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>, where each column corresponds to a particular protein and two cell types, with a warning if the protein is not expressed at higher levels in the cell type for which it is a marker than the cell type for which it is not.</p>
+<p>The diagnostics:</p>
+<ol class="arabic simple">
+<li><p>Iterates through every cell type and every marker for that cell type</p></li>
+<li><p>Given a cell type <em>c</em> and marker <em>g</em>, find the set of cell types <em>D</em> that don’t have <em>g</em> as a marker</p></li>
+<li><p>For each cell type <em>d</em> in <em>D</em>, perform a t-test between the expression of marker <em>g</em> in <em>c</em> vs <em>d</em></p></li>
+<li><p>If <em>g</em> is not expressed significantly higher (at significance <em>alpha</em>), output a diagnostic explaining this for further investigation.</p></li>
+</ol>
+<p>If multiple issues are found, the markers and cell types may need refined.</p>
+</div>
+</div>
+<div class="section" id="3.-Fitting-cell-state">
+<h2>3. Fitting cell state<a class="headerlink" href="#3.-Fitting-cell-state" title="Permalink to this headline">¶</a></h2>
+<p>Similarly as before, to fit cell state, call</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ast</span><span class="o">.</span><span class="n">fit_state</span><span class="p">(</span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">max_epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/jinelles.h/Documents/Camlab/astir-top-level/astir/astir/models/cellstate.py:176: UserWarning: Delta loss batch size is greater than the number of epochs
+  warnings.warn(&#34;Delta loss batch size is greater than the number of epochs&#34;)
+training restart 1/5: 100%|██████████| 5/5 [ 3.41s/epochs, current loss: 59.8]
+training restart 2/5: 100%|██████████| 5/5 [ 3.40s/epochs, current loss: 98.0]
+training restart 3/5: 100%|██████████| 5/5 [ 3.51s/epochs, current loss: 78.2]
+training restart 4/5: 100%|██████████| 5/5 [ 3.48s/epochs, current loss: 88.0]
+training restart 5/5: 100%|██████████| 5/5 [ 3.37s/epochs, current loss: 60.0]
+training restart (final): 100%|██████████| 50/50 [ 3.60s/epochs, current loss: 14.5]
+/Users/jinelles.h/Documents/Camlab/astir-top-level/astir/astir/astir.py:268: UserWarning: Maximum epochs reached. More iteration may be needed to complete the training.
+  warnings.warn(msg)
+</pre></div></div>
+</div>
+<p>and similary plot the losses via</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ast</span><span class="o">.</span><span class="n">get_state_losses</span><span class="p">())),</span> <span class="n">ast</span><span class="o">.</span><span class="n">get_state_losses</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Loss&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Epoch&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Text(0.5, 0, &#39;Epoch&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_notebooks_getting_started_37_1.png" src="../../_images/tutorials_notebooks_getting_started_37_1.png" />
+</div>
+</div>
+<p>and cell state assignments can be inferred via</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">states</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">get_cellstates</span><span class="p">()</span>
+<span class="n">states</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>RTK_signalling</th>
+      <th>cell_growth</th>
+      <th>mTOR_signalling</th>
+      <th>apoptosis</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_1</th>
+      <td>0.219178</td>
+      <td>0.178849</td>
+      <td>0.133436</td>
+      <td>0.144105</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_2</th>
+      <td>0.296468</td>
+      <td>0.119678</td>
+      <td>0.200147</td>
+      <td>0.157937</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_3</th>
+      <td>0.181820</td>
+      <td>0.185739</td>
+      <td>0.117271</td>
+      <td>0.117391</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4</th>
+      <td>0.271369</td>
+      <td>0.091272</td>
+      <td>0.145709</td>
+      <td>0.170535</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_5</th>
+      <td>0.238632</td>
+      <td>0.219416</td>
+      <td>0.147383</td>
+      <td>0.165110</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4927</th>
+      <td>0.377885</td>
+      <td>0.229766</td>
+      <td>0.257093</td>
+      <td>0.232393</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4928</th>
+      <td>0.144620</td>
+      <td>0.335371</td>
+      <td>0.105722</td>
+      <td>0.134628</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4929</th>
+      <td>0.494012</td>
+      <td>0.387052</td>
+      <td>0.286395</td>
+      <td>0.357899</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4930</th>
+      <td>0.624909</td>
+      <td>0.492357</td>
+      <td>0.315533</td>
+      <td>0.519452</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4931</th>
+      <td>0.631358</td>
+      <td>0.453455</td>
+      <td>0.292822</td>
+      <td>0.536574</td>
+    </tr>
+  </tbody>
+</table>
+<p>4931 rows × 4 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">states</span><span class="p">[</span><span class="s1">&#39;RTK_signalling&#39;</span><span class="p">],</span>
+    <span class="n">ast</span><span class="o">.</span><span class="n">get_state_dataset</span><span class="p">()</span><span class="o">.</span><span class="n">get_exprs_df</span><span class="p">()[</span><span class="s1">&#39;Her2&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.collections.PathCollection at 0x7f8d60937b90&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_notebooks_getting_started_40_1.png" src="../../_images/tutorials_notebooks_getting_started_40_1.png" />
+</div>
+</div>
+<div class="section" id="Cell-state-diagnostics">
+<h3>Cell state diagnostics<a class="headerlink" href="#Cell-state-diagnostics" title="Permalink to this headline">¶</a></h3>
+<p>It is important to run diagnostics on cell states model for the same reasons stated for the cell type model. <code class="docutils literal notranslate"><span class="pre">Astir.diagnostics_cellstate()</span></code> spots any non marker protein and pathway pairs whose expressions are higher than those of the marker proteins of the pathway.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ast</span><span class="o">.</span><span class="n">diagnostics_cellstate</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pathway</th>
+      <th>protein A</th>
+      <th>correlation of protein A</th>
+      <th>protein B</th>
+      <th>correlation of protein B</th>
+      <th>note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>RTK_signalling</td>
+      <td>EGFR</td>
+      <td>0.823298</td>
+      <td>Cleaved Caspase3</td>
+      <td>0.831128</td>
+      <td>EGFR is marker for RTK_signalling but Cleaved ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>RTK_signalling</td>
+      <td>EGFR</td>
+      <td>0.823298</td>
+      <td>cleaved PARP</td>
+      <td>0.831128</td>
+      <td>EGFR is marker for RTK_signalling but cleaved ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>cell_growth</td>
+      <td>Ki-67</td>
+      <td>0.058879</td>
+      <td>Cleaved Caspase3</td>
+      <td>0.862459</td>
+      <td>Ki-67 is marker for cell_growth but Cleaved Ca...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>cell_growth</td>
+      <td>Ki-67</td>
+      <td>0.058879</td>
+      <td>EGFR</td>
+      <td>0.897650</td>
+      <td>Ki-67 is marker for cell_growth but EGFR isn't</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>cell_growth</td>
+      <td>Ki-67</td>
+      <td>0.058879</td>
+      <td>Her2</td>
+      <td>0.750985</td>
+      <td>Ki-67 is marker for cell_growth but Her2 isn't</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>cell_growth</td>
+      <td>Ki-67</td>
+      <td>0.058879</td>
+      <td>cleaved PARP</td>
+      <td>0.862459</td>
+      <td>Ki-67 is marker for cell_growth but cleaved PA...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>cell_growth</td>
+      <td>Ki-67</td>
+      <td>0.058879</td>
+      <td>phospho S6</td>
+      <td>0.272989</td>
+      <td>Ki-67 is marker for cell_growth but phospho S6...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>mTOR_signalling</td>
+      <td>phospho S6</td>
+      <td>0.699387</td>
+      <td>EGFR</td>
+      <td>0.720013</td>
+      <td>phospho S6 is marker for mTOR_signalling but E...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>mTOR_signalling</td>
+      <td>phospho S6</td>
+      <td>0.699387</td>
+      <td>Her2</td>
+      <td>0.757867</td>
+      <td>phospho S6 is marker for mTOR_signalling but H...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">ast.diagnostics_cellstate()</span></code> returns a <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code>, where each column corresponds to a particular protein and two cell types, with a warning if the protein is not expressed at higher levels in the cell state for which it is a marker than the cell state for which it is not.</p>
+<p>The diagnostics:</p>
+<ol class="arabic simple">
+<li><p>Get correlations between all cell states and proteins</p></li>
+<li><p>For each cell state <em>c</em>, get the smallest correlation with marker <em>g</em></p></li>
+<li><p>For each cell state <em>c</em> and its non marker <em>g</em>, find any correlation that is bigger than those smallest correlation for <em>c</em>.</p></li>
+<li><p>Any <em>c</em> and <em>g</em> pairs found in step 3 will be included in the output of <code class="docutils literal notranslate"><span class="pre">Astir.diagnostics_cellstate()</span></code>, including an explanation.</p></li>
+</ol>
+<p>If multiple issues are found, the markers and cell states may need refined.</p>
+</div>
+</div>
+<div class="section" id="4.-Saving-results">
+<h2>4. Saving results<a class="headerlink" href="#4.-Saving-results" title="Permalink to this headline">¶</a></h2>
+<p>Both cell type and cell state information can easily be saved to disk via</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ast</span><span class="o">.</span><span class="n">type_to_csv</span><span class="p">(</span><span class="s2">&quot;data/cell-types.csv&quot;</span><span class="p">)</span>
+<span class="n">ast</span><span class="o">.</span><span class="n">state_to_csv</span><span class="p">(</span><span class="s2">&quot;data/cell-states.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span>head -n <span class="m">3</span> data/cell-types.csv
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+,stromal,B cells,T cells,macrophage,epithelial(basal),epithelial(luminal),Other
+BaselTMA_SP43_115_X4Y8_1,5.9812641356773485e-05,0.43514272442399615,4.4133780759206555e-06,4.778704083811438e-05,0.00590960852651017,1.6351770806453748e-06,0.5588340188121422
+BaselTMA_SP43_115_X4Y8_2,7.080264289768121e-05,0.38496458175145926,5.889272783675721e-06,4.3142984449199766e-05,0.04471036731616506,7.2442437475747445e-06,0.5701979717884975
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">!</span>head -n <span class="m">3</span> data/cell-states.csv
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+,RTK_signalling,cell_growth,mTOR_signalling,apoptosis
+BaselTMA_SP43_115_X4Y8_1,0.2191776340692214,0.17884886731101723,0.13343558969907734,0.1441052515306596
+BaselTMA_SP43_115_X4Y8_2,0.29646752007327026,0.11967817733248733,0.20014708539822942,0.1579368118796618
+</pre></div></div>
+</div>
+<p>where the first (unnamed) column always corresponds to the cell name/ID.</p>
+</div>
+<div class="section" id="5.-Accessing-internal-functions-and-data">
+<h2>5. Accessing internal functions and data<a class="headerlink" href="#5.-Accessing-internal-functions-and-data" title="Permalink to this headline">¶</a></h2>
+<p>Data stored in <code class="docutils literal notranslate"><span class="pre">astir</span></code> objects is in the form of an <code class="docutils literal notranslate"><span class="pre">SCDataSet</span></code>. These can be retrieved via</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">celltype_data</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">get_type_dataset</span><span class="p">()</span>
+<span class="n">celltype_data</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;astir.data.scdataset.SCDataset at 0x7f8d60bd6ed0&gt;
+</pre></div></div>
+</div>
+<p>and similarly for cell state via <code class="docutils literal notranslate"><span class="pre">ast.get_state_dataset()</span></code>.</p>
+<p>These have several helper functions to retrieve relevant information to the dataset:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">celltype_data</span><span class="o">.</span><span class="n">get_cell_names</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="c1"># cell names</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;BaselTMA_SP43_115_X4Y8_1&#39;,
+ &#39;BaselTMA_SP43_115_X4Y8_2&#39;,
+ &#39;BaselTMA_SP43_115_X4Y8_3&#39;,
+ &#39;BaselTMA_SP43_115_X4Y8_4&#39;]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">celltype_data</span><span class="o">.</span><span class="n">get_classes</span><span class="p">()</span> <span class="c1"># cell type names</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;stromal&#39;,
+ &#39;B cells&#39;,
+ &#39;T cells&#39;,
+ &#39;macrophage&#39;,
+ &#39;epithelial(basal)&#39;,
+ &#39;epithelial(luminal)&#39;]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nb">print</span><span class="p">(</span><span class="n">celltype_data</span><span class="o">.</span><span class="n">get_n_classes</span><span class="p">())</span> <span class="c1"># number of cell types</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">celltype_data</span><span class="o">.</span><span class="n">get_n_features</span><span class="p">())</span> <span class="c1"># number of features / proteins</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+6
+14
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">celltype_data</span><span class="o">.</span><span class="n">get_exprs</span><span class="p">()</span> <span class="c1"># Return a torch tensor corresponding to the expression data used</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+tensor([[4.2121e-02, 5.2044e-02, 1.7348e-03,  ..., 6.1314e-01, 4.4827e-02,
+         3.8841e-01],
+        [0.0000e+00, 3.4770e-02, 0.0000e+00,  ..., 9.4025e-01, 1.9424e-02,
+         5.6716e-01],
+        [1.8200e-02, 7.8596e-02, 0.0000e+00,  ..., 6.2852e-01, 4.0905e-02,
+         8.4946e-01],
+        ...,
+        [1.4403e-01, 7.0877e-02, 2.0325e-01,  ..., 1.7303e+00, 2.1434e-01,
+         9.4889e-01],
+        [3.6400e-02, 9.9307e-02, 1.1815e-01,  ..., 1.6467e+00, 1.3463e-01,
+         1.9238e+00],
+        [5.4069e-02, 1.1861e-01, 5.3894e-02,  ..., 1.4265e+00, 4.9443e-01,
+         1.6126e+00]], dtype=torch.float64)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">celltype_data</span><span class="o">.</span><span class="n">get_exprs_df</span><span class="p">()</span> <span class="c1"># Return a pandas DataFrame corresponding to the expression data used</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CD20</th>
+      <th>CD3</th>
+      <th>CD45</th>
+      <th>CD68</th>
+      <th>Cytokeratin 14</th>
+      <th>Cytokeratin 19</th>
+      <th>Cytokeratin 5</th>
+      <th>Cytokeratin 7</th>
+      <th>Cytokeratin 8/18</th>
+      <th>E-Cadherin</th>
+      <th>Fibronectin</th>
+      <th>Her2</th>
+      <th>Vimentin</th>
+      <th>pan Cytokeratin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_1</th>
+      <td>0.042121</td>
+      <td>0.052044</td>
+      <td>0.001735</td>
+      <td>0.042628</td>
+      <td>0.046076</td>
+      <td>0.076746</td>
+      <td>0.113790</td>
+      <td>0.073571</td>
+      <td>0.110530</td>
+      <td>0.800019</td>
+      <td>0.324533</td>
+      <td>0.613138</td>
+      <td>0.044827</td>
+      <td>0.388409</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_2</th>
+      <td>0.000000</td>
+      <td>0.034770</td>
+      <td>0.000000</td>
+      <td>0.084581</td>
+      <td>0.059064</td>
+      <td>0.056487</td>
+      <td>0.098873</td>
+      <td>0.019242</td>
+      <td>0.152825</td>
+      <td>0.972369</td>
+      <td>0.384034</td>
+      <td>0.940250</td>
+      <td>0.019424</td>
+      <td>0.567159</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_3</th>
+      <td>0.018200</td>
+      <td>0.078596</td>
+      <td>0.000000</td>
+      <td>0.042628</td>
+      <td>0.026254</td>
+      <td>0.126815</td>
+      <td>0.165966</td>
+      <td>0.310404</td>
+      <td>0.253835</td>
+      <td>1.108996</td>
+      <td>0.256832</td>
+      <td>0.628524</td>
+      <td>0.040905</td>
+      <td>0.849462</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4</th>
+      <td>0.000000</td>
+      <td>0.018701</td>
+      <td>0.015682</td>
+      <td>0.108294</td>
+      <td>0.071382</td>
+      <td>0.052757</td>
+      <td>0.022484</td>
+      <td>0.093607</td>
+      <td>0.062275</td>
+      <td>1.204820</td>
+      <td>0.661950</td>
+      <td>0.530076</td>
+      <td>0.093848</td>
+      <td>0.418222</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_5</th>
+      <td>0.099789</td>
+      <td>0.073795</td>
+      <td>0.093230</td>
+      <td>0.122463</td>
+      <td>0.000000</td>
+      <td>0.238924</td>
+      <td>0.193627</td>
+      <td>0.000000</td>
+      <td>0.125397</td>
+      <td>1.225161</td>
+      <td>0.623664</td>
+      <td>0.493992</td>
+      <td>0.000000</td>
+      <td>0.296923</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4927</th>
+      <td>0.000000</td>
+      <td>0.036476</td>
+      <td>0.142845</td>
+      <td>0.384770</td>
+      <td>0.046530</td>
+      <td>0.000362</td>
+      <td>0.139654</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.730274</td>
+      <td>0.233316</td>
+      <td>1.276169</td>
+      <td>0.171234</td>
+      <td>0.396967</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4928</th>
+      <td>0.000000</td>
+      <td>0.100622</td>
+      <td>0.089643</td>
+      <td>0.091315</td>
+      <td>0.000000</td>
+      <td>0.098437</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.155443</td>
+      <td>0.908461</td>
+      <td>0.411734</td>
+      <td>0.365833</td>
+      <td>0.110548</td>
+      <td>0.789458</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4929</th>
+      <td>0.144029</td>
+      <td>0.070877</td>
+      <td>0.203246</td>
+      <td>0.503439</td>
+      <td>0.051248</td>
+      <td>0.200929</td>
+      <td>0.138156</td>
+      <td>0.045556</td>
+      <td>0.057138</td>
+      <td>2.136403</td>
+      <td>0.841147</td>
+      <td>1.730263</td>
+      <td>0.214340</td>
+      <td>0.948885</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4930</th>
+      <td>0.036400</td>
+      <td>0.099307</td>
+      <td>0.118155</td>
+      <td>0.447235</td>
+      <td>0.285294</td>
+      <td>0.270529</td>
+      <td>0.107387</td>
+      <td>0.423265</td>
+      <td>0.234452</td>
+      <td>1.884903</td>
+      <td>0.767309</td>
+      <td>1.646707</td>
+      <td>0.134634</td>
+      <td>1.923792</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4931</th>
+      <td>0.054069</td>
+      <td>0.118611</td>
+      <td>0.053894</td>
+      <td>0.484753</td>
+      <td>0.340787</td>
+      <td>0.133814</td>
+      <td>0.150674</td>
+      <td>0.365944</td>
+      <td>0.163528</td>
+      <td>1.843372</td>
+      <td>1.161388</td>
+      <td>1.426493</td>
+      <td>0.494433</td>
+      <td>1.612622</td>
+    </tr>
+  </tbody>
+</table>
+<p>4931 rows × 14 columns</p>
+</div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ast</span><span class="o">.</span><span class="n">normalize</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ast</span><span class="o">.</span><span class="n">get_type_dataset</span><span class="p">()</span><span class="o">.</span><span class="n">get_exprs_df</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CD20</th>
+      <th>CD3</th>
+      <th>CD45</th>
+      <th>CD68</th>
+      <th>Cytokeratin 14</th>
+      <th>Cytokeratin 19</th>
+      <th>Cytokeratin 5</th>
+      <th>Cytokeratin 7</th>
+      <th>Cytokeratin 8/18</th>
+      <th>E-Cadherin</th>
+      <th>Fibronectin</th>
+      <th>Her2</th>
+      <th>Vimentin</th>
+      <th>pan Cytokeratin</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_1</th>
+      <td>0.008424</td>
+      <td>0.010409</td>
+      <td>0.000347</td>
+      <td>0.008586</td>
+      <td>0.009215</td>
+      <td>0.015349</td>
+      <td>0.022756</td>
+      <td>0.014714</td>
+      <td>0.022104</td>
+      <td>0.159329</td>
+      <td>0.064861</td>
+      <td>0.122322</td>
+      <td>0.008965</td>
+      <td>0.077604</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_2</th>
+      <td>0.000000</td>
+      <td>0.006954</td>
+      <td>0.000000</td>
+      <td>0.016915</td>
+      <td>0.011813</td>
+      <td>0.011297</td>
+      <td>0.019773</td>
+      <td>0.003848</td>
+      <td>0.030560</td>
+      <td>0.193268</td>
+      <td>0.076731</td>
+      <td>0.186959</td>
+      <td>0.003885</td>
+      <td>0.113190</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_3</th>
+      <td>0.003640</td>
+      <td>0.015719</td>
+      <td>0.000000</td>
+      <td>0.008586</td>
+      <td>0.005251</td>
+      <td>0.025360</td>
+      <td>0.033187</td>
+      <td>0.062041</td>
+      <td>0.050745</td>
+      <td>0.220020</td>
+      <td>0.051344</td>
+      <td>0.125376</td>
+      <td>0.008181</td>
+      <td>0.169086</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4</th>
+      <td>0.000000</td>
+      <td>0.003740</td>
+      <td>0.003136</td>
+      <td>0.021657</td>
+      <td>0.014276</td>
+      <td>0.010551</td>
+      <td>0.004497</td>
+      <td>0.018720</td>
+      <td>0.012455</td>
+      <td>0.238691</td>
+      <td>0.132006</td>
+      <td>0.105818</td>
+      <td>0.018769</td>
+      <td>0.083547</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_5</th>
+      <td>0.019956</td>
+      <td>0.014758</td>
+      <td>0.018645</td>
+      <td>0.024490</td>
+      <td>0.000000</td>
+      <td>0.047767</td>
+      <td>0.038716</td>
+      <td>0.000000</td>
+      <td>0.025077</td>
+      <td>0.242644</td>
+      <td>0.124412</td>
+      <td>0.098638</td>
+      <td>0.000000</td>
+      <td>0.059350</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4927</th>
+      <td>0.000000</td>
+      <td>0.007295</td>
+      <td>0.028565</td>
+      <td>0.076878</td>
+      <td>0.009306</td>
+      <td>0.000123</td>
+      <td>0.027927</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.339496</td>
+      <td>0.046690</td>
+      <td>0.252541</td>
+      <td>0.034240</td>
+      <td>0.079310</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4928</th>
+      <td>0.000000</td>
+      <td>0.020123</td>
+      <td>0.017928</td>
+      <td>0.018262</td>
+      <td>0.000000</td>
+      <td>0.019686</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.031084</td>
+      <td>0.180707</td>
+      <td>0.082254</td>
+      <td>0.073101</td>
+      <td>0.022108</td>
+      <td>0.157243</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4929</th>
+      <td>0.028802</td>
+      <td>0.014175</td>
+      <td>0.040638</td>
+      <td>0.100518</td>
+      <td>0.010249</td>
+      <td>0.040175</td>
+      <td>0.027628</td>
+      <td>0.009111</td>
+      <td>0.011427</td>
+      <td>0.415244</td>
+      <td>0.167446</td>
+      <td>0.339493</td>
+      <td>0.042855</td>
+      <td>0.188656</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4930</th>
+      <td>0.007280</td>
+      <td>0.019860</td>
+      <td>0.023629</td>
+      <td>0.089328</td>
+      <td>0.057028</td>
+      <td>0.054079</td>
+      <td>0.021476</td>
+      <td>0.084552</td>
+      <td>0.046873</td>
+      <td>0.368578</td>
+      <td>0.152866</td>
+      <td>0.323661</td>
+      <td>0.026924</td>
+      <td>0.375847</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4931</th>
+      <td>0.010813</td>
+      <td>0.023720</td>
+      <td>0.010779</td>
+      <td>0.096799</td>
+      <td>0.068105</td>
+      <td>0.026760</td>
+      <td>0.030130</td>
+      <td>0.073124</td>
+      <td>0.032700</td>
+      <td>0.360796</td>
+      <td>0.230238</td>
+      <td>0.281564</td>
+      <td>0.098726</td>
+      <td>0.317179</td>
+    </tr>
+  </tbody>
+</table>
+<p>4931 rows × 14 columns</p>
+</div></div>
+</div>
+</div>
+<div class="section" id="6.-Saving-models">
+<h2>6. Saving models<a class="headerlink" href="#6.-Saving-models" title="Permalink to this headline">¶</a></h2>
+<p>After fixing the models, we can save the cell type/state assignment, the losses, the parameters (e.g. <code class="docutils literal notranslate"><span class="pre">mu</span></code>, <code class="docutils literal notranslate"><span class="pre">rho</span></code>, <code class="docutils literal notranslate"><span class="pre">log_sigma</span></code>, etc) and the run informations (e.g. <code class="docutils literal notranslate"><span class="pre">batch_size</span></code>, <code class="docutils literal notranslate"><span class="pre">learning_rate</span></code>, <code class="docutils literal notranslate"><span class="pre">delta_loss</span></code>, etc) to an hdf5 file.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ast</span><span class="o">.</span><span class="n">save_models</span><span class="p">(</span><span class="s2">&quot;data/astir_summary.hdf5&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The hierarchy of the hdf5 file would be:</p>
+<p><img alt="8f2c414db08c44488babaed7ec22f3ce" src="../../_images/hdf5_schematics.png" /></p>
+<p>Only the model that is trained will be saved (<code class="docutils literal notranslate"><span class="pre">CellTypeModel</span></code> or <code class="docutils literal notranslate"><span class="pre">CellStateModel</span></code> or both). If the functioned is called before any model is trained, exception will be raised. Data saved in the file is either <code class="docutils literal notranslate"><span class="pre">int</span></code> or <code class="docutils literal notranslate"><span class="pre">np.array</span></code>.</p>
+</div>
+<div class="section" id="7.-Plot-clustermap-of-expression-data">
+<h2>7. Plot clustermap of expression data<a class="headerlink" href="#7.-Plot-clustermap-of-expression-data" title="Permalink to this headline">¶</a></h2>
+<p>After fixing the cell type model, we can also plot a heatmap of protein expression of cells clustered by type. The heatmap will be saved at the location <code class="docutils literal notranslate"><span class="pre">plot_name</span></code>, which is default to <code class="docutils literal notranslate"><span class="pre">&quot;./celltype_protein_cluster.png&quot;</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">ast</span><span class="o">.</span><span class="n">type_clustermap</span><span class="p">(</span><span class="n">plot_name</span><span class="o">=</span><span class="s2">&quot;./img/celltype_protein_cluster.png&quot;</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_notebooks_getting_started_72_0.png" src="../../_images/tutorials_notebooks_getting_started_72_0.png" />
+</div>
+</div>
+<p>Note: <code class="docutils literal notranslate"><span class="pre">threshold</span></code> is the probability threshold above which a cell is assigned to a cell type, default to 0.7.</p>
+</div>
+<div class="section" id="8.-Hierarchical-model-specification">
+<h2>8. Hierarchical model specification<a class="headerlink" href="#8.-Hierarchical-model-specification" title="Permalink to this headline">¶</a></h2>
+<p>In the marker yaml file, the user can also add a section called <code class="docutils literal notranslate"><span class="pre">hierarchy</span></code>, which specifies the hierarchical structure of cell types. Here’s an example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hierarchy</span><span class="p">:</span>
+  <span class="n">immune</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">B</span> <span class="n">cells</span>
+    <span class="o">-</span> <span class="n">T</span> <span class="n">cells</span>
+    <span class="o">-</span> <span class="n">macrophage</span>
+  <span class="n">epithelial</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">epithelial</span><span class="p">(</span><span class="n">basal</span><span class="p">)</span>
+    <span class="o">-</span> <span class="n">epithelial</span><span class="p">(</span><span class="n">luminal</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Some notes: 1. The section would be accessed by key <code class="docutils literal notranslate"><span class="pre">hierarchy</span></code>. 2. In the section, the higher-levelled cell type names should be the keys. 3. The values in the section should also exist as the cell type names in the <code class="docutils literal notranslate"><span class="pre">cell_types</span></code> section. (e.g. if we have <code class="docutils literal notranslate"><span class="pre">&quot;B</span> <span class="pre">cells&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">marker[&quot;hierarchy&quot;][&quot;immune&quot;]</span></code>, we should also be able to get <code class="docutils literal notranslate"><span class="pre">marker[&quot;cell_types&quot;][&quot;B</span> <span class="pre">cells&quot;]</span></code>)</p>
+<p>This section could be used to summarize the cell types assignment at a higher hierarchical level. (e.g. a cell is predicted as “immune” instead of “B cells” or “T cells”)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">hierarchy_probs</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">assign_celltype_hierarchy</span><span class="p">()</span>
+<span class="n">hierarchy_probs</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>immune</th>
+      <th>epithelial</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_1</th>
+      <td>0.435195</td>
+      <td>0.005911</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_2</th>
+      <td>0.385014</td>
+      <td>0.044718</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_3</th>
+      <td>0.188510</td>
+      <td>0.330741</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_4</th>
+      <td>0.444039</td>
+      <td>0.011956</td>
+    </tr>
+    <tr>
+      <th>BaselTMA_SP43_115_X4Y8_5</th>
+      <td>0.468241</td>
+      <td>0.017085</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>To make it more clear, here’s a heatmap for the cell assignment in a higher hierarchy:</p>
+<p><img alt="2c63579408964473bf0750a2207e903b" src="../../_images/hierarchical_celltype_cluster.png" /></p>
+<p>The way it is calculated is simply summing up the probabilities of the cell type assignments under the same hierarchy.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="data_loading.html" class="btn btn-neutral float-right" title="Loading data into astir" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jinyu Hou, Sunyun Lee, Michael Geuenich, Kieran Campbell
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

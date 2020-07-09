@@ -1,0 +1,406 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>astir.data.data_readers &mdash; astir  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> astir
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../development.html">Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../astir.html">astir package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../astir.data.html">astir.data package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../astir.models.html">astir.models package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">astir</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>astir.data.data_readers</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for astir.data.data_readers</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cbook</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">cbook</span><span class="o">.</span><span class="n">mplDeprecation</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">yaml</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">loompy</span>
+<span class="kn">import</span> <span class="nn">anndata</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">FlowCytometryTools</span>
+<span class="kn">from</span> <span class="nn">FlowCytometryTools</span> <span class="kn">import</span> <span class="n">FCMeasurement</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OneHotEncoder</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+
+<div class="viewcode-block" id="from_csv_yaml"><a class="viewcode-back" href="../../../astir.data.html#astir.data.from_csv_yaml">[docs]</a><span class="k">def</span> <span class="nf">from_csv_yaml</span><span class="p">(</span>
+    <span class="n">csv_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">marker_yaml</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">design_csv</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">random_seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an Astir object from an expression CSV and marker YAML</span>
+
+<span class="sd">    :param csv_input: Path to input csv containing expression for cells (rows) by proteins (columns). First column is </span>
+<span class="sd">        cell identifier, and additional column names are gene identifiers.</span>
+<span class="sd">    :param marker_yaml: Path to input YAML file containing marker gene information. Should include cell_type and cell_state      </span>
+<span class="sd">        entries. See documention.</span>
+<span class="sd">    :param design_csv: Path to design matrix as a CSV. Rows should be cells, and columns covariates. First column is cell </span>
+<span class="sd">        identifier, and additional column names are covariate identifiers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df_gex</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_input</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">design</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">design_csv</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">design</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">design_csv</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">marker_yaml</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+        <span class="n">marker_dict</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">astir.astir</span> <span class="kn">import</span> <span class="n">Astir</span>
+
+    <span class="k">return</span> <span class="n">Astir</span><span class="p">(</span><span class="n">df_gex</span><span class="p">,</span> <span class="n">marker_dict</span><span class="p">,</span> <span class="n">design</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="from_csv_dir_yaml"><a class="viewcode-back" href="../../../astir.data.html#astir.data.from_csv_dir_yaml">[docs]</a><span class="k">def</span> <span class="nf">from_csv_dir_yaml</span><span class="p">(</span>
+    <span class="n">input_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">marker_yaml</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an Astir object a directory containing multiple csv files</span>
+
+<span class="sd">    :param input_dir: Path to a directory containing multiple CSV files, each in the format expected by</span>
+<span class="sd">        `from_csv_yaml`</span>
+<span class="sd">    :param marker_yaml: Path to input YAML file containing marker gene information. Should include cell_type and cell_state      </span>
+<span class="sd">        entries. See documention.</span>
+<span class="sd">    :param design_csv: Path to design matrix as a CSV. Rows should be cells, and columns covariates. First column is cell </span>
+<span class="sd">        identifier, and additional column names are covariate identifiers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: add text explaining concatenation</span>
+    <span class="c1"># Parse the input directory</span>
+    <span class="n">csv_files</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">input_dir</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">input_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;csv&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Read to gene expression df and parse</span>
+    <span class="n">dfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">csv_files</span><span class="p">]</span>
+    <span class="n">df_gex</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">dfs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Construct a sample specific design matrix</span>
+    <span class="n">design_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">dfs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dfs</span><span class="p">))]</span>
+    <span class="n">design</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">OneHotEncoder</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">design_list</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="n">design</span> <span class="o">=</span> <span class="n">design</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># remove final column</span>
+    <span class="n">design</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">design</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">design</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">)</span>  <span class="c1"># add in intercept!</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">marker_yaml</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+        <span class="n">marker_dict</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">astir.astir</span> <span class="kn">import</span> <span class="n">Astir</span>
+
+    <span class="k">return</span> <span class="n">Astir</span><span class="p">(</span><span class="n">df_gex</span><span class="p">,</span> <span class="n">marker_dict</span><span class="p">,</span> <span class="n">design</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="from_loompy_yaml"><a class="viewcode-back" href="../../../astir.data.html#astir.data.from_loompy_yaml">[docs]</a><span class="k">def</span> <span class="nf">from_loompy_yaml</span><span class="p">(</span>
+    <span class="n">loom_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">marker_yaml</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">protein_name_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;protein&quot;</span><span class="p">,</span>
+    <span class="n">cell_name_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;cell_name&quot;</span><span class="p">,</span>
+    <span class="n">batch_name_attr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;batch&quot;</span><span class="p">,</span>
+    <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an Astir object from a loom file and a marker yaml</span>
+
+<span class="sd">    :param loom_file: Path to a loom file, where rows correspond to proteins and columns to cells</span>
+<span class="sd">    :param marker_yaml: Path to input YAML file containing marker gene information. Should include cell_type and cell_state      </span>
+<span class="sd">        entries. See documention.</span>
+<span class="sd">    :param protein_name_attr: The attribute (key) in the row attributes that identifies the protein names </span>
+<span class="sd">        (required to match with the marker gene information)</span>
+<span class="sd">    :param cell_name_attr: The attribute (key) in the column attributes that identifies the name of each cell</span>
+<span class="sd">    :param batch_name_attr: The attribute (key) in the column attributes that identifies the batch. A design matrix</span>
+<span class="sd">        will be built using this (if present) using a one-hot encoding to control for batch.</span>
+<span class="sd">    :param random_seed: The random seed to be used to initialize variables</span>
+
+<span class="sd">    :returns: An object of class `astir_bash.py.Astir` using data imported from the loom files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: This function is memory inefficient and goes against the philosophy of loom files. Should be improved</span>
+    <span class="n">batch_list</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">with</span> <span class="n">loompy</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">loom_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">ds</span><span class="p">:</span>
+        <span class="n">df_gex</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ds</span><span class="p">[:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">df_gex</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">ra</span><span class="p">[</span><span class="n">protein_name_attr</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">cell_name_attr</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">df_gex</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">ca</span><span class="p">[</span><span class="n">cell_name_attr</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">batch_name_attr</span> <span class="ow">in</span> <span class="n">ds</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">batch_list</span> <span class="o">=</span> <span class="n">ds</span><span class="o">.</span><span class="n">ca</span><span class="p">[</span><span class="n">batch_name_attr</span><span class="p">]</span>
+
+    <span class="n">design</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">batch_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">design</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">batch_list</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+        <span class="n">design</span> <span class="o">=</span> <span class="n">design</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># remove final column</span>
+        <span class="n">design</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">design</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">design</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">marker_yaml</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+        <span class="n">marker_dict</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">astir.astir</span> <span class="kn">import</span> <span class="n">Astir</span>
+
+    <span class="k">return</span> <span class="n">Astir</span><span class="p">(</span><span class="n">df_gex</span><span class="p">,</span> <span class="n">marker_dict</span><span class="p">,</span> <span class="n">design</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="from_anndata_yaml"><a class="viewcode-back" href="../../../astir.data.html#astir.data.from_anndata_yaml">[docs]</a><span class="k">def</span> <span class="nf">from_anndata_yaml</span><span class="p">(</span>
+    <span class="n">anndata_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">marker_yaml</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">protein_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">cell_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;batch&quot;</span><span class="p">,</span>
+    <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an Astir object from an :class:`anndata.Anndata` file and a marker yaml</span>
+
+<span class="sd">    :param anndata_file: Path to an :class:`anndata.Anndata` `h5py` file</span>
+<span class="sd">    :param marker_yaml: Path to input YAML file containing marker gene information. Should include cell_type and cell_state      </span>
+<span class="sd">        entries. See documention.</span>
+<span class="sd">    :param protein_name: The column of `adata.var` containing protein names. If this is none, defaults to `adata.var_names`</span>
+<span class="sd">    :param cell_name:  The column of `adata.obs` containing cell names. If this is none, defaults to `adata.obs_names`</span>
+<span class="sd">    :param batch_name: The column of `adata.obs` containing batch names. A design matrix</span>
+<span class="sd">        will be built using this (if present) using a one-hot encoding to control for batch.</span>
+<span class="sd">    :param random_seed: The random seed to be used to initialize variables</span>
+
+<span class="sd">    :returns: An object of class `astir_bash.py.Astir` using data imported from the loom files</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: This function is memory inefficient and goes against the philosophy of loom files. Should be improved</span>
+    <span class="n">batch_list</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">ad</span> <span class="o">=</span> <span class="n">anndata</span><span class="o">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="n">anndata_file</span><span class="p">)</span>
+
+    <span class="n">df_gex</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ad</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="n">protein_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df_gex</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">var</span><span class="p">[</span><span class="n">protein_name</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">df_gex</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">var_names</span>
+
+    <span class="k">if</span> <span class="n">cell_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df_gex</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">cell_name</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">df_gex</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">obs_names</span>
+
+    <span class="k">if</span> <span class="n">batch_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">batch_list</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">obs</span><span class="p">[</span><span class="n">batch_name</span><span class="p">]</span>
+
+    <span class="n">design</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">batch_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">design</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">OneHotEncoder</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">batch_list</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="n">design</span> <span class="o">=</span> <span class="n">design</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># remove final column</span>
+        <span class="n">design</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">design</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">design</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">marker_yaml</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+        <span class="n">marker_dict</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">astir.astir</span> <span class="kn">import</span> <span class="n">Astir</span>
+
+    <span class="k">return</span> <span class="n">Astir</span><span class="p">(</span><span class="n">df_gex</span><span class="p">,</span> <span class="n">marker_dict</span><span class="p">,</span> <span class="n">design</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">from_fcs_yaml</span><span class="p">(</span>
+    <span class="n">fcs_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">marker_yaml</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1234</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">expr_fcs</span> <span class="o">=</span> <span class="n">FCMeasurement</span><span class="p">(</span><span class="n">ID</span><span class="o">=</span><span class="s2">&quot;astir_data&quot;</span><span class="p">,</span> <span class="n">datafile</span><span class="o">=</span><span class="n">fcs_file</span><span class="p">)</span>
+    <span class="n">expr_df</span> <span class="o">=</span> <span class="n">expr_fcs</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">marker_yaml</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">stream</span><span class="p">:</span>
+        <span class="n">marker_dict</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">safe_load</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">astir.astir</span> <span class="kn">import</span> <span class="n">Astir</span>
+
+    <span class="k">return</span> <span class="n">Astir</span><span class="p">(</span><span class="n">expr_df</span><span class="p">,</span> <span class="n">marker_dict</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jinyu Hou, Sunyun Lee, Michael Geuenich, Kieran Campbell
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

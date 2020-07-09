@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>astir.data package &mdash; astir  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="astir.models package" href="astir.models.html" />
+    <link rel="prev" title="astir package" href="astir.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> astir
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Package Reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="astir.html">astir package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">astir.data package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-astir.data">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="astir.models.html">astir.models package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">astir</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>astir.data package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/astir.data.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="astir-data-package">
+<h1>astir.data package<a class="headerlink" href="#astir-data-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-astir.data">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-astir.data" title="Permalink to this headline">¶</a></h2>
+<p><strong>Functions</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.data.from_csv_yaml" title="astir.data.from_csv_yaml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_csv_yaml</span></code></a>(csv_input, marker_yaml[, …])</p></td>
+<td><p>Create an Astir object from an expression CSV and marker YAML</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.data.from_csv_dir_yaml" title="astir.data.from_csv_dir_yaml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_csv_dir_yaml</span></code></a>(input_dir, marker_yaml[, …])</p></td>
+<td><p>Create an Astir object a directory containing multiple csv files</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.data.from_loompy_yaml" title="astir.data.from_loompy_yaml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_loompy_yaml</span></code></a>(loom_file, marker_yaml[, …])</p></td>
+<td><p>Create an Astir object from a loom file and a marker yaml</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.data.from_anndata_yaml" title="astir.data.from_anndata_yaml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_anndata_yaml</span></code></a>(anndata_file, marker_yaml)</p></td>
+<td><p>Create an Astir object from an <code class="xref py py-class docutils literal notranslate"><span class="pre">anndata.Anndata</span></code> file and a marker yaml</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Classes</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.data.SCDataset" title="astir.data.SCDataset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SCDataset</span></code></a>(expr_input, marker_dict, …[, …])</p></td>
+<td><p>Container for single-cell proteomic data in the form of</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt id="astir.data.from_csv_yaml">
+<code class="sig-prename descclassname">astir.data.</code><code class="sig-name descname">from_csv_yaml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">csv_input</span></em>, <em class="sig-param"><span class="n">marker_yaml</span></em>, <em class="sig-param"><span class="n">design_csv</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">random_seed</span><span class="o">=</span><span class="default_value">1234</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">torch.float64</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/data_readers.html#from_csv_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.from_csv_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an Astir object from an expression CSV and marker YAML</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>csv_input</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path to input csv containing expression for cells (rows) by proteins (columns). First column is 
+cell identifier, and additional column names are gene identifiers.</p></li>
+<li><p><strong>marker_yaml</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path to input YAML file containing marker gene information. Should include cell_type and cell_state      
+entries. See documention.</p></li>
+<li><p><strong>design_csv</strong> – Path to design matrix as a CSV. Rows should be cells, and columns covariates. First column is cell 
+identifier, and additional column names are covariate identifiers.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="astir.data.from_csv_dir_yaml">
+<code class="sig-prename descclassname">astir.data.</code><code class="sig-name descname">from_csv_dir_yaml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dir</span></em>, <em class="sig-param"><span class="n">marker_yaml</span></em>, <em class="sig-param"><span class="n">random_seed</span><span class="o">=</span><span class="default_value">1234</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">torch.float64</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/data_readers.html#from_csv_dir_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.from_csv_dir_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an Astir object a directory containing multiple csv files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dir</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path to a directory containing multiple CSV files, each in the format expected by
+<cite>from_csv_yaml</cite></p></li>
+<li><p><strong>marker_yaml</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path to input YAML file containing marker gene information. Should include cell_type and cell_state      
+entries. See documention.</p></li>
+<li><p><strong>design_csv</strong> – Path to design matrix as a CSV. Rows should be cells, and columns covariates. First column is cell 
+identifier, and additional column names are covariate identifiers.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="astir.data.from_loompy_yaml">
+<code class="sig-prename descclassname">astir.data.</code><code class="sig-name descname">from_loompy_yaml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">loom_file</span></em>, <em class="sig-param"><span class="n">marker_yaml</span></em>, <em class="sig-param"><span class="n">protein_name_attr</span><span class="o">=</span><span class="default_value">'protein'</span></em>, <em class="sig-param"><span class="n">cell_name_attr</span><span class="o">=</span><span class="default_value">'cell_name'</span></em>, <em class="sig-param"><span class="n">batch_name_attr</span><span class="o">=</span><span class="default_value">'batch'</span></em>, <em class="sig-param"><span class="n">random_seed</span><span class="o">=</span><span class="default_value">1234</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">torch.float64</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/data_readers.html#from_loompy_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.from_loompy_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an Astir object from a loom file and a marker yaml</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>loom_file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path to a loom file, where rows correspond to proteins and columns to cells</p></li>
+<li><p><strong>marker_yaml</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path to input YAML file containing marker gene information. Should include cell_type and cell_state      
+entries. See documention.</p></li>
+<li><p><strong>protein_name_attr</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The attribute (key) in the row attributes that identifies the protein names 
+(required to match with the marker gene information)</p></li>
+<li><p><strong>cell_name_attr</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The attribute (key) in the column attributes that identifies the name of each cell</p></li>
+<li><p><strong>batch_name_attr</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The attribute (key) in the column attributes that identifies the batch. A design matrix
+will be built using this (if present) using a one-hot encoding to control for batch.</p></li>
+<li><p><strong>random_seed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The random seed to be used to initialize variables</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An object of class <cite>astir_bash.py.Astir</cite> using data imported from the loom files</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="astir.data.from_anndata_yaml">
+<code class="sig-prename descclassname">astir.data.</code><code class="sig-name descname">from_anndata_yaml</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">anndata_file</span></em>, <em class="sig-param"><span class="n">marker_yaml</span></em>, <em class="sig-param"><span class="n">protein_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">cell_name</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">batch_name</span><span class="o">=</span><span class="default_value">'batch'</span></em>, <em class="sig-param"><span class="n">random_seed</span><span class="o">=</span><span class="default_value">1234</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">torch.float64</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/data_readers.html#from_anndata_yaml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.from_anndata_yaml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an Astir object from an <code class="xref py py-class docutils literal notranslate"><span class="pre">anndata.Anndata</span></code> file and a marker yaml</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>anndata_file</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path to an <code class="xref py py-class docutils literal notranslate"><span class="pre">anndata.Anndata</span></code> <cite>h5py</cite> file</p></li>
+<li><p><strong>marker_yaml</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – Path to input YAML file containing marker gene information. Should include cell_type and cell_state      
+entries. See documention.</p></li>
+<li><p><strong>protein_name</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The column of <cite>adata.var</cite> containing protein names. If this is none, defaults to <cite>adata.var_names</cite></p></li>
+<li><p><strong>cell_name</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]) – The column of <cite>adata.obs</cite> containing cell names. If this is none, defaults to <cite>adata.obs_names</cite></p></li>
+<li><p><strong>batch_name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>) – The column of <cite>adata.obs</cite> containing batch names. A design matrix
+will be built using this (if present) using a one-hot encoding to control for batch.</p></li>
+<li><p><strong>random_seed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>) – The random seed to be used to initialize variables</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An object of class <cite>astir_bash.py.Astir</cite> using data imported from the loom files</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="astir.data.SCDataset">
+<em class="property">class </em><code class="sig-prename descclassname">astir.data.</code><code class="sig-name descname">SCDataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">expr_input</span></em>, <em class="sig-param"><span class="n">marker_dict</span></em>, <em class="sig-param"><span class="n">include_other_column</span></em>, <em class="sig-param"><span class="n">design</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dtype</span><span class="o">=</span><span class="default_value">torch.float64</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.utils.data.dataset.Dataset</span></code></p>
+<p>Container for single-cell proteomic data in the form of 
+a pytorch dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr_input</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code>[<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]]) – Input expression data. See details :<cite>expr_input</cite> is either a <cite>pd.DataFrame</cite> 
+or a three-element <cite>tuple</cite>. When it is <cite>pd.DataFrame</cite>, its index and column should indicate the cell
+name and feature name of the dataset; when it is a three-element <cite>tuple</cite>, it should be in the form 
+of <cite>Tuple[Union[np.array, torch.Tensor], List[str], List[str]]</cite> and  its first element should
+be the actual dataset as either <cite>np.array</cite> or <cite>torch.tensor</cite>, the second element should be 
+a list containing the name of the columns or the names of features, the third element should be a 
+list containing the name of the indices or the names of the cells.:</p></li>
+<li><p><strong>marker_dict</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]) – Marker dictionary containing cell type and 
+information. See details :The dictionary maps the name of cell type/state to protein features. :</p></li>
+<li><p><strong>design</strong> (<code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code>, <code class="docutils literal notranslate"><span class="pre">None</span></code>]) – A design matrix</p></li>
+<li><p><strong>include_other_column</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code>) – Should an additional ‘other’ column be included?</p></li>
+<li><p><strong>dtype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code>) – torch datatype of the model</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Methods</strong></p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.data.SCDataset.get_cell_names" title="astir.data.SCDataset.get_cell_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cell_names</span></code></a>()</p></td>
+<td><p>Get the cell names.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.data.SCDataset.get_classes" title="astir.data.SCDataset.get_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_classes</span></code></a>()</p></td>
+<td><p>Get the cell types/states.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.data.SCDataset.get_design" title="astir.data.SCDataset.get_design"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_design</span></code></a>()</p></td>
+<td><p>Get the design matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.data.SCDataset.get_dtype" title="astir.data.SCDataset.get_dtype"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dtype</span></code></a>()</p></td>
+<td><p>Get the dtype of the <cite>SCDataset</cite>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.data.SCDataset.get_exprs" title="astir.data.SCDataset.get_exprs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_exprs</span></code></a>()</p></td>
+<td><p>Return the expression data as a <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.data.SCDataset.get_exprs_df" title="astir.data.SCDataset.get_exprs_df"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_exprs_df</span></code></a>()</p></td>
+<td><p>Return the expression data as a <code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.data.SCDataset.get_features" title="astir.data.SCDataset.get_features"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_features</span></code></a>()</p></td>
+<td><p>Get the features (proteins).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.data.SCDataset.get_marker_mat" title="astir.data.SCDataset.get_marker_mat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_marker_mat</span></code></a>()</p></td>
+<td><p>Return the marker matrix as a <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.data.SCDataset.get_mu" title="astir.data.SCDataset.get_mu"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_mu</span></code></a>()</p></td>
+<td><p>Get the mean expression of each protein as a <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.data.SCDataset.get_n_cells" title="astir.data.SCDataset.get_n_cells"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_n_cells</span></code></a>()</p></td>
+<td><p>Get the number of cells: either the number of cell types or cell states.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.data.SCDataset.get_n_classes" title="astir.data.SCDataset.get_n_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_n_classes</span></code></a>()</p></td>
+<td><p>Get the number of ‘classes’: either the number of cell types or cell states.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.data.SCDataset.get_n_features" title="astir.data.SCDataset.get_n_features"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_n_features</span></code></a>()</p></td>
+<td><p>Get the number of features (proteins).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.data.SCDataset.get_sigma" title="astir.data.SCDataset.get_sigma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_sigma</span></code></a>()</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">rtype</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></p>
+</dd>
+</dl>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#astir.data.SCDataset.normalize" title="astir.data.SCDataset.normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize</span></code></a>([percentile_lower, …])</p></td>
+<td><p>Normalize the expression data</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#astir.data.SCDataset.rescale" title="astir.data.SCDataset.rescale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rescale</span></code></a>()</p></td>
+<td><p>Normalize the expression data.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="astir.data.SCDataset.get_cell_names">
+<code class="sig-name descname">get_cell_names</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.get_cell_names"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.get_cell_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the cell names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>return self._cell_names</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.get_classes">
+<code class="sig-name descname">get_classes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.get_classes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.get_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the cell types/states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>return self._classes</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.get_design">
+<code class="sig-name descname">get_design</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.get_design"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.get_design" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the design matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>return self._design</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.get_dtype">
+<code class="sig-name descname">get_dtype</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.get_dtype"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.get_dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the dtype of the <cite>SCDataset</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><cite>self._dtype</cite></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.get_exprs">
+<code class="sig-name descname">get_exprs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.get_exprs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.get_exprs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the expression data as a <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.get_exprs_df">
+<code class="sig-name descname">get_exprs_df</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.get_exprs_df"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.get_exprs_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the expression data as a <code class="xref py py-class docutils literal notranslate"><span class="pre">pandas.DataFrame</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.get_features">
+<code class="sig-name descname">get_features</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.get_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.get_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the features (proteins).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>return self._m_features</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.get_marker_mat">
+<code class="sig-name descname">get_marker_mat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.get_marker_mat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.get_marker_mat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the marker matrix as a <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.get_mu">
+<code class="sig-name descname">get_mu</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.get_mu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.get_mu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the mean expression of each protein as a <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.get_n_cells">
+<code class="sig-name descname">get_n_cells</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.get_n_cells"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.get_n_cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of cells: either the number of cell types or cell states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.get_n_classes">
+<code class="sig-name descname">get_n_classes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.get_n_classes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.get_n_classes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of ‘classes’: either the number of cell types or cell states.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.get_n_features">
+<code class="sig-name descname">get_n_features</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.get_n_features"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.get_n_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of features (proteins).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.get_sigma">
+<code class="sig-name descname">get_sigma</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.get_sigma"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.get_sigma" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.normalize">
+<code class="sig-name descname">normalize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">percentile_lower</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">percentile_upper</span><span class="o">=</span><span class="default_value">99.9</span></em>, <em class="sig-param"><span class="n">cofactor</span><span class="o">=</span><span class="default_value">5.0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize the expression data</p>
+<p>This performs a two-step normalization:
+1. A <cite>log(1+x)</cite> transformation to the data
+2. Winsorizes to (<cite>percentile_lower</cite>, <cite>percentile_upper</cite>)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="astir.data.SCDataset.rescale">
+<code class="sig-name descname">rescale</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/astir/data/scdataset.html#SCDataset.rescale"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#astir.data.SCDataset.rescale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize the expression data.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="astir.models.html" class="btn btn-neutral float-right" title="astir.models package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="astir.html" class="btn btn-neutral float-left" title="astir package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Jinyu Hou, Sunyun Lee, Michael Geuenich, Kieran Campbell
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
