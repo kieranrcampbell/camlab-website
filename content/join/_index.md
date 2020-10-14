@@ -31,12 +31,12 @@ title = "Join"
 </div>
 
 
-<div class="card" style="margin-top:1em">
+<!-- <div class="card" style="margin-top:1em">
 <div class="card-body">
  <h5 class="card-title">Postdoctoral fellowships</h5>
   We have an <b>opening for a postdoctoral fellow</b> in the lab working at the interface between machine learning and single-cell data analysis. See the <a href="https://contact2.mshri.on.ca/hr/DEFAULT.ASP?page=jobDetail&job=1363">job posting</a> for details. The closing date is <b>September 18th 2020</b>. 
 </div>
-</div>
+</div> -->
 
 <div class="card" style="margin-top:1em"> 
 <div class="card-body">
