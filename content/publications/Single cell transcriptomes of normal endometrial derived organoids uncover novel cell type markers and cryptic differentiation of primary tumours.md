@@ -2,7 +2,7 @@
 authors: "Cochrane, Dawn R; <b>Campbell, Kieran R</b>; Greening, Kendall; Ho, Germain\
   \ C; Hopkins, James; Bui, Minh; Douglas, J Maxwell; Sharlandjieva, Vassilena; Munzur,\
   \ Asl\u0131 D; Lai, Daniel; DeGrood, Maya; Gibbard, Evan W; Leung, Samuel; Boyd,\
-  \ Niki; Cheng, Angela S; Chow, Christine; Lim, Jamie L P; Farnell, David A; Kommoss,\
+  \ Niki; Cheng, Angela S; Chow, Christine; Lim, Jamie Lp; Farnell, David A; Kommoss,\
   \ Stefan; Kommoss, Friedrich; Roth, Andrew; Hoang, Lien; McAlpine, Jessica N; Shah,\
   \ Sohrab P; Huntsman, David G"
 date: '2020-07-21'
