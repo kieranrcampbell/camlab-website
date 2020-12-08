@@ -1,3 +1,4 @@
++++
 title = "Michael Geuenich"
 image = "Geuenich_headshot.jpg"
 position = "PhD Student Molecular Genetics (CBMG Track)"
@@ -6,3 +7,5 @@ twitter = "MichaelGeuenich"
 github = "Michael-Geuenich"
 linkedin = "michael-geuenich"
 email = "m.geuenich@mail.utoronto.ca"
+date = 2020-05-09
++++
