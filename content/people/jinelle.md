@@ -8,4 +8,5 @@ github = "JinelleH"
 linkedin = "jinyu-hou-70a656171"
 email = "jinyu.hou@mail.utoronto.ca"
 date = 2020-04-23
+alum = "yes"
 +++
