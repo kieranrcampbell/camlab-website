@@ -45,7 +45,7 @@ pluralizelisttitles = false
   url = "/publications/"
   weight = 3
   [[menu.nav]]
-  name = "Software"
+  name = "Projects & Software"
   url = "/software/"
   weight = 4
   [[menu.nav]]

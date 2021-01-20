@@ -10,8 +10,13 @@
 <!-- {{ partial "nav.html" . }} -->
 
 
+<div class="container" style="margin-top:1em">
+  {{ .Content }}
+</div>
+
+
 <div class="container-fluid" style="margin-top:1em">
-  <h4>Software</h4>
+  <h4>Other software</h4>
   <div class="row">
       <!-- Ranges through content/posts/*.md -->
       {{ range .Pages }}
