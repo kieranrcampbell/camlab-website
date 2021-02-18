@@ -13,6 +13,6 @@ _Astir_ is a modelling framework for the assignment of cell type across a range 
 * **View the [code on github](https://www.github.com/camlab-bioml/astir)**
 * **Read the [documentation on readthedocs](https://astir.readthedocs.io/en/latest/)**
 * **View the [Python package on pypi](https://pypi.org/project/astir/)**
-* Preprint coming soon
+* **View the [Preprint on Biorxiv](https://www.biorxiv.org/content/10.1101/2021.02.17.431633v1)**
 
 
