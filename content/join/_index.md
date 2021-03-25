@@ -17,11 +17,11 @@ title = "Join"
 </div>
 </div>
 
-
-<div class="card" style="margin-top:1em; display:none">
+<!-- ; display:none -->
+<div class="card" style="margin-top:1em">
 <div class="card-body">
  <h5 class="card-title">PhD positions</h5>
-    If you are interested in PhD positions in the lab, please apply to the <a href="http://www.moleculargenetics.utoronto.ca/graduate-1#graduate-studies">Computational Biology in Molecular Genetics track of the University of Toronto Molecular Genetics PhD program</a>. Applicants with a quantitative background and/or prior quantitative experience are highly preferred. Please get in touch if you would like to discuss more. The next deadline is <b><a href="http://www.moleculargenetics.utoronto.ca/deadlines">May 1st 2020</a></b>. Possible PhD topics include:
+    Graduate students can join the lab via the <a href="http://www.moleculargenetics.utoronto.ca/graduate-1#graduate-studies">Computational Biology in Molecular Genetics track of the University of Toronto Molecular Genetics PhD program</a> or the <a href="https://www.statistics.utoronto.ca/">Department of Statistical Sciences</a>. Applicants with a quantitative background and/or prior quantitative experience are highly preferred. Please get in touch if you would like to discuss more. Possible PhD topics include:
     <ul>
       <li>Identifying signatures of cancer progression from spatial 'omics data</li>
       <li>Deep learning approaches to integrate imaging and transcriptomics data</li>
@@ -38,7 +38,7 @@ title = "Join"
 </div>
 </div> -->
 
-<div class="card" style="margin-top:1em"> 
+<div class="card" style="margin-top:1em; display:none"> 
 <div class="card-body">
  <h5 class="card-title">BCB330 / BCB430 students</h5>
     The lab is currently full for BCB330/430 project students for the 2020-2021 academic year.
