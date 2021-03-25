@@ -53,9 +53,13 @@ pluralizelisttitles = false
   url = "/people/"
   weight = 5
   [[menu.nav]]
+  name = "Teaching"
+  url = "/teaching/"
+  weight=6
+  [[menu.nav]]
   name = "Join"
   url = "/join/"
-  weight = 6
+  weight = 7
 
 [markup]
   [markup.goldmark]
