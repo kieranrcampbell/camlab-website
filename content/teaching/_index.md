@@ -22,7 +22,16 @@ Graduate course, Department of Molecular Genetics, University of Toronto. Note: 
     * Train/test splits
     * Model complexity: overfitting and underfitting
     * Penalized regression
-* [2.1] **Unsupervised learning** [[slides]()]
+* [2.1.1] **Unsupervised learning: continuous latent variable models** [[slides](https://camlab-bioml.github.io/ACB_I_II/slides/unsupervised_learning_continuous.html)]
+    * Historical perspective
+    * Principal component analysis and pPCA
+    * Non-negative matrix factorization
+    * Nonlinear methods: tSNE & autoencoders
+* [2.1.2] **Unsupervised learning: mixture models** [[slides]](https://camlab-bioml.github.io/ACB_I_II/slides/unsupervised_learning_discrete.html)
+    * Clustering from a probabilistic perspective
+    * Gaussian Mixture Models
+    * Expectation-maximization
+    * Model selection
 * [2.4.1] **Bayesian inference** [[slides]()]
 * [2.4.2] **An introduction to deep learning** [[slides]()]
 
