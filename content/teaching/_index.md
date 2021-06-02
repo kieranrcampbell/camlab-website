@@ -32,6 +32,14 @@ Graduate course, Department of Molecular Genetics, University of Toronto. Note: 
     * Gaussian Mixture Models
     * Expectation-maximization
     * Model selection
-* [2.4.1] **Bayesian inference** [[slides]()]
-* [2.4.2] **An introduction to deep learning** [[slides]()]
+* [2.4.1] **Introduction to Bayesian inference** [[slides](https://camlab-bioml.github.io/ACB_I_II/slides/bayesian-inference.html#1)]
+    * Re-introduction to Bayes rule
+    * Sampling methods: Gibbs sampling, Metropolis Hastings
+    * Variational inference
+    * An introduction to probabilistic programming languages & STAN
+* [2.4.2] **Introduction to deep learning** [[slides](https://camlab-bioml.github.io/ACB_I_II/slides/deep-learning.html#1)]
+    * The perceptron, multi-layer perceptrons
+    * Gradient descent and backpropagation
+    * Deep learning for images: CNNs
+    * Deep learning for sequence data: RNNs
 
