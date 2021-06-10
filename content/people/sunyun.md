@@ -8,4 +8,5 @@ github = "sunyunlee"
 linkedin = "sunyun-lee"
 email = "sulee@lunenfeld.ca"
 date = 2020-05-01
+alum = "yes"
 +++

@@ -21,12 +21,13 @@ title = "Join"
 <div class="card" style="margin-top:1em">
 <div class="card-body">
  <h5 class="card-title">PhD positions</h5>
-    Graduate students can join the lab via the <a href="http://www.moleculargenetics.utoronto.ca/graduate-1#graduate-studies">Computational Biology in Molecular Genetics track of the University of Toronto Molecular Genetics PhD program</a> or the <a href="https://www.statistics.utoronto.ca/">Department of Statistical Sciences</a>. Applicants with a quantitative background and/or prior quantitative experience are highly preferred. Please get in touch if you would like to discuss more. Possible PhD topics include:
+    Graduate students can join the lab via the <a href="http://www.moleculargenetics.utoronto.ca/graduate-1#graduate-studies">Computational Biology in Molecular Genetics track of the University of Toronto Molecular Genetics PhD program</a> or the <a href="https://www.statistics.utoronto.ca/">Department of Statistical Sciences</a>. Applicants with a quantitative background and/or prior quantitative experience are highly preferred. Possible PhD topics include:
     <ul>
       <li>Identifying signatures of cancer progression from spatial 'omics data</li>
       <li>Deep learning approaches to integrate imaging and transcriptomics data</li>
       <li>Machine learning modelling of cell types across multimodal data</li>
     </ul>
+    If you are interested in joining please reach out via email. Please be sure to detail your interests and experience in <b>quantitative</b> analysis of biomedical data (i.e. that with a computer science / statistics / machine learning component). Unfortunately we cannot respond to all emails.
 </div>
 </div>
 
