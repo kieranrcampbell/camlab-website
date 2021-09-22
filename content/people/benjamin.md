@@ -8,4 +8,5 @@ github = "Zhengbe2"
 linkedin = "Ben-Zheng"
 email = "benjaminyi.zheng@mail.utoronto.ca"
 date = "2021-06-09"
+alum = "yes"
 +++ 

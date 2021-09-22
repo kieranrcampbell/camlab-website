@@ -5,6 +5,6 @@ The Campbell Lab is a group of data scientists working at the interface of stati
 and the Departments of [Molecular Genetics](http://www.moleculargenetics.utoronto.ca/) and [Statistical Sciences](https://www.statistics.utoronto.ca/) at the University of Toronto.
 
 We are primarily interested in 
-* Probabilistic modelling to understand single-cell and spatially resolved 'omics data in the context of cancer
+* Probabilistic modelling of single-cell and spatially resolved 'omics data
 * Machine learning algorithms to help automate biological and biomedical data analysis
 * Machine learning models to uncover structure from large, heterogeneous datasets such as electronic health records (EHRs)

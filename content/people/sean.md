@@ -8,4 +8,5 @@ github = ""
 linkedin = "https://www.linkedin.com/in/sean-gong-06573b158/"
 email = "daewon.gong@mail.utoronto.ca"
 date = 2021-06-09
+alum = "yes"
 +++

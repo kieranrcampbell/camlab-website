@@ -8,4 +8,5 @@ github = ""
 linkedin = ""
 email = "aisha.faruqui@mail.utoronto.ca"
 date = 2020-07-12
+alum = "yes"
 +++
