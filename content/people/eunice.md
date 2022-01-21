@@ -8,4 +8,5 @@ github = "poonpooneunice"
 linkedin = "eunice-poon"
 email = "e8poon@uwaterloo.ca"
 date = 2021-09-07
+alum = "yes"
 +++

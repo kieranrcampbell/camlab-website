@@ -40,12 +40,16 @@ pluralizelisttitles = false
   name = "Research"
   url = "/research/"
   weight = 2
+#  [[menu.nav]]
+#  name = "Blog"
+#  url = "/blog/"
+#  weight = 3
   [[menu.nav]]
   name = "Publications"
   url = "/publications/"
   weight = 3
   [[menu.nav]]
-  name = "Projects & Software"
+  name = "Software"
   url = "/software/"
   weight = 4
   [[menu.nav]]
