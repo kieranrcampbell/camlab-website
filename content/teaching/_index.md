@@ -27,7 +27,7 @@ Graduate course, Department of Molecular Genetics, University of Toronto. Note: 
     * Principal component analysis and pPCA
     * Non-negative matrix factorization
     * Nonlinear methods: tSNE & autoencoders
-* [2.1.2] **Unsupervised learning: mixture models** [[slides]](https://camlab-bioml.github.io/ACB_I_II/slides/unsupervised_learning_discrete.html)
+* [2.1.2] **Unsupervised learning: mixture models** [[slides]](https://camlab-bioml.github.io/ACB_I_II/slides/22-unsupervised_learning_discrete.html)
     * Clustering from a probabilistic perspective
     * Gaussian Mixture Models
     * Expectation-maximization
