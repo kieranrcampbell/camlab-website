@@ -8,4 +8,5 @@ github = "mattwarkentin"
 linkedin = ""
 email = "warkentin@lunenfeld.ca"
 date = 2020-03-01
+alum = "yes"
 +++
