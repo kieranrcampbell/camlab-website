@@ -5,7 +5,7 @@ title = "Join"
 
 #### Openings
 
-<div class="card" style="margin-top:1em">
+<div class="card" style="margin-top:1em; display:none">
 <div class="card-body">
  <h5 class="card-title">Research associate/postdoctoral fellow</h5>
   We have an opening for a postdoctoral fellow in the lab working at the interface between data science and single-cell and spatial data analysis. See the <a href="https://contact2.mshri.on.ca/hr/DEFAULT.ASP?page=jobDetail&job=1781">job posting</a> for details. The closing date is <b>March 14th 2023</b>. 
