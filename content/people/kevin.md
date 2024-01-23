@@ -8,4 +8,5 @@ github = "ksg0617"
 linkedin = "https://www.linkedin.com/in/kevin-sun-670aba198/"
 email = "kevinuoft.sun@mail.utoronto.ca"
 date = 2023-05-10
+alum = "yes"
 +++

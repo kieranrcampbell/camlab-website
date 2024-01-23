@@ -7,4 +7,5 @@ github = "joanne-pl"
 linkedin = "joanne-leung-ph-d-a90270118/"
 email = "joanne.leung@sri.utoronto.ca"
 date = 2021-01-15
+alum = "yes"
 +++

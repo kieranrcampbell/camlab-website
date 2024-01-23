@@ -8,4 +8,5 @@ github = "cindyfang70"
 linkedin = "https://www.linkedin.com/in/cindy-f-a887a2138/"
 email = "xinzhi.fang@mail.utoronto.ca"
 date = 2020-07-10
+alum = "yes"
 +++
