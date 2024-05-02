@@ -1,5 +1,6 @@
 baseURL = "https://camlab.netlify.com/"
 languageCode = "en-us"
+
 title = "Campbell Lab Toronto | Machine Learning in Translational Biomedicine"
 theme = "minimal-bootstrap-hugo-theme"
 pluralizelisttitles = false
