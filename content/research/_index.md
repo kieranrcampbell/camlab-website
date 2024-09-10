@@ -2,6 +2,42 @@
 title = "Research"
 +++
 
+#### Machine learning for single-cell genomics
+
+
+
+<div class="card mb-1">
+        <!-- <div class="card-header"></div> -->
+        <div class="card-body">
+            <div class="row">
+            **The impacts of active and self-supervised learning on efficient annotation of single-cell expression data** [Geuenich et al. Nature Communications 2024](https://www.nature.com/articles/s41467-024-45198-y)
+            </div>
+            <div class="row">
+                <div class="col-md-5 col-sm-12">
+                    <img src="/img/research/cellassign.gif" class="img-fluid" alt="CellAssign">
+                </div>
+                <div class="col-md-7 col-sm-12">
+                    <p>We created CellAssign, a novel statistical model implemented in Google's Tensorflow to assign cells to known tumour microenvironment cell types from single-cell RNA-sequencing data, across large patient cohorts while controlling for sample and technical effects.</p>
+                    <p><a href="https://www.nature.com/articles/s41592-019-0529-1" class="btn btn-outline-secondary" style="white-space: normal">Zhang et al. 2019 (Nature Methods)</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+- **Beyond benchmarking: towards predictive models of dataset-specific single-cell RNA-seq pipeline performance** [Fang et al. BioRxiv 2024](https://www.biorxiv.org/content/10.1101/2024.01.02.572650v1)
+
+**Multi-objective Bayesian Optimization with Heuristic Objectives for Biomedical and Molecular Data Analysis Workflows** [Selega and Campbell Transactions on Machine Learning 2023](https://openreview.net/forum?id=QspAcsAyis)
+
+
+
+
+#### Methods for highly multiplexed imaging
+
+**Automated assignment of cell identity from single-cell multiplexed imaging and proteomic data** [Geuenich et al. Cell Systems 2021](https://www.sciencedirect.com/science/article/pii/S2405471221003355)
+
+#### Tumour evolution and tumour-immune interactions
+
 <div class="container-fluid mt-2 pb-0 card card-body border-dark">
     <h4>Current and past research:</h4>
     <p>
