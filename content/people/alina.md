@@ -8,4 +8,5 @@ github = "alinaselega"
 linkedin = ""
 email = "aselega@lunenfeld.ca"
 date = 2021-02-01
+alum = "yes"
 +++

@@ -7,4 +7,5 @@ github = "hsmaan"
 linkedin = "hmaan"
 email = "hassaan.maan@mail.utoronto.ca"
 date = 2023-09-25 
+alum = "yes"
 +++
