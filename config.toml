@@ -9,7 +9,7 @@ pluralizelisttitles = false
   tag = "tags"
 
 [permalinks]
-  post = "/:filename/"
+  post = "/:contentbasename/"
 
 [params]
   description = "Campbell Lab Toronto - Machine Learning in Translational Biomedicine - Kieran R Campbell"
