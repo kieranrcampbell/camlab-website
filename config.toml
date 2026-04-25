@@ -20,14 +20,14 @@ pluralizelisttitles = false
   navbarBackgroundColor = "#ffffff"
   navbarLinkColor = "rgba(0, 0, 0, 1)"
   navbarLinkHoverColor = "rgba(0, 0, 0, 0.7)"
-  wrapperMaxWidth = "800px"
+  wrapperMaxWidth = "1200px"
   customDateFormat = "Jan 2, 2006"
   customCodeStyle = true
   customBlockquoteStyle = true
   showPostSummary = false
   googleAnalytics = "UA-61354538-4"
   cookieConsent = false
-  includeBootstrapJs = false
+  includeBootstrapJs = true
   faviconSafariPinnedTabColor = "#5bbad5"
   faviconMsApplicationTileColor = "#da532c"
   faviconThemeColor = "#ffffff"
@@ -46,13 +46,17 @@ pluralizelisttitles = false
 #  url = "/blog/"
 #  weight = 3
   [[menu.nav]]
-  name = "Publications"
-  url = "/publications/"
-  weight = 3
-  [[menu.nav]]
-  name = "Software"
-  url = "/software/"
-  weight = 4
+  name = "Lab Publications"
+  url = "/keypubs/"
+  weight = 2
+#  [[menu.nav]]
+#  name = "Publications"
+#  url = "/publications/"
+#  weight = 3
+#  [[menu.nav]]
+#  name = "Software"
+#  url = "/software/"
+#  weight = 4
   [[menu.nav]]
   name = "People"
   url = "/people/"

@@ -1,0 +1,98 @@
+{{- define "main" -}}
+
+<div class="container-fluid" style="margin-top:1em; position: relative;" data-spy="scroll" data-target="#year-nav" data-offset="100">
+
+  <!-- Floating Year Navigation -->
+  <nav id="year-nav" class="navbar navbar-light bg-light" style="position: sticky; top: 60px; z-index: 100; margin-bottom: 2em; border-radius: 0.25rem;">
+    <nav class="nav nav-pills">
+      {{ range .Pages.ByDate.Reverse.GroupByDate "2006" }}
+        <a class="nav-link" href="#{{ .Key }}">{{ .Key }}</a>
+      {{ end }}
+    </nav>
+  </nav>
+
+  <h4>Key Publications</h4>
+
+  <!-- Group keypubs by year in reverse chronological order -->
+  {{ range .Pages.ByDate.Reverse.GroupByDate "2006" }}
+
+  <!-- Year heading with ID for anchor navigation -->
+  <h5 id="{{ .Key }}" style="margin-top:1.5em; margin-bottom:1em"><strong>{{ .Key }}</strong></h5>
+
+  <!-- Range through publications in this year -->
+  {{ range .Pages }}
+  <div class="row">
+    <div class="col-xs-12 col-md-12" style="margin-bottom:2em">
+      <div class="card card-body">
+        <div class="row">
+          <!-- Left column: Image -->
+          <div class="col-md-6">
+            {{ if .Params.image }}
+              <img src="/img/keypubs/{{.Params.image}}" class="img-fluid" alt="{{.Title}}">
+            {{ else }}
+              <!-- Placeholder if no image is provided -->
+              <div class="bg-light d-flex align-items-center justify-content-center" style="height: 100%; min-height: 200px;">
+                <span class="text-muted">No image</span>
+              </div>
+            {{ end }}
+          </div>
+
+          <!-- Right column: Publication details -->
+          <div class="col-md-6">
+            <!-- Title (linked to paper) -->
+            <h5 class="card-title" style="margin-bottom:0.5em">
+              <a href="{{.Params.paper_url}}" target="_blank" rel="noopener noreferrer">{{.Title}}</a>
+            </h5>
+
+            <!-- Authors -->
+            <p class="card-text" style="margin-bottom:0.75em">
+              {{.Params.authors}}
+            </p>
+
+            <!-- Journal and Year (highlighted) -->
+            <h6 class="card-subtitle" style="margin-bottom:0.75em">
+              <strong><em>{{.Params.journal}}</em></strong>
+              {{ if .Params.date }}
+                <strong>({{ dateFormat "2006" .Params.date }})</strong>
+              {{ end }}
+            </h6>
+
+            <!-- Abstract -->
+            {{ if .Params.abstract }}
+            <p class="card-text">
+              {{.Params.abstract}}
+            </p>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ end }}
+  {{ end }}
+</div>
+
+<!-- ScrollSpy and Smooth Scroll JavaScript -->
+<script>
+  // Smooth scroll to anchor links
+  document.querySelectorAll('#year-nav a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 100,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Initialize ScrollSpy when document is ready
+  $(document).ready(function() {
+    $('body').scrollspy({ target: '#year-nav', offset: 100 });
+  });
+</script>
+
+{{- end -}}
