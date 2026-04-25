@@ -8,4 +8,5 @@ github = "harrig12"
 linkedin = ""
 email = "cait.harrigan@mail.utoronto.ca"
 date = 2021-03-16
+alum = "yes"
 +++
