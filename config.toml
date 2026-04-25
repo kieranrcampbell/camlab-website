@@ -46,7 +46,7 @@ pluralizelisttitles = false
 #  url = "/blog/"
 #  weight = 3
   [[menu.nav]]
-  name = "Lab Publications"
+  name = "Key Publications"
   url = "/keypubs/"
   weight = 2
 #  [[menu.nav]]
